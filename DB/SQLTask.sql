@@ -15,9 +15,9 @@ CREATE SCHEMA IF NOT EXISTS `taskdidattici` DEFAULT CHARACTER SET utf8mb3 ;
 USE `taskdidattici` ;
 
 -- -----------------------------------------------------
--- Table `taskdidattici`.`docente`
+-- Table `taskdidattici`.`docenti`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `taskdidattici`.`docente` (
+CREATE TABLE IF NOT EXISTS `taskdidattici`.`docenti` (
   `id` INT NOT NULL,
   `nome` VARCHAR(45) NULL DEFAULT NULL,
   `cognome` VARCHAR(45) NULL DEFAULT NULL,
@@ -29,26 +29,26 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `taskdidattici`.`classe`
+-- Table `taskdidattici`.`classi`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `taskdidattici`.`classe` (
+CREATE TABLE IF NOT EXISTS `taskdidattici`.`classi` (
   `codice` INT NOT NULL,
   `nome` VARCHAR(45) NULL DEFAULT NULL,
   `numeroTask` INT NULL DEFAULT NULL,
-  `docente_id` INT NOT NULL,
-  PRIMARY KEY (`codice`, `docente_id`),
+  `docente_id` INT NULL,
+  PRIMARY KEY (`codice`),
   INDEX `fk_classe_docente1_idx` (`docente_id` ASC) VISIBLE,
   CONSTRAINT `fk_classe_docente1`
     FOREIGN KEY (`docente_id`)
-    REFERENCES `taskdidattici`.`docente` (`id`))
+    REFERENCES `taskdidattici`.`docenti` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `taskdidattici`.`studente`
+-- Table `taskdidattici`.`studenti`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `taskdidattici`.`studente` (
+CREATE TABLE IF NOT EXISTS `taskdidattici`.`studenti` (
   `id` INT NOT NULL,
   `nome` VARCHAR(45) NULL DEFAULT NULL,
   `cognome` VARCHAR(45) NULL DEFAULT NULL,
@@ -57,12 +57,12 @@ CREATE TABLE IF NOT EXISTS `taskdidattici`.`studente` (
   `numTaskCompletati` INT NULL DEFAULT NULL,
   `numTaskValutati` INT NULL DEFAULT NULL,
   `punteggioTotaleOttenuto` INT NULL DEFAULT NULL,
-  `classe_codice` INT NOT NULL,
-  PRIMARY KEY (`id`, `classe_codice`),
+  `classe_codice` INT NULL,
+  PRIMARY KEY (`id`),
   INDEX `fk_studente_classe1_idx` (`classe_codice` ASC) VISIBLE,
   CONSTRAINT `fk_studente_classe1`
     FOREIGN KEY (`classe_codice`)
-    REFERENCES `taskdidattici`.`classe` (`codice`))
+    REFERENCES `taskdidattici`.`classi` (`codice`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
@@ -77,30 +77,29 @@ CREATE TABLE IF NOT EXISTS `taskdidattici`.`task` (
   `dataScadenza` VARCHAR(8) NULL DEFAULT NULL,
   `maxPuntiAssegnabili` INT NULL DEFAULT NULL,
   `classe_codice` INT NOT NULL,
-  PRIMARY KEY (`id`, `classe_codice`),
+  PRIMARY KEY (`id`),
   INDEX `fk_task_classe1_idx` (`classe_codice` ASC) VISIBLE,
   CONSTRAINT `fk_task_classe1`
     FOREIGN KEY (`classe_codice`)
-    REFERENCES `taskdidattici`.`classe` (`codice`))
+    REFERENCES `taskdidattici`.`classi` (`codice`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `taskdidattici`.`consegna`
+-- Table `taskdidattici`.`consegne`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `taskdidattici`.`consegna` (
-  `id` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `taskdidattici`.`consegne` (
   `punteggio` INT NULL DEFAULT NULL,
   `soluzione` BLOB NULL DEFAULT NULL,
   `task_id` INT NOT NULL,
   `studente_id` INT NOT NULL,
-  PRIMARY KEY (`id`, `task_id`, `studente_id`),
+  PRIMARY KEY (`task_id`, `studente_id`),
   INDEX `fk_consegna_task1_idx` (`task_id` ASC) VISIBLE,
   INDEX `fk_consegna_studente1_idx` (`studente_id` ASC) VISIBLE,
   CONSTRAINT `fk_consegna_studente1`
     FOREIGN KEY (`studente_id`)
-    REFERENCES `taskdidattici`.`studente` (`id`),
+    REFERENCES `taskdidattici`.`studenti` (`id`),
   CONSTRAINT `fk_consegna_task1`
     FOREIGN KEY (`task_id`)
     REFERENCES `taskdidattici`.`task` (`id`))
