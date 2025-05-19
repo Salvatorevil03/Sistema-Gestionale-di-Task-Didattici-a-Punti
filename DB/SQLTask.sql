@@ -23,7 +23,8 @@ CREATE TABLE IF NOT EXISTS `taskdidattici`.`docenti` (
   `cognome` VARCHAR(45) NULL DEFAULT NULL,
   `mail` VARCHAR(45) NULL DEFAULT NULL,
   `password` VARCHAR(45) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `mail_UNIQUE` (`mail` ASC) VISIBLE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
@@ -60,6 +61,7 @@ CREATE TABLE IF NOT EXISTS `taskdidattici`.`studenti` (
   `classe_codice` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_studente_classe1_idx` (`classe_codice` ASC) VISIBLE,
+  UNIQUE INDEX `mail_UNIQUE` (`mail` ASC) VISIBLE,
   CONSTRAINT `fk_studente_classe1`
     FOREIGN KEY (`classe_codice`)
     REFERENCES `taskdidattici`.`classi` (`codice`))
