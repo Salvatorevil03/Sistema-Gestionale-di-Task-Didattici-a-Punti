@@ -46,7 +46,7 @@ public class DBDocente {
 
     public void caricaDaDB() {
         //1. definisco la query
-        String query = "SELECT * FROM docente WHERE id='"+this.id+"';";
+        String query = "SELECT * FROM docenti WHERE id='"+this.id+"';";
         //System.out.println(query); //per debug
         try {
             //2 faccio di query di select
