@@ -6,8 +6,8 @@ INSERT INTO docenti VALUES (2, 'Giovanna', 'Verdi', 'g.verdi1@unina.it', 'gverdi
 # Classe 1 e Task, Docente 1
 INSERT INTO classi VALUES (1, 'Ingegneria del Software',2  , 1);
 
-INSERT INTO tasks VALUES (1, ' ', ' ', '2025-05-21', 30, 1);
-INSERT INTO tasks VALUES (2, ' ', ' ', '2025-05-25', 25, 1);
+INSERT INTO task VALUES (1, ' ', ' ', '2025-05-21', 30, 1);
+INSERT INTO task VALUES (2, ' ', ' ', '2025-05-25', 25, 1);
 
 # Classe 2 No Task, Docente 1
 INSERT INTO classi VALUES (2, 'Software Architecture Design',0  , 1);
@@ -15,8 +15,8 @@ INSERT INTO classi VALUES (2, 'Software Architecture Design',0  , 1);
 # Classe 3 e Task, Docente 2
 INSERT INTO classi VALUES (3, 'Basi di Dati',2  , 2);
 
-INSERT INTO tasks VALUES (3, ' ', ' ', '2025-05-24', 20, 3);
-INSERT INTO tasks VALUES (4, ' ', ' ', '2025-06-30', 30, 3);
+INSERT INTO task VALUES (3, ' ', ' ', '2025-05-24', 20, 3);
+INSERT INTO task VALUES (4, ' ', ' ', '2025-06-30', 30, 3);
 
 # Mario Rossi No Classe 
 INSERT INTO studenti VALUES (1, 'Mario', 'Rossi', 'm.rossi1@studenti.unina.it', 'mrossi', 0, 0, 0, NULL);
