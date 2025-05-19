@@ -10,7 +10,7 @@ public class EntityDocente extends Utente{
         this.nome = docente.getNome();
         this.cognome = docente.getCognome();
         this.mail = docente.getMail();
-        this.cognome=docente.getCognome();
+        this.password=docente.getPassword();
     }
 
     public EntityDocente(DBDocente docente){
