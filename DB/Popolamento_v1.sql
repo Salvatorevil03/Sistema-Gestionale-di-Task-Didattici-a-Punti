@@ -37,4 +37,4 @@ INSERT INTO consegne VALUES (15, ' ', 2, 3);
 
 INSERT INTO studenti VALUES (4, 'Chiara', 'Rossi', 'c.rossi1@studenti.unina.it', 'crossi', 1, 1, 20, 3);
 
-INSERT INTO consegne VALUES (20,' ', 3, 4);
+INSERT INTO consegne VALUES (20,'',3,4);
