@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `taskdidattici`.`task` (
   `id` INT NOT NULL,
   `titolo` VARCHAR(45) NULL DEFAULT NULL,
   `descrizione` VARCHAR(150) NULL DEFAULT NULL,
-  `dataScadenza` VARCHAR(8) NULL DEFAULT NULL,
+  `dataScadenza` VARCHAR(10) NULL DEFAULT NULL,
   `maxPuntiAssegnabili` INT NULL DEFAULT NULL,
   `classe_codice` INT NOT NULL,
   PRIMARY KEY (`id`),
