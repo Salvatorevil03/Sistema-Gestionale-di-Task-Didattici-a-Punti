@@ -92,13 +92,14 @@ DEFAULT CHARACTER SET = utf8mb3;
 -- Table `taskdidattici`.`consegne`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `taskdidattici`.`consegne` (
+  `id` INT NOT NULL,
   `punteggio` INT NULL DEFAULT NULL,
   `soluzione` BLOB NULL DEFAULT NULL,
   `task_id` INT NOT NULL,
   `studente_id` INT NOT NULL,
-  PRIMARY KEY (`task_id`, `studente_id`),
   INDEX `fk_consegna_task1_idx` (`task_id` ASC) VISIBLE,
   INDEX `fk_consegna_studente1_idx` (`studente_id` ASC) VISIBLE,
+  PRIMARY KEY (`id`),
   CONSTRAINT `fk_consegna_studente1`
     FOREIGN KEY (`studente_id`)
     REFERENCES `taskdidattici`.`studenti` (`id`),
