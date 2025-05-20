@@ -6,5 +6,4 @@ public class Utente {
     protected String cognome;
     protected String mail;
     protected String password;
-
 }
