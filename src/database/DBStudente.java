@@ -2,6 +2,7 @@ package database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class DBStudente {
     private int id; //PK
@@ -9,7 +10,19 @@ public class DBStudente {
     private String cognome;
     private String mail;
     private String password;
+    private int numTaskCompletati;
+    private int numTaskValutati;
+    private int punteggioTotaleOttenuto;
+    private DBClasse classe;
+    private ArrayList<DBConsegna> consegne;
 
+    // costruttore vuoto
+    // contruttore con PK
+
+    public DBStudente() {
+        super();
+        this.consegne = new ArrayList<DBConsegna>();
+    }
 
     public  DBStudente(int id) {
         this.id = id;
@@ -18,7 +31,7 @@ public class DBStudente {
 
     public void caricaDaDB() {
 
-        String query = "SELECT * FROM studente WHERE id='"+this.id+"';";
+        String query = "SELECT * FROM studenti WHERE id='"+this.id+"';";
         System.out.println(query); //per debug
 
         try {
@@ -31,18 +44,16 @@ public class DBStudente {
                 this.setCognome(rs.getString("cognome"));
                 this.setMail(rs.getString("mail"));
                 this.setPassword(rs.getString("password"));
+                this.setNumTaskCompletati(rs.getInt("numTaskCompletati"));
+                this.setNumTaskValutati(rs.getInt("numTaskValutati"));
+                this.setPunteggioTotaleOttenuto(rs.getInt("punteggioTotaleOttenuto"));
             }
 
-        } catch (ClassNotFoundException | SQLException e) {
-            // TODO Auto-generated catch block
+        } catch (ClassNotFoundException|SQLException e) {
             e.printStackTrace();
         }
     }
 
-    // costruttore di base
-    public DBStudente() {
-        super();
-    }
 
     // set e get
     public int getId() {
@@ -83,5 +94,45 @@ public class DBStudente {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getNumTaskCompletati() {
+        return numTaskCompletati;
+    }
+
+    public void setNumTaskCompletati(int numTaskCompletati) {
+        this.numTaskCompletati = numTaskCompletati;
+    }
+
+    public int getNumTaskValutati() {
+        return numTaskValutati;
+    }
+
+    public void setNumTaskValutati(int numTaskValutati) {
+        this.numTaskValutati = numTaskValutati;
+    }
+
+    public int getPunteggioTotaleOttenuto() {
+        return punteggioTotaleOttenuto;
+    }
+
+    public void setPunteggioTotaleOttenuto(int punteggioTotaleOttenuto) {
+        this.punteggioTotaleOttenuto = punteggioTotaleOttenuto;
+    }
+
+    public DBClasse getClasse() {
+        return classe;
+    }
+
+    public void setClasse(DBClasse classe) {
+        this.classe = classe;
+    }
+
+    public ArrayList<DBConsegna> getConsegne() {
+        return consegne;
+    }
+
+    public void setConsegne(ArrayList<DBConsegna> consegne) {
+        this.consegne = consegne;
     }
 }
