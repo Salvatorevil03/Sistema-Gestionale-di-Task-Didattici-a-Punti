@@ -1,8 +1,10 @@
 package entity;
 
 import database.DBDocente;
+import java.util.ArrayList;
 
 public class EntityDocente extends Utente{
+    private ArrayList<EntityClasse> classi;
 
     //Costruttore
     public EntityDocente(int id){
@@ -11,6 +13,10 @@ public class EntityDocente extends Utente{
         this.cognome = docente.getCognome();
         this.mail = docente.getMail();
         this.password=docente.getPassword();
+        this.classi= new ArrayList<EntityClasse>();
+
+        docente.caricaClassiDaDB();
+        caricaClassi(docente);
     }
 
     public EntityDocente(DBDocente docente){
@@ -19,14 +25,14 @@ public class EntityDocente extends Utente{
         this.cognome = docente.getCognome();
         this.mail = docente.getMail();
         this.password=docente.getPassword();
+        this.classi=new ArrayList<EntityClasse>();
+        docente.caricaClassiDaDB();
+        caricaClassi(docente);
     }
 
     public EntityDocente(){
-        this.nome = "";
-        this.password = "";
-        this.mail = "";
-        this.cognome = "";
-        this.id = -1;
+        super();
+        this.classi=new ArrayList<EntityClasse>();
     }
 
     //GETTER AND SETTER
@@ -51,15 +57,30 @@ public class EntityDocente extends Utente{
         this.nome = nome;
     }
     public int getId() {return id;}
+    public ArrayList<EntityClasse> getClassi() {
+        return classi;
+    }
+    public void setClassi(ArrayList<EntityClasse> classi) {
+        this.classi = classi;
+    }
 
     @Override
     public String toString() {
         return "EntityDocente{" +
                 "id=" + id +
-                ", password='" + password + '\'' +
-                ", mail='" + mail + '\'' +
-                ", cognome='" + cognome + '\'' +
                 ", nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", mail='" + mail + '\'' +
+                ", password='" + password + '\'' +
+                ", classi=" + classi +
                 '}';
+    }
+
+    //--------------------------------------------------------------------
+    public void caricaClassi(DBDocente docente){
+        for(int i=0;i<docente.getClassi().size();i++){
+            EntityClasse classe= new EntityClasse(docente.getClassi().get(i));
+            this.classi.add(classe);
+        }
     }
 }
