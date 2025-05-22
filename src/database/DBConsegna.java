@@ -22,7 +22,7 @@ public class DBConsegna {
     public void caricaDaDB() {
 
         String query = "SELECT * FROM consegne WHERE id='"+this.id+"';";
-        System.out.println(query); //per debug
+        //System.out.println(query); //per debug
 
         try {
 
@@ -37,6 +37,35 @@ public class DBConsegna {
             e.printStackTrace();
         }
     }
+
+    public void caricaStudentiDaDB() {
+        //Le consegne prelevano gli studenti ad esse relative
+        //String query = "SELECT * FROM studente WHERE studente_id='"+this.studente.getId()+"';";
+        String query1= "SELECT * FROM STUDENTI S JOIN CONSEGNE C ON C.studente_id = S.id WHERE C.id="+this.id+";";
+        //System.out.println(query1);
+        try {
+
+            ResultSet rs1 = DBConnectionManager.selectQuery(query1);
+
+            if(rs1.next()) {
+                DBStudente studente = new DBStudente();
+                studente.setId(rs1.getInt("id"));
+                studente.setNome(rs1.getString("nome"));
+                studente.setCognome(rs1.getString("nome"));
+                studente.setMail(rs1.getString("mail"));
+                studente.setPassword(rs1.getString("password"));
+                studente.setNumTaskCompletati(rs1.getInt("numTaskCompletati"));
+                studente.setNumTaskValutati(rs1.getInt("numTaskValutati"));
+                studente.setPunteggioTotaleOttenuto(rs1.getInt("punteggioTotaleOttenuto"));
+                //SALVATAGGIO RISULTATO
+                this.studente = studente;
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
 
     // get e set
 
