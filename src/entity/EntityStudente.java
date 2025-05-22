@@ -11,8 +11,8 @@ public class EntityStudente extends Utente{
     private int numTaskCompletati;
     private int numTaskValutati;
     private int punteggioTotaleOttenuto;
-    private DBClasse classe;
-    private ArrayList<DBConsegna> consegne;
+    private EntityClasse classe;
+    private ArrayList<EntityConsegna> consegne;
 
     public EntityStudente(int id) {
         this.id = id;
@@ -25,6 +25,14 @@ public class EntityStudente extends Utente{
         this.numTaskCompletati = studente.getNumTaskCompletati();
         this.numTaskValutati = studente.getNumTaskValutati();
         this.punteggioTotaleOttenuto = studente.getPunteggioTotaleOttenuto();
+
+        studente.caricaClasseStudenteDaDB();
+        caricaClasse(studente);
+
+        this.consegne = new ArrayList<EntityConsegna>();
+        studente.caricaConsegneStudenteDaDB();
+        caricaConsegne(studente);
+
     }
 
     public EntityStudente(DBStudente studente) {
@@ -36,6 +44,59 @@ public class EntityStudente extends Utente{
         this.numTaskCompletati = studente.getNumTaskCompletati();
         this.numTaskValutati = studente.getNumTaskValutati();
         this.punteggioTotaleOttenuto = studente.getPunteggioTotaleOttenuto();
+    }
+
+    public void caricaClasse(DBStudente studente){
+        EntityClasse classe = new EntityClasse(studente.getClasse());
+        this.setClasse(classe);
+    }
+
+    public void caricaConsegne(DBStudente studente){
+        for(int i=0;i<studente.getConsegne().size();i++) {
+
+            EntityConsegna consegna = new EntityConsegna(studente.getConsegne().get(i));
+            this.consegne.add(consegna);
+        }
+    }
+
+    public int getNumTaskCompletati() {
+        return numTaskCompletati;
+    }
+
+    public void setNumTaskCompletati(int numTaskCompletati) {
+        this.numTaskCompletati = numTaskCompletati;
+    }
+
+    public int getNumTaskValutati() {
+        return numTaskValutati;
+    }
+
+    public void setNumTaskValutati(int numTaskValutati) {
+        this.numTaskValutati = numTaskValutati;
+    }
+
+    public int getPunteggioTotaleOttenuto() {
+        return punteggioTotaleOttenuto;
+    }
+
+    public void setPunteggioTotaleOttenuto(int punteggioTotaleOttenuto) {
+        this.punteggioTotaleOttenuto = punteggioTotaleOttenuto;
+    }
+
+    public EntityClasse getClasse() {
+        return classe;
+    }
+
+    public void setClasse(EntityClasse classe) {
+        this.classe = classe;
+    }
+
+    public ArrayList<EntityConsegna> getConsegne() {
+        return consegne;
+    }
+
+    public void setConsegne(ArrayList<EntityConsegna> consegne) {
+        this.consegne = consegne;
     }
 
     @Override
