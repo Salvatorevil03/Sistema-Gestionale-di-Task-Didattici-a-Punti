@@ -11,12 +11,22 @@ public class DBTask {
     public String descrizione;
     public String dataScadenza;
     public int maxPuntiAssegnabili;
-    //public DBClasse classe;
-    //public ArrayList<DBConsegna> consegne;
+    public DBClasse classe;
+    public ArrayList<DBConsegna> consegne;
 
+    public DBTask() {
+        this.titolo = "";
+        this.descrizione = "";
+        this.dataScadenza = "";
+        this.maxPuntiAssegnabili = 0;
+        this.classe = new DBClasse();
+        this.consegne = new ArrayList<DBConsegna>();
+    }
 
     public DBTask(int idTask) {
         this.id = idTask;
+        this.classe = new DBClasse();
+        this.consegne = new ArrayList<DBConsegna>();
         caricaDaDB();
     }
 
@@ -41,6 +51,37 @@ public class DBTask {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+
+    public void caricaClasseTaskDaDB(){
+
+        String query = new String("select * from task t join classi c on t.classe_codice = c.codice where t.id = ' "+this.id+"'");
+
+        try{
+
+            ResultSet rs = DBConnectionManager.selectQuery(query);
+
+            while(rs.next()) {
+
+                DBClasse classe = new DBClasse();
+                classe.setCodice(rs.getInt("codice"));
+                classe.setNome(rs.getString("nome"));
+                classe.setNumeroTask(rs.getInt("numeroTask"));
+
+                this.classe = classe;
+
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public void caricaConsegneTaskDaDB(){
+
+        String query = new String("select * from task t join consegne c on c.task_id = t.id where t.id = ' "+this.id+"'");
+
+
     }
 
     public int getId() {
@@ -83,4 +124,11 @@ public class DBTask {
         this.dataScadenza = dataScadenza;
     }
 
+    public DBClasse getClasse() {
+        return this.classe;
+    }
+
+    public ArrayList<DBConsegna> getConsegne(){
+        return this.consegne;
+    }
 }
