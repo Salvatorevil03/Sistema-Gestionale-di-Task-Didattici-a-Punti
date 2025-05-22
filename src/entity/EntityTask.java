@@ -10,16 +10,16 @@ public class EntityTask {
     public String descrizione;
     public String dataScadenza;
     public int maxPuntiAssegnabili;
-    //public EntityClasse classe;
-    //public ArrayList<EntityConsegna> consegne;
+    public EntityClasse classe;
+    public ArrayList<EntityConsegna> consegne;
 
     public EntityTask() {
         this.titolo = "";
         this.descrizione = "";
         this.dataScadenza = "";
         this.maxPuntiAssegnabili = 0;
-        //this.classe = null;
-        //this.consegne = null;
+        this.classe = null;
+        this.consegne = null;
     }
 
     //costruttore con PK
@@ -31,6 +31,16 @@ public class EntityTask {
         this.descrizione = task.getDescrizione();
         this.dataScadenza = task.getDataScadenza();
         this.maxPuntiAssegnabili = task.getMaxPuntiAssegnabili();
+        this.classe = null;
+        this.consegne = new ArrayList<EntityConsegna>();
+
+        task.caricaClasseTaskDaDB();
+        caricaClasse(task);
+
+
+        task.caricaConsegneTaskDaDB();
+        caricaConsegne(task);
+
 
     }
 
@@ -42,7 +52,22 @@ public class EntityTask {
         this.descrizione = task.getDescrizione();
         this.dataScadenza = task.getDataScadenza();
         this.maxPuntiAssegnabili = task.getMaxPuntiAssegnabili();
+        this.classe = null;
+        this.consegne = new ArrayList<EntityConsegna>();
 
+        task.caricaClasseDaDB();
+        caricaClasse(task);
+
+
+        task.caricaConsegneDaDB();
+        caricaConsegne(task);
+
+    }
+
+    public void caricaClasse(DBTask task){
+
+        EntityClasse classe = new EntityClasse(task.getClasse());
+        this.setClasse(classe)
     }
 
     //Setter e Getter
@@ -80,6 +105,10 @@ public class EntityTask {
 
     public void setMaxPuntiAssegnabili(int maxPuntiAssegnabili) {
         this.maxPuntiAssegnabili = maxPuntiAssegnabili;
+    }
+
+    public void setClasse(EntityClasse classe){
+        this.classe = classe;
     }
 
 
