@@ -26,6 +26,7 @@ public class DBStudente {
 
     public  DBStudente(int id) {
         this.id = id;
+        this.consegne = new ArrayList<DBConsegna>();
         caricaDaDB();
     }
 
@@ -47,6 +48,53 @@ public class DBStudente {
                 this.setNumTaskCompletati(rs.getInt("numTaskCompletati"));
                 this.setNumTaskValutati(rs.getInt("numTaskValutati"));
                 this.setPunteggioTotaleOttenuto(rs.getInt("punteggioTotaleOttenuto"));
+            }
+
+        } catch (ClassNotFoundException|SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void caricaClasseStudenteDaDB(){
+
+        String query = "SELECT c.codice, c.nome, c.numeroTask FROM studenti s JOIN classi c ON s.classe_codice = c.codice WHERE s.id = '"+this.id+"';";
+        System.out.println(query); //per debug
+
+        try {
+
+            ResultSet rs = DBConnectionManager.selectQuery(query);
+
+            if(rs.next()) {
+
+                DBClasse classe = new DBClasse();
+                classe.setCodice(rs.getInt("codice"));
+                classe.setNome(rs.getString("nome"));
+                classe.setNumeroTask(rs.getInt("numeroTask"));
+
+                this.setClasse(classe);
+            }
+
+        } catch (ClassNotFoundException|SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void caricaConsegneStudenteDaDB(){
+
+        String query = "SELECT * FROM consegne WHERE studente_id='"+this.id+"';";
+        System.out.println(query); //per debug
+
+        try {
+
+            ResultSet rs = DBConnectionManager.selectQuery(query);
+
+            while(rs.next()) {
+
+                DBConsegna consegna = new DBConsegna();
+                consegna.setId(rs.getInt("id"));
+                consegna.setPunteggio(rs.getInt("punteggio"));
+                consegna.setSoluzione(rs.getString("soluzione"));
+                this.consegne.add(consegna);
             }
 
         } catch (ClassNotFoundException|SQLException e) {
