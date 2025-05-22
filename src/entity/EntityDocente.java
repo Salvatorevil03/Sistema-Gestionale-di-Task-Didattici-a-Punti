@@ -9,6 +9,7 @@ public class EntityDocente extends Utente{
     //Costruttore
     public EntityDocente(int id){
         DBDocente docente = new DBDocente(id); //carico studente da DB
+        this.id = docente.getId();
         this.nome = docente.getNome();
         this.cognome = docente.getCognome();
         this.mail = docente.getMail();
