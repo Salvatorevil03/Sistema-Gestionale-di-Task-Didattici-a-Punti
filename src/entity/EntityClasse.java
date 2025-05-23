@@ -6,6 +6,11 @@ public class EntityClasse {
     private int codice;
     private String nome;
     private int numeroTask;
+    private EntityDocente docente;
+    //private ArrayList<EntityStudente> studenti;
+    //private ArrayList<EntityTask> task;
+    //RICORDA LA CREAZIONE DI QUESTI ATTRIBUTI -> MODIFICA DEL TO STRING
+
 
     public EntityClasse() {
         super();
@@ -16,12 +21,20 @@ public class EntityClasse {
         this.codice = codice;
         this.nome = classe.getNome();
         this.numeroTask = classe.getNumeroTask();
+
+        classe.caricaDocenteDaDB();
+        caricaDocente(classe);
     }
 
     public EntityClasse(DBClasse classe) {
         this.codice = classe.getCodice();
         this.nome = classe.getNome();
         this.numeroTask = classe.getNumeroTask();
+    }
+
+    public void caricaDocente(DBClasse classe) {
+        EntityDocente docente = new EntityDocente(classe.getDocente());
+        this.docente = docente;
     }
 
     //GETTER AND SETTER-----------------
@@ -49,8 +62,8 @@ public class EntityClasse {
         return "EntityClasse{" +
                 "codice=" + codice +
                 ", nome='" + nome + '\'' +
-                ", numeroTask='" + numeroTask + '\'' +
+                ", numeroTask=" + numeroTask +
+                ", docente=" + docente +
                 '}';
     }
-
 }
