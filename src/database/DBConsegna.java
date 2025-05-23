@@ -66,6 +66,26 @@ public class DBConsegna {
         }
     }
 
+    public void caricaTaskDaDB() {
+        String query1= "SELECT * FROM TASK T JOIN CONSEGNE C ON C.task_id = T.id WHERE C.id="+this.id+";";
+        try {
+            ResultSet rs1 = DBConnectionManager.selectQuery(query1);
+            if(rs1.next()) {
+                DBTask task = new DBTask();
+                task.setId(rs1.getInt("id"));
+                task.setTitolo(rs1.getString("titolo"));
+                task.setDescrizione(rs1.getString("descrizione"));
+                task.setDataScadenza(rs1.getString("dataScadenza"));
+                task.setMaxPuntiAssegnabili(rs1.getInt("maxPuntiAssegnabili"));
+                //SALVATAGGIO RISULTATO
+                this.task = task;
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
 
     // get e set
 
