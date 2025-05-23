@@ -1,8 +1,6 @@
 package entity;
 
 import database.DBConsegna;
-import database.DBStudente;
-import database.DBTask;
 
 public class EntityConsegna {
     private int id; // PK
@@ -20,7 +18,10 @@ public class EntityConsegna {
         //TODO: this.task
         //CARICAMENTO DELLO STUDENTE A CUI LA CONSEGNA è COLLEGATA
         consegna.caricaStudentiDaDB();
+        consegna.caricaTaskDaDB();
+
         caricaStudenti(consegna);
+        caricaTask(consegna);
     }
 
     public EntityConsegna(DBConsegna consegna) {
@@ -29,6 +30,9 @@ public class EntityConsegna {
         this.soluzione = consegna.getSoluzione();
 
         consegna.caricaStudentiDaDB();
+        caricaStudenti(consegna);
+        consegna.caricaTaskDaDB();
+        caricaTask(consegna);
     }
 
     public EntityConsegna() {
@@ -38,6 +42,11 @@ public class EntityConsegna {
         EntityStudente studente = new EntityStudente(consegna.getStudente());
         this.studente=studente;
 
+    }
+
+    public void caricaTask(DBConsegna consegna) {
+        EntityTask task = new EntityTask(consegna.getTask());
+        this.task=task;
     }
 
     @Override
