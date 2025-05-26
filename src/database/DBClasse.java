@@ -2,22 +2,27 @@ package database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class DBClasse {
     private int codice;
     private String nome;
     private int numeroTask;
     private DBDocente docente;
-    //private ArrayList<DBStudente> studenti;
-    //private ArrayList<DBTask> task;
-    //RICORDA LA CREAZIONE DI QUESTI ATTRIBUTI -> MODIFICA DEL TO STRING
+    private ArrayList<DBStudente> studenti;
+    private ArrayList<DBTask> task;
+
 
     public DBClasse() {
         super();
+        this.studenti = new ArrayList<DBStudente>();
+        this.task = new ArrayList<DBTask>();
     }
 
     public DBClasse(int codice) {
         this.codice = codice;
+        this.studenti = new ArrayList<DBStudente>();
+        this.task=new ArrayList<DBTask>();
         caricaDaDB();
     }
 
@@ -25,6 +30,9 @@ public class DBClasse {
         this.codice=classe.getCodice();
         this.nome=classe.getNome();
         this.numeroTask=classe.getNumeroTask();
+        this.docente=classe.getDocente();
+        this.studenti=classe.studenti;
+        this.task=classe.task;
     }
 
     public void caricaDocenteDaDB() {
@@ -42,6 +50,50 @@ public class DBClasse {
                 //SALVATAGGIO RISULTATO
                 this.docente = docente;
             }
+        } catch (ClassNotFoundException | SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public void caricaStudentiDaDB() {
+        String query1 = "SELECT * FROM STUDENTI S JOIN CLASSI C ON S.classe_codice=C.codice WHERE C.codice=" + this.codice + ";";
+        try {
+            ResultSet rs1 = DBConnectionManager.selectQuery(query1);
+            while (rs1.next()) {
+                DBStudente studente = new DBStudente();
+                studente.setId(rs1.getInt("id"));
+                studente.setNome(rs1.getString("nome"));
+                studente.setCognome(rs1.getString("cognome"));
+                studente.setMail(rs1.getString("mail"));
+                studente.setPassword(rs1.getString("password"));
+                studente.setNumTaskCompletati(rs1.getInt("numTaskCompletati"));
+                studente.setNumTaskValutati(rs1.getInt("numTaskValutati"));
+                studente.setPunteggioTotaleOttenuto(rs1.getInt("punteggioTotaleOttenuto"));
+                this.studenti.add(studente);
+            }
+            rs1.close();
+        } catch (ClassNotFoundException | SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public void caricaTaskDaDB() {
+        String query1 = "SELECT * FROM TASK T JOIN CLASSI C ON T.classe_codice=C.codice WHERE C.codice=" + this.codice + ";";
+        try {
+            ResultSet rs1 = DBConnectionManager.selectQuery(query1);
+            while(rs1.next()) {
+                DBTask task = new DBTask();
+                task.setId(rs1.getInt("id"));
+                task.setTitolo(rs1.getString("titolo"));
+                task.setDescrizione(rs1.getString("descrizione"));
+                task.setMaxPuntiAssegnabili(rs1.getInt("maxPuntiAssegnabili"));
+
+                //SALVATAGGIO RISULTATO
+                this.task.add(task);
+            }
+            rs1.close();
         } catch (ClassNotFoundException | SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -76,6 +128,22 @@ public class DBClasse {
         this.docente = docente;
     }
 
+    public ArrayList<DBStudente> getStudenti() {
+        return studenti;
+    }
+
+    public void setStudenti(ArrayList<DBStudente> studenti) {
+        this.studenti = studenti;
+    }
+
+    public ArrayList<DBTask> getTask() {
+        return task;
+    }
+
+    public void setTask(ArrayList<DBTask> task) {
+        this.task = task;
+    }
+
     @Override
     public String toString() {
         return "DBClasse{" +
@@ -83,6 +151,8 @@ public class DBClasse {
                 ", nome='" + nome + '\'' +
                 ", numeroTask=" + numeroTask +
                 ", docente=" + docente +
+                ", studenti=" + studenti +
+                ", task=" + task +
                 '}';
     }
 
