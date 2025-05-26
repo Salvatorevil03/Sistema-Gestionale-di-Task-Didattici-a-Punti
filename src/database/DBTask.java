@@ -77,10 +77,42 @@ public class DBTask {
         }
     }
 
-    public void caricaConsegneTaskDaDB(){
+    public void caricaClasseDaDB() {
+        String query1 = "SELECT * FROM TASK T JOIN CLASSI C ON T.classe_codice = C.codice WHERE T.classe_codice=" + this.classe.getCodice() + ";";
+        try {
+            ResultSet rs1 = DBConnectionManager.selectQuery(query1);
+            if (rs1.next()) {
+                DBClasse classe= new DBClasse();
+                classe.setCodice(rs1.getInt("codice"));
+                classe.setNome(rs1.getString("nome"));
+                classe.setNumeroTask(rs1.getInt("numeroTask"));
 
-        String query = new String("select * from task t join consegne c on c.task_id = t.id where t.id = ' "+this.id+"'");
+                //SALVATAGGIO RISULTATO
+                this.classe = classe;
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
+    public void caricaConsegneDaDB(){
+        String query1 = "SELECT * FROM TASK T JOIN CONSEGNE C ON T.id = C.task_id WHERE T.id=" + this.id + ";";
+        try {
+            ResultSet rs1 = DBConnectionManager.selectQuery(query1);
+            while (rs1.next()) {
+                DBConsegna consegna= new DBConsegna();
+                consegna.setId(rs1.getInt("id"));
+                consegna.setPunteggio(rs1.getInt("punteggio"));
+                consegna.setSoluzione(rs1.getString("soluzione"));
+
+                //SALVATAGGIO RISULTATO
+                this.consegne.add(consegna);
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
     }
 
@@ -131,4 +163,6 @@ public class DBTask {
     public ArrayList<DBConsegna> getConsegne(){
         return this.consegne;
     }
+
+
 }
