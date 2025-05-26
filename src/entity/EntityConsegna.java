@@ -15,7 +15,6 @@ public class EntityConsegna {
 
         this.punteggio = consegna.getPunteggio();
         this.soluzione = consegna.getSoluzione();
-        //TODO: this.task
         //CARICAMENTO DELLO STUDENTE A CUI LA CONSEGNA è COLLEGATA
         consegna.caricaStudentiDaDB();
         consegna.caricaTaskDaDB();
