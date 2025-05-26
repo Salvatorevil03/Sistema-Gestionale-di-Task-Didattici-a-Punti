@@ -38,7 +38,7 @@ public class EntityTask {
         caricaClasse(task);
 
 
-        task.caricaConsegneTaskDaDB();
+        task.caricaConsegneDaDB();
         caricaConsegne(task);
 
 
@@ -64,10 +64,16 @@ public class EntityTask {
 
     }
 
-    public void caricaClasse(DBTask task){
+    private void caricaConsegne(DBTask task) {
+        for(int i=0; i<task.getConsegne().size(); i++) {
+            EntityConsegna consegna = new EntityConsegna(task.getConsegne().get(i));
+            this.consegne.add(consegna);
+        }
+    }
 
+    public void caricaClasse(DBTask task){
         EntityClasse classe = new EntityClasse(task.getClasse());
-        this.setClasse(classe)
+        this.setClasse(classe);
     }
 
     //Setter e Getter
