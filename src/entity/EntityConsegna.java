@@ -1,51 +1,48 @@
 package entity;
 
 import database.DBConsegna;
+import database.DBStudente;
 
 public class EntityConsegna {
     private int id; // PK
     private int punteggio;
     private String soluzione;
-    private EntityTask task;
-    private EntityStudente studente;
+    //private EntityTask task;
+    //private EntityStudente studente;
 
     public EntityConsegna(int id) {
         this.id = id;
         DBConsegna consegna = new DBConsegna(id);
-
         this.punteggio = consegna.getPunteggio();
         this.soluzione = consegna.getSoluzione();
-        //CARICAMENTO DELLO STUDENTE A CUI LA CONSEGNA è COLLEGATA
-        consegna.caricaStudentiDaDB();
-        consegna.caricaTaskDaDB();
-
-        caricaStudenti(consegna);
-        caricaTask(consegna);
     }
 
     public EntityConsegna(DBConsegna consegna) {
         this.id = consegna.getId();
         this.punteggio = consegna.getPunteggio();
         this.soluzione = consegna.getSoluzione();
-
-        consegna.caricaStudentiDaDB();
-        caricaStudenti(consegna);
-        consegna.caricaTaskDaDB();
-        caricaTask(consegna);
     }
 
     public EntityConsegna() {
     }
 
-    public void caricaStudenti(DBConsegna consegna) {
-        EntityStudente studente = new EntityStudente(consegna.getStudente());
-        this.studente=studente;
-
+    public int getId() {
+        return id;
     }
-
-    public void caricaTask(DBConsegna consegna) {
-        EntityTask task = new EntityTask(consegna.getTask());
-        this.task=task;
+    public void setId(int id) {
+        this.id = id;
+    }
+    public int getPunteggio() {
+        return punteggio;
+    }
+    public void setPunteggio(int punteggio) {
+        this.punteggio = punteggio;
+    }
+    public String getSoluzione() {
+        return soluzione;
+    }
+    public void setSoluzione(String soluzione) {
+        this.soluzione = soluzione;
     }
 
     @Override
@@ -54,8 +51,46 @@ public class EntityConsegna {
                 "id=" + id +
                 ", punteggio=" + punteggio +
                 ", soluzione='" + soluzione + '\'' +
-                ", task=" + task +
-                ", studente=" + studente +
                 '}';
+    }
+
+    //########################################################
+    //METODI PER POSSIBILI DIPENDENZE
+//    public void caricaStudenti(DBConsegna consegna) {
+//        EntityStudente studente = new EntityStudente(consegna.getStudente());
+//        this.studente=studente;
+//    }
+//
+//    public void caricaTask(DBConsegna consegna) {
+//        EntityTask task = new EntityTask(consegna.getTask());
+//        this.task=task;
+//    }
+
+    //---------------------------------------------------------
+    //BUSINESS LOGIC
+    public int impostaPunteggio(int punteggio) {
+        this.punteggio = punteggio;
+        DBConsegna consegna = new DBConsegna(id);
+        consegna.setPunteggio(punteggio);
+        int esito=consegna.salvaInDB();
+        return esito;
+    }
+
+    private void aggiornaPunteggioTotaleOttenuto(int punteggio,DBStudente studente) {
+        studente.setPunteggioTotaleOttenuto(studente.getPunteggioTotaleOttenuto()+punteggio);
+    }
+
+    public int aggiornaStatistiche(int punteggio) {
+        DBConsegna consegna = new DBConsegna(this.id);
+        DBStudente studente= consegna.caricaStudenteDaDB();
+        int esito=0;
+        this.aggiornaPunteggioTotaleOttenuto(punteggio,studente);
+        this.aggiornaNumTaskValutati(studente);
+        esito =studente.salvaInDB();
+        return esito;
+    }
+
+    private void aggiornaNumTaskValutati(DBStudente studente) {
+        studente.setNumTaskValutati(studente.getNumTaskValutati()+1);
     }
 }

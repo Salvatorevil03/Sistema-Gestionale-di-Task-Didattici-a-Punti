@@ -1,5 +1,4 @@
 package database;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -7,8 +6,8 @@ public class DBConsegna {
     private int id; // PK
     private int punteggio;
     private String soluzione;
-    private DBTask task;
-    private DBStudente studente;
+    //private DBTask task;
+    //private DBStudente studente;
 
     public DBConsegna() {
         super();
@@ -19,8 +18,14 @@ public class DBConsegna {
         caricaDaDB();
     }
 
-    public void caricaDaDB() {
+    public DBConsegna(DBConsegna consegna){
+        this.id=consegna.getId();
+        this.punteggio=consegna.getPunteggio();
+        this.soluzione=consegna.getSoluzione();
+    }
 
+    //CARICAMENTO DA DB
+    public void caricaDaDB() {
         String query = "SELECT * FROM consegne WHERE id='"+this.id+"';";
         //System.out.println(query); //per debug
 
@@ -38,7 +43,39 @@ public class DBConsegna {
         }
     }
 
-    public void caricaStudentiDaDB() {
+    //GETTER E SETTER
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public int getPunteggio() {
+        return punteggio;
+    }
+    public void setPunteggio(int punteggio) {
+        this.punteggio = punteggio;
+    }
+    public String getSoluzione() {
+        return soluzione;
+    }
+    public void setSoluzione(String soluzione) {
+        this.soluzione = soluzione;
+    }
+
+    @Override
+    public String toString() {
+        return "DBConsegna{" +
+                "id=" + id +
+                ", punteggio=" + punteggio +
+                ", soluzione='" + soluzione + '\'' +
+                '}';
+    }
+
+    //###########################################################################
+    // METODI PER POSSIBILI DIPENDENZE
+
+    public DBStudente caricaStudenteDaDB() {
         //Le consegne prelevano gli studenti ad esse relative
         //String query = "SELECT * FROM studente WHERE studente_id='"+this.studente.getId()+"';";
         String query1= "SELECT * FROM STUDENTI S JOIN CONSEGNE C ON C.studente_id = S.id WHERE C.id="+this.id+";";
@@ -49,7 +86,7 @@ public class DBConsegna {
 
             if(rs1.next()) {
                 DBStudente studente = new DBStudente();
-                studente.setId(rs1.getInt("id"));
+                studente.setId(rs1.getInt("S.id"));
                 studente.setNome(rs1.getString("nome"));
                 studente.setCognome(rs1.getString("nome"));
                 studente.setMail(rs1.getString("mail"));
@@ -58,74 +95,49 @@ public class DBConsegna {
                 studente.setNumTaskValutati(rs1.getInt("numTaskValutati"));
                 studente.setPunteggioTotaleOttenuto(rs1.getInt("punteggioTotaleOttenuto"));
                 //SALVATAGGIO RISULTATO
-                this.studente = studente;
+                //this.studente = studente;
+                return studente;
             }
         } catch (ClassNotFoundException | SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        return null;
     }
 
-    public void caricaTaskDaDB() {
-        String query1= "SELECT * FROM TASK T JOIN CONSEGNE C ON C.task_id = T.id WHERE C.id="+this.id+";";
-        try {
-            ResultSet rs1 = DBConnectionManager.selectQuery(query1);
-            if(rs1.next()) {
-                DBTask task = new DBTask();
-                task.setId(rs1.getInt("id"));
-                task.setTitolo(rs1.getString("titolo"));
-                task.setDescrizione(rs1.getString("descrizione"));
-                task.setDataScadenza(rs1.getString("dataScadenza"));
-                task.setMaxPuntiAssegnabili(rs1.getInt("maxPuntiAssegnabili"));
-                //SALVATAGGIO RISULTATO
-                this.task = task;
-            }
+//    public void caricaTaskDaDB() {
+//        String query1= "SELECT * FROM TASK T JOIN CONSEGNE C ON C.task_id = T.id WHERE C.id="+this.id+";";
+//        try {
+//            ResultSet rs1 = DBConnectionManager.selectQuery(query1);
+//            if(rs1.next()) {
+//                DBTask task = new DBTask();
+//                task.setId(rs1.getInt("id"));
+//                task.setTitolo(rs1.getString("titolo"));
+//                task.setDescrizione(rs1.getString("descrizione"));
+//                task.setDataScadenza(rs1.getString("dataScadenza"));
+//                task.setMaxPuntiAssegnabili(rs1.getInt("maxPuntiAssegnabili"));
+//                //SALVATAGGIO RISULTATO
+//                this.task = task;
+//            }
+//        } catch (ClassNotFoundException | SQLException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
+//    }
+
+    //---------------------------------------
+    //BUSINESS LOGIC
+    public int salvaInDB() {
+        int ret=0;
+        //UPDATE taskdidattici.consegne SET punteggio = 15 WHERE id = 1;
+        String query = "UPDATE consegne SET punteggio = "+this.punteggio+ " WHERE id= "+this.id+";";
+        try{
+            ret=DBConnectionManager.updateQuery(query);
         } catch (ClassNotFoundException | SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            ret=-1;
         }
+        return ret;
     }
 
-
-    // get e set
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getPunteggio() {
-        return punteggio;
-    }
-
-    public void setPunteggio(int punteggio) {
-        this.punteggio = punteggio;
-    }
-
-    public String getSoluzione() {
-        return soluzione;
-    }
-
-    public void setSoluzione(String soluzione) {
-        this.soluzione = soluzione;
-    }
-
-    public DBTask getTask() {
-        return task;
-    }
-
-    public void setTask(DBTask task) {
-        this.task = task;
-    }
-
-    public DBStudente getStudente() {
-        return studente;
-    }
-
-    public void setStudente(DBStudente studente) {
-        this.studente = studente;
-    }
 }

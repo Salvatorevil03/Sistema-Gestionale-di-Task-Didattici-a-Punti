@@ -1,23 +1,27 @@
 package entity;
 
-import database.DBClasse;
-import database.DBConsegna;
 import database.DBStudente;
 
-import java.util.ArrayList;
-
-public class EntityStudente extends Utente{
-
+public class EntityStudente {
+    private int id; //PK
+    private String nome;
+    private String cognome;
+    private String mail;
+    private String password;
     private int numTaskCompletati;
     private int numTaskValutati;
     private int punteggioTotaleOttenuto;
-    private EntityClasse classe;
-    private ArrayList<EntityConsegna> consegne;
+    //private EntityClasse classe;
+    //private ArrayList<EntityConsegna> consegne;
 
-    public EntityStudente(int id) {
-        this.id = id;
+    public EntityStudente() {
+        super();
+        //this.consegne = new ArrayList<EntityConsegna>();
+    }
+
+    public  EntityStudente(int id) {
         DBStudente studente = new DBStudente(id);
-
+        this.id = id;
         this.nome = studente.getNome();
         this.cognome = studente.getCognome();
         this.mail = studente.getMail();
@@ -25,14 +29,7 @@ public class EntityStudente extends Utente{
         this.numTaskCompletati = studente.getNumTaskCompletati();
         this.numTaskValutati = studente.getNumTaskValutati();
         this.punteggioTotaleOttenuto = studente.getPunteggioTotaleOttenuto();
-
-        studente.caricaClasseStudenteDaDB();
-        caricaClasse(studente);
-
-        this.consegne = new ArrayList<EntityConsegna>();
-        studente.caricaConsegneStudenteDaDB();
-        caricaConsegne(studente);
-
+        //this.consegne = new ArrayList<EntityConsegna>();
     }
 
     public EntityStudente(DBStudente studente) {
@@ -46,58 +43,23 @@ public class EntityStudente extends Utente{
         this.punteggioTotaleOttenuto = studente.getPunteggioTotaleOttenuto();
     }
 
-    public void caricaClasse(DBStudente studente){
-        EntityClasse classe = new EntityClasse(studente.getClasse());
-        this.setClasse(classe);
-    }
-
-    public void caricaConsegne(DBStudente studente){
-        for(int i=0;i<studente.getConsegne().size();i++) {
-
-            EntityConsegna consegna = new EntityConsegna(studente.getConsegne().get(i));
-            this.consegne.add(consegna);
-        }
-    }
-
-    public int getNumTaskCompletati() {
-        return numTaskCompletati;
-    }
-
-    public void setNumTaskCompletati(int numTaskCompletati) {
-        this.numTaskCompletati = numTaskCompletati;
-    }
-
-    public int getNumTaskValutati() {
-        return numTaskValutati;
-    }
-
-    public void setNumTaskValutati(int numTaskValutati) {
-        this.numTaskValutati = numTaskValutati;
-    }
-
-    public int getPunteggioTotaleOttenuto() {
-        return punteggioTotaleOttenuto;
-    }
-
-    public void setPunteggioTotaleOttenuto(int punteggioTotaleOttenuto) {
-        this.punteggioTotaleOttenuto = punteggioTotaleOttenuto;
-    }
-
-    public EntityClasse getClasse() {
-        return classe;
-    }
-
-    public void setClasse(EntityClasse classe) {
-        this.classe = classe;
-    }
-
-    public ArrayList<EntityConsegna> getConsegne() {
-        return consegne;
-    }
-
-    public void setConsegne(ArrayList<EntityConsegna> consegne) {
-        this.consegne = consegne;
-    }
+    //GETTER AND SETTER-----------------
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id;}
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
+    public String getCognome() { return cognome; }
+    public void setCognome(String cognome) { this.cognome = cognome; }
+    public String getMail() { return mail; }
+    public void setMail(String mail) { this.mail = mail; }
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
+    public int getNumTaskCompletati() { return numTaskCompletati; }
+    public void setNumTaskCompletati(int numTaskCompletati){ this.numTaskCompletati = numTaskCompletati; }
+    public int getNumTaskValutati() { return numTaskValutati; }
+    public void setNumTaskValutati(int numTaskValutati) { this.numTaskValutati = numTaskValutati; }
+    public int getPunteggioTotaleOttenuto() { return punteggioTotaleOttenuto; }
+    public void setPunteggioTotaleOttenuto(int punteggioTotaleOttenuto) { this.punteggioTotaleOttenuto = punteggioTotaleOttenuto; }
 
     @Override
     public String toString() {
@@ -105,8 +67,6 @@ public class EntityStudente extends Utente{
                 "numTaskCompletati=" + numTaskCompletati +
                 ", numTaskValutati=" + numTaskValutati +
                 ", punteggioTotaleOttenuto=" + punteggioTotaleOttenuto +
-                ", classe=" + classe +
-                ", consegne=" + consegne +
                 ", id=" + id +
                 ", nome='" + nome + '\'' +
                 ", cognome='" + cognome + '\'' +
@@ -114,4 +74,19 @@ public class EntityStudente extends Utente{
                 ", password='" + password + '\'' +
                 '}';
     }
+
+    //###########################################################
+    //METODI PER POSSIBILI DIPENDENZE
+//    public void caricaClasse(DBStudente studente){
+//        EntityClasse classe = new EntityClasse(studente.getClasse());
+//        this.setClasse(classe);
+//    }
+
+//    public void caricaConsegne(DBStudente studente){
+//        for(int i=0;i<studente.getConsegne().size();i++) {
+
+//            EntityConsegna consegna = new EntityConsegna(studente.getConsegne().get(i));
+//            this.consegne.add(consegna);
+//        }
+//    }
 }

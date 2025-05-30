@@ -1,4 +1,4 @@
-package taskdidatticiNEW;
+package boundary;
 
 import java.awt.EventQueue;
 
@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 
-import NomeP.GUI2;
+//import NomeP.GUI2;
 
 import javax.swing.JSplitPane;
 import java.awt.Font;

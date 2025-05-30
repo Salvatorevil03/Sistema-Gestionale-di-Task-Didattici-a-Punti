@@ -1,4 +1,4 @@
-package taskdidatticiNEW;
+package boundary;
 
 public class SessioneStudente {
 

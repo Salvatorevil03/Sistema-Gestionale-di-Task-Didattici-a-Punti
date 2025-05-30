@@ -1,69 +1,50 @@
 package entity;
 
 import database.DBDocente;
-import java.util.ArrayList;
 
-public class EntityDocente extends Utente{
-    private ArrayList<EntityClasse> classi;
+public class EntityDocente {
+    private int id;
+    private String nome;
+    private String cognome;
+    private String mail;
+    private String password;
+    //private ArrayList<EntityClasse> classi;
 
-    //Costruttore
-    public EntityDocente(int id){
-        DBDocente docente = new DBDocente(id); //carico studente da DB
+
+    public EntityDocente() {
+        super();
+        //this.classi = new ArrayList<EntityClasse>();
+    }
+
+    public EntityDocente(int id) {
+        DBDocente docente = new DBDocente(id);
+        this.id = id;
+        this.nome = docente.getNome();
+        this.cognome = docente.getCognome();
+        this.mail = docente.getMail();
+        this.password = docente.getPassword();
+        //this.classi = new ArrayList<EntityClasse>();
+    }
+
+    public EntityDocente(DBDocente docente) {
         this.id = docente.getId();
         this.nome = docente.getNome();
         this.cognome = docente.getCognome();
         this.mail = docente.getMail();
-        this.password=docente.getPassword();
-        this.classi= new ArrayList<EntityClasse>();
-
-        docente.caricaClassiDaDB();
-        caricaClassi(docente);
+        this.password = docente.getPassword();
     }
 
-    public EntityDocente(DBDocente docente){
-        this.id=docente.getId();
-        this.nome = docente.getNome();
-        this.cognome = docente.getCognome();
-        this.mail = docente.getMail();
-        this.password=docente.getPassword();
-        this.classi=new ArrayList<EntityClasse>();
-        docente.caricaClassiDaDB();
-        caricaClassi(docente);
-    }
-
-    public EntityDocente(){
-        super();
-        this.classi=new ArrayList<EntityClasse>();
-    }
-
-    //GETTER AND SETTER
-    public String getCognome() {
-        return cognome;
-    }
-    public void setCognome(String cognome) {
-        this.cognome = cognome;
-    }
-    public String getMail() {return mail;}
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-    public String getPassword() {return password;}
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    public String getNome() {
-        return nome;
-    }
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-    public int getId() {return id;}
-    public ArrayList<EntityClasse> getClassi() {
-        return classi;
-    }
-    public void setClassi(ArrayList<EntityClasse> classi) {
-        this.classi = classi;
-    }
+    //GETTER AND SETTER-----------------
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id;}
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
+    public String getCognome() { return cognome; }
+    public void setCognome(String cognome) { this.cognome = cognome; }
+    public String getMail() { return mail; }
+    public void setMail(String mail) { this.mail = mail; }
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
 
     @Override
     public String toString() {
@@ -73,15 +54,15 @@ public class EntityDocente extends Utente{
                 ", cognome='" + cognome + '\'' +
                 ", mail='" + mail + '\'' +
                 ", password='" + password + '\'' +
-                ", classi=" + classi +
                 '}';
     }
 
-    //--------------------------------------------------------------------
-    public void caricaClassi(DBDocente docente){
-        for(int i=0;i<docente.getClassi().size();i++){
-            EntityClasse classe= new EntityClasse(docente.getClassi().get(i));
-            this.classi.add(classe);
-        }
-    }
+    //###########################################################
+    //METODI PER POSSIBILI DIPENDENZE
+//    public void caricaClassi(DBDocente docente){
+//        for(int i=0;i<docente.getClassi().size();i++){
+//            EntityClasse classe= new EntityClasse(docente.getClassi().get(i));
+//            this.classi.add(classe);
+//        }
+//    }
 }
