@@ -106,7 +106,7 @@ public class GUIClasseDocente extends JFrame {
 		btnListaStudenti.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIListaStudentiClasse seconda = new GUIListaStudentiClasse(nome); // Crea nuova finestra
+				GUIListaStudentiClasse seconda = new GUIListaStudentiClasse(); // Crea nuova finestra
 				seconda.setVisible(true); // Mostra nuova finestra
 				dispose(); // Chiude questa finestra
 			}
