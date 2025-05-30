@@ -58,6 +58,8 @@ public class GUILogin extends JFrame {
 	 * Create the frame.
 	 */
 	public GUILogin() {
+		SessioneStudente studente = SessioneStudente.getInstance();
+		studente.setNomeStudente("Salvatore");
 		//
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -106,15 +108,19 @@ public class GUILogin extends JFrame {
 		accessoBTN.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int i = 0;
 				if (mailField.getText().equals("0")) {
 					GUIStudente seconda = new GUIStudente(); // Crea nuova finestra
 					seconda.setVisible(true); // Mostra nuova finestra
 					dispose(); // Chiude questa finestra
 				}else {
-					GUIDocente seconda = new GUIDocente(); // Crea nuova finestra
-					seconda.setVisible(true); // Mostra nuova finestra
-					dispose(); // Chiude questa finestra
+					if (mailField.getText().equals("1")) {
+						GUIDocente seconda = new GUIDocente(); // Crea nuova finestra
+						seconda.setVisible(true); // Mostra nuova finestra
+						dispose(); // Chiude questa finestra
+					}else {
+						GUIIscrizioneClasse seconda = new GUIIscrizioneClasse(); // Crea nuova finestra
+						seconda.setVisible(true); // Mostra nuova finestra
+					}
 				}
 			}
 		});

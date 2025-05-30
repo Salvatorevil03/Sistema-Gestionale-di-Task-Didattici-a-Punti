@@ -142,7 +142,12 @@ public class GUIDocente extends JFrame {
 		model = new DefaultTableModel(
 				new Object[][] {}, // Inizia vuoto
 				new String[] { "Nome" } // Nome colonna
-			);
+			){
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 		table.setModel(model);
 		model.addRow(new Object[] { "classeSasi" });
 		scrollPane.setViewportView(table);
@@ -161,7 +166,7 @@ public class GUIDocente extends JFrame {
 				if (selectedRow != -1) {
 					String nome = (String) model.getValueAt(selectedRow, 0);
 					System.out.println(nome);
-					GUIClasseDocente seconda = new GUIClasseDocente(nome); // Crea nuova finestra
+					GUIClasseDocente seconda = new GUIClasseDocente(); // Crea nuova finestra
 					seconda.setVisible(true); // Mostra nuova finestra
 					dispose(); // Chiude questa finestra
 				} else {
@@ -177,5 +182,17 @@ public class GUIDocente extends JFrame {
 		lblListaStudenti.setFont(new Font("Tahoma", Font.BOLD, 30));
 		lblListaStudenti.setBounds(69, 312, 208, 56);
 		contentPane.add(lblListaStudenti);
+		
+		JButton aggiornaButton = new JButton("aggiorna");
+		aggiornaButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				GUIDocente seconda = new GUIDocente(); // Crea nuova finestra
+				seconda.setVisible(true); // Mostra nuova finestra
+				dispose(); // Chiude questa finestra
+			}
+		});
+		aggiornaButton.setBounds(785, 11, 89, 23);
+		contentPane.add(aggiornaButton);
 	}
 }

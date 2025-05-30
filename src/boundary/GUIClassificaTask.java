@@ -106,7 +106,12 @@ public class GUIClassificaTask extends JFrame {
 		model = new DefaultTableModel(
 				new Object[][] {}, // Inizia vuoto
 				new String[] { "Titolo","Descrizione","Data Scadenza","" } // Nome colonna
-			);
+			){
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 		table.setModel(model);
 		model.addRow(new Object[] { "classeSasi" });
 		scrollPane.setViewportView(table);

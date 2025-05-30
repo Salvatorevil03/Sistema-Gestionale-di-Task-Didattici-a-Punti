@@ -41,7 +41,8 @@ public class GUIListaStudentiPiattaforma extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private DefaultTableModel model; /////
-	private JTextField codiceField;
+	private JTable table2;
+	private DefaultTableModel model2; /////
 
 	/**
 	 * Launch the application.
@@ -116,14 +117,19 @@ public class GUIListaStudentiPiattaforma extends JFrame {
 		contentPane.add(lblTitolo);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(83, 121, 728, 346);
+		scrollPane.setBounds(83, 121, 265, 346);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
 		model = new DefaultTableModel(
 				new Object[][] {}, // Inizia vuoto
 				new String[] { "Nome", "Cognome" } // Nome colonna
-			);
+			){
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 		table.setModel(model);
 		model.addRow(new Object[] { "Ernesto", "Cifuni" });
 		scrollPane.setViewportView(table);
@@ -134,24 +140,33 @@ public class GUIListaStudentiPiattaforma extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int selectedRow = table.getSelectedRow();
-				if (selectedRow != -1 && !codiceField.getText().equals("")) {
+				if (selectedRow != -1) {
 					String nome = (String) model.getValueAt(selectedRow, 0);
-					System.out.println(nome+" "+codiceField.getText());
+					System.out.println(nome);
 				} else {
-					JOptionPane.showMessageDialog(null, "Nessuna riga selezionata o nessun codice classe inserito.");
+					JOptionPane.showMessageDialog(null, "Nessun studente o classe selezionati.");
 				}
 			}
 		});
-		btnIscrivi.setBounds(345, 518, 89, 29);
+		btnIscrivi.setBounds(389, 519, 89, 29);
 		contentPane.add(btnIscrivi);
 		
-		codiceField = new JTextField();
-		codiceField.setBounds(464, 524, 113, 20);
-		contentPane.add(codiceField);
-		codiceField.setColumns(10);
+		JScrollPane scrollPane2 = new JScrollPane();
+		scrollPane2.setBounds(524, 121, 265, 346);
+		contentPane.add(scrollPane2);
 		
-		JLabel lblCodiceClasse = new JLabel("Codice Classe");
-		lblCodiceClasse.setBounds(464, 499, 123, 14);
-		contentPane.add(lblCodiceClasse);
+		table2 = new JTable();
+		model2 = new DefaultTableModel(
+				new Object[][] {}, // Inizia vuoto
+				new String[] { "Nome", "Cognome" } // Nome colonna
+			){
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		table2.setModel(model2);
+		model2.addRow(new Object[] { "Ernesto", "Cifuni" });
+		scrollPane2.setViewportView(table2);
 	}
 }

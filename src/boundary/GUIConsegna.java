@@ -89,7 +89,7 @@ public class GUIConsegna extends JFrame {
 		indietroBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIClasseDocente seconda = new GUIClasseDocente("NomeSasi"); // Crea nuova finestra
+				GUIClasseDocente seconda = new GUIClasseDocente(); // Crea nuova finestra
 				seconda.setVisible(true); // Mostra nuova finestra
 				dispose(); // Chiude questa finestra
 			}
@@ -105,7 +105,12 @@ public class GUIConsegna extends JFrame {
 		model = new DefaultTableModel(
 				new Object[][] {}, // Inizia vuoto
 				new String[] { "Nome" } // Nome colonna
-			);
+			){
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 		table.setModel(model);
 		model.addRow(new Object[] { "classeSasi" });
 		scrollPane.setViewportView(table);
@@ -122,7 +127,7 @@ public class GUIConsegna extends JFrame {
 		contentPane.add(textArea);
 		textArea.setLineWrap(true);         // abilita il ritorno a capo
 		textArea.setWrapStyleWord(true);    // va a capo tra parole (non a metà parola)
-		textArea.setText("Seleziona un task per visualizzare qui la consegna");
+		textArea.setText("Seleziona una consegna per visualizzare qui l'elaborato");
 		
 		JLabel lblBenvenuto_1_1 = new JLabel("Elaborato");
 		lblBenvenuto_1_1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -144,5 +149,21 @@ public class GUIConsegna extends JFrame {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(653, 419, 46, 14);
 		contentPane.add(lblNewLabel);
+		
+		JButton aggiornaButton = new JButton("aggiorna");
+		aggiornaButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				GUIConsegna seconda = new GUIConsegna(); // Crea nuova finestra
+				seconda.setVisible(true); // Mostra nuova finestra
+				dispose(); // Chiude questa finestra
+			}
+		});
+		aggiornaButton.setBounds(785, 11, 89, 23);
+		contentPane.add(aggiornaButton);
+		
+		JButton btnSeleziona = new JButton("seleziona");
+		btnSeleziona.setBounds(45, 489, 89, 23);
+		contentPane.add(btnSeleziona);
 	}
 }

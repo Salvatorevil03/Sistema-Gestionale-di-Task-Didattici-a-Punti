@@ -54,7 +54,7 @@ public class GUIClasseDocente extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GUIClasseDocente frame = new GUIClasseDocente("nome");
+					GUIClasseDocente frame = new GUIClasseDocente();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -66,7 +66,7 @@ public class GUIClasseDocente extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GUIClasseDocente(String nome) { //Nome dato dalla GUI che lo crea
+	public GUIClasseDocente() { //Nome dato dalla GUI che lo crea
 		//
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -80,7 +80,7 @@ public class GUIClasseDocente extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel nome_classe = new JLabel("NOME_CLASSE");
-		nome_classe.setText(nome);
+		nome_classe.setText("nome classe");
 		nome_classe.setHorizontalAlignment(SwingConstants.CENTER);
 		nome_classe.setFont(new Font("Tahoma", Font.BOLD, 30));
 		nome_classe.setBounds(316, 50, 255, 64);
@@ -190,7 +190,12 @@ public class GUIClasseDocente extends JFrame {
 		model = new DefaultTableModel(
 				new Object[][] {}, // Inizia vuoto
 				new String[] { "Titolo","Descrizione","Data Scadenza","Max Punteggio" } // Nome colonna
-			);
+			){
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 		table.setModel(model);
 		model.addRow(new Object[] { "classeSasi" });
 		scrollPane.setViewportView(table);
@@ -213,5 +218,17 @@ public class GUIClasseDocente extends JFrame {
 		});
 		btnSeleziona.setBounds(602, 512, 89, 23);
 		contentPane.add(btnSeleziona);
+		
+		JButton aggiornaButton = new JButton("aggiorna");
+		aggiornaButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				GUIClasseDocente seconda = new GUIClasseDocente(); // Crea nuova finestra
+				seconda.setVisible(true); // Mostra nuova finestra
+				dispose(); // Chiude questa finestra
+			}
+		});
+		aggiornaButton.setBounds(785, 11, 89, 23);
+		contentPane.add(aggiornaButton);
 	}
 }

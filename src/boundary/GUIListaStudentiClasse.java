@@ -49,7 +49,7 @@ public class GUIListaStudentiClasse extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GUIListaStudentiClasse frame = new GUIListaStudentiClasse("nome");
+					GUIListaStudentiClasse frame = new GUIListaStudentiClasse();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -61,7 +61,7 @@ public class GUIListaStudentiClasse extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GUIListaStudentiClasse(String nome) {
+	public GUIListaStudentiClasse() {
 		//
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -84,7 +84,7 @@ public class GUIListaStudentiClasse extends JFrame {
 		aggiornaButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIListaStudentiClasse seconda = new GUIListaStudentiClasse(nome); // Crea nuova finestra
+				GUIListaStudentiClasse seconda = new GUIListaStudentiClasse(); // Crea nuova finestra
 				seconda.setVisible(true); // Mostra nuova finestra
 				dispose(); // Chiude questa finestra
 			}
@@ -100,7 +100,7 @@ public class GUIListaStudentiClasse extends JFrame {
 		indietroBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIClasseDocente seconda = new GUIClasseDocente(nome); // Crea nuova finestra
+				GUIClasseDocente seconda = new GUIClasseDocente(); // Crea nuova finestra
 				seconda.setVisible(true); // Mostra nuova finestra
 				dispose(); // Chiude questa finestra
 			}
@@ -122,7 +122,12 @@ public class GUIListaStudentiClasse extends JFrame {
 		model = new DefaultTableModel(
 				new Object[][] {}, // Inizia vuoto
 				new String[] { "Nome", "Cognome" } // Nome colonna
-			);
+			){
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 		table.setModel(model);
 		model.addRow(new Object[] { "Salvatore","Bosco" });
 		scrollPane.setViewportView(table);

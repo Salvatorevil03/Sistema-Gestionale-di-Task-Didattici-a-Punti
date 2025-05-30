@@ -98,16 +98,18 @@ public class GUIStudente extends JFrame {
 		logoutBtn.setBounds(10, 11, 89, 23);
 		contentPane.add(logoutBtn);
 		
-		JLabel lblBenvenuto = new JLabel("Benvenuto");
+		JLabel lblBenvenuto = new JLabel("Benvenuto ");
 		lblBenvenuto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBenvenuto.setFont(new Font("Tahoma", Font.BOLD, 30));
 		lblBenvenuto.setBounds(200, 48, 208, 56);
 		contentPane.add(lblBenvenuto);
 		
-		JLabel nome_docente = new JLabel("NOME_STUDENTE");
-		nome_docente.setHorizontalAlignment(SwingConstants.CENTER);
+		SessioneStudente studente = SessioneStudente.getInstance();
+		String nome = studente.getNomeStudente();
+		JLabel nome_docente = new JLabel(nome);
+		nome_docente.setHorizontalAlignment(SwingConstants.LEFT);
 		nome_docente.setFont(new Font("Tahoma", Font.BOLD, 30));
-		nome_docente.setBounds(382, 44, 324, 64);
+		nome_docente.setBounds(394, 44, 324, 64);
 		contentPane.add(nome_docente);
 		
 		JLabel lblListaTask = new JLabel("Lista Task");

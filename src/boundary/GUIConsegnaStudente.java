@@ -38,7 +38,6 @@ public class GUIConsegnaStudente extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private DefaultTableModel model; /////
 
 
 	/**
@@ -138,10 +137,6 @@ public class GUIConsegnaStudente extends JFrame {
 		JLabel lblNewLabel_7 = new JLabel("New label");
 		lblNewLabel_7.setBounds(172, 248, 592, 14);
 		contentPane.add(lblNewLabel_7);
-		model = new DefaultTableModel(
-				new Object[][] {}, // Inizia vuoto
-				new String[] { "Titolo","Descrizione","Data Scadenza","" } // Nome colonna
-			);
-		model.addRow(new Object[] { "classeSasi" });
+		
 	}
 }
