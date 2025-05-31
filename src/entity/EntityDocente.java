@@ -2,12 +2,7 @@ package entity;
 
 import database.DBDocente;
 
-public class EntityDocente {
-    private int id;
-    private String nome;
-    private String cognome;
-    private String mail;
-    private String password;
+public class EntityDocente extends Utente {
     //private ArrayList<EntityClasse> classi;
 
 

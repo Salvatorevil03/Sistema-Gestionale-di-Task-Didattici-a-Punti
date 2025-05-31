@@ -2,12 +2,7 @@ package entity;
 
 import database.DBStudente;
 
-public class EntityStudente {
-    private int id; //PK
-    private String nome;
-    private String cognome;
-    private String mail;
-    private String password;
+public class EntityStudente extends Utente {
     private int numTaskCompletati;
     private int numTaskValutati;
     private int punteggioTotaleOttenuto;
