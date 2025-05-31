@@ -1,10 +1,10 @@
 package controller;
-import DTO.DTOClasse;
-import DTO.DTOConsegna;
-import DTO.DTOStudente;
-import DTO.DTOTask;
+import dto.DTOClasse;
+import dto.DTOConsegna;
+import dto.DTOStudente;
+import dto.DTOTask;
 import database.DBTask;
-import database.DTOUtente;
+import dto.DTOUtente;
 
 import java.util.ArrayList;
 
@@ -14,7 +14,7 @@ public class Controller {
         return 0;
     }
 
-    public static ArrayList<DTOUtente> login(String mail, String password){
+    public static DTOUtente login(String mail, String password){
         return null;
     }
 
@@ -66,11 +66,15 @@ public class Controller {
         return null;
     }
 
-    public static DBTask getTask(String pkTask){
+    public static DTOTask getTask(String pkTask){
         return null;
     }
 
     public static int consegnaSoluzione(String pkStudente, String pkTask, String soluzione){
+        return 0;
+    }
+
+    public static int getClasseID(String pkStudente){
         return 0;
     }
 
