@@ -1,31 +1,25 @@
 package boundary;
 
+import controller.Controller;
+import dto.DTOClasse;
+import dto.DTOStudente;
+import dto.DTOUtente;
+
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.FlowLayout;
-import javax.swing.JButton;
-import javax.swing.SpringLayout;
 import java.awt.BorderLayout;
-import javax.swing.SwingConstants;
-import javax.swing.JSeparator;
-import javax.swing.JList;
-import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 
 //import NomeP.GUI2;
 
-import javax.swing.JSplitPane;
 import java.awt.Font;
-import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -58,8 +52,6 @@ public class GUILogin extends JFrame {
 	 * Create the frame.
 	 */
 	public GUILogin() {
-		SessioneStudente studente = SessioneStudente.getInstance();
-		studente.setNomeStudente("Salvatore");
 		//
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -101,26 +93,35 @@ public class GUILogin extends JFrame {
 		passwordField.setColumns(10);
 		
 		JButton accessoBTN = new JButton("Accesso");
-		accessoBTN.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		accessoBTN.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (mailField.getText().equals("0")) {
-					GUIStudente seconda = new GUIStudente(); // Crea nuova finestra
-					seconda.setVisible(true); // Mostra nuova finestra
-					dispose(); // Chiude questa finestra
-				}else {
-					if (mailField.getText().equals("1")) {
+				DTOUtente utente = Controller.login(mailField.getText(),passwordField.getText());
+				if (utente != null) {
+					if (utente instanceof DTOStudente) {
+						int id_classe = Controller.getClasseID(String.valueOf(utente.getId()));
+						if (id_classe!=-1) { //ha classe
+							SessioneStudente studente = SessioneStudente.getInstance();
+							studente.setNomeStudente(utente.getNome());
+							studente.setIdStudente(utente.getId());
+							studente.setPkClasse(String.valueOf(id_classe));
+							GUIStudente seconda = new GUIStudente(); // Crea nuova finestra
+							seconda.setVisible(true); // Mostra nuova finestra
+							dispose(); // Chiude questa finestra
+						} else {
+							GUIIscrizioneClasse seconda = new GUIIscrizioneClasse(); // Crea nuova finestra
+							seconda.setVisible(true); // Mostra nuova finestra
+						}
+					}else {
+						SessioneDocente docente = SessioneDocente.getInstance();
+						docente.setNomeDocente(utente.getNome());
+						docente.setIdDocente(utente.getId());
 						GUIDocente seconda = new GUIDocente(); // Crea nuova finestra
 						seconda.setVisible(true); // Mostra nuova finestra
 						dispose(); // Chiude questa finestra
-					}else {
-						GUIIscrizioneClasse seconda = new GUIIscrizioneClasse(); // Crea nuova finestra
-						seconda.setVisible(true); // Mostra nuova finestra
 					}
+				}else {
+					JOptionPane.showMessageDialog(null, "Credenziali non valide");
 				}
 			}
 		});

@@ -103,10 +103,8 @@ public class GUIStudente extends JFrame {
 		lblBenvenuto.setFont(new Font("Tahoma", Font.BOLD, 30));
 		lblBenvenuto.setBounds(200, 48, 208, 56);
 		contentPane.add(lblBenvenuto);
-		
-		SessioneStudente studente = SessioneStudente.getInstance();
-		String nome = studente.getNomeStudente();
-		JLabel nome_docente = new JLabel(nome);
+
+		JLabel nome_docente = new JLabel("nome");
 		nome_docente.setHorizontalAlignment(SwingConstants.LEFT);
 		nome_docente.setFont(new Font("Tahoma", Font.BOLD, 30));
 		nome_docente.setBounds(394, 44, 324, 64);

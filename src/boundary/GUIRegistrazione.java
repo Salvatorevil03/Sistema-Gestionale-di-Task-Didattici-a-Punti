@@ -1,31 +1,22 @@
 package boundary;
 
+import controller.Controller;
+
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.FlowLayout;
-import javax.swing.JButton;
-import javax.swing.SpringLayout;
 import java.awt.BorderLayout;
-import javax.swing.SwingConstants;
-import javax.swing.JSeparator;
-import javax.swing.JList;
-import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 
 //import NomeP.GUI2;
 
-import javax.swing.JSplitPane;
 import java.awt.Font;
-import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -97,8 +88,18 @@ public class GUIRegistrazione extends JFrame {
 		
 		JButton registrazioneBTN = new JButton("Registrazione");
 		registrazioneBTN.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		registrazioneBTN.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		registrazioneBTN.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//int res = Controller.registrazione();
+				int res = 1;
+				if (res == 1){
+					GUILogin seconda = new GUILogin(); // Crea nuova finestra
+					seconda.setVisible(true); // Mostra nuova finestra
+					dispose(); // Chiude questa finestra
+				}else{
+					JOptionPane.showMessageDialog(null, "Registrazione fallita");
+				}
 			}
 		});
 		registrazioneBTN.setBounds(381, 480, 130, 29);
