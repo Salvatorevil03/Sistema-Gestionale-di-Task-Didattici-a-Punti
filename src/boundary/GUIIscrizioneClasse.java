@@ -21,7 +21,6 @@ import javax.swing.JList;
 import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 
-import NomeP.GUI2;
 
 import javax.swing.JSplitPane;
 import java.awt.Font;

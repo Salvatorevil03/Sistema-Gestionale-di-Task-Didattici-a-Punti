@@ -22,7 +22,6 @@ import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
-import NomeP.GUI2;
 
 import javax.swing.JSplitPane;
 import java.awt.Font;
