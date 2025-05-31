@@ -1,4 +1,4 @@
-package boundary;
+package taskdidatticiNEW;
 
 import java.awt.EventQueue;
 
@@ -22,7 +22,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
-//import NomeP.GUI2;
+import NomeP.GUI2;
 
 import javax.swing.JSplitPane;
 import java.awt.Font;
@@ -103,8 +103,10 @@ public class GUIStudente extends JFrame {
 		lblBenvenuto.setFont(new Font("Tahoma", Font.BOLD, 30));
 		lblBenvenuto.setBounds(200, 48, 208, 56);
 		contentPane.add(lblBenvenuto);
-
-		JLabel nome_docente = new JLabel("nome");
+		
+		SessioneStudente studente = SessioneStudente.getInstance();
+		String nome = studente.getNomeStudente();
+		JLabel nome_docente = new JLabel(nome);
 		nome_docente.setHorizontalAlignment(SwingConstants.LEFT);
 		nome_docente.setFont(new Font("Tahoma", Font.BOLD, 30));
 		nome_docente.setBounds(394, 44, 324, 64);
@@ -134,8 +136,8 @@ public class GUIStudente extends JFrame {
 		model.addRow(new Object[] { "classeSasi" });
 		scrollPane.setViewportView(table);
 		
-		JButton btnNewButton = new JButton("seleziona");
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		JButton btnSeleziona = new JButton("seleziona");
+		btnSeleziona.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				GUIConsegnaStudente seconda = new GUIConsegnaStudente(); // Crea nuova finestra
@@ -143,8 +145,8 @@ public class GUIStudente extends JFrame {
 				dispose(); // Chiude questa finestra
 			}
 		});
-		btnNewButton.setBounds(615, 435, 89, 23);
-		contentPane.add(btnNewButton);
+		btnSeleziona.setBounds(615, 435, 89, 23);
+		contentPane.add(btnSeleziona);
 		
 		JLabel lblStatistiche = new JLabel("Statistiche");
 		lblStatistiche.setHorizontalAlignment(SwingConstants.CENTER);
@@ -152,11 +154,11 @@ public class GUIStudente extends JFrame {
 		lblStatistiche.setBounds(75, 130, 208, 56);
 		contentPane.add(lblStatistiche);
 		
-		JLabel lblNewLabel = new JLabel("media voti ottenuti :");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel.setBounds(61, 192, 132, 23);
-		contentPane.add(lblNewLabel);
+		JLabel lblMedia = new JLabel("media voti ottenuti :");
+		lblMedia.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblMedia.setHorizontalAlignment(SwingConstants.LEFT);
+		lblMedia.setBounds(61, 192, 132, 23);
+		contentPane.add(lblMedia);
 		
 		JLabel lblPunteggioTotaleOttenuto = new JLabel("punteggio totale ottenuto :");
 		lblPunteggioTotaleOttenuto.setHorizontalAlignment(SwingConstants.CENTER);
@@ -170,17 +172,17 @@ public class GUIStudente extends JFrame {
 		lblTotaleTaskAssegnati.setBounds(61, 265, 132, 23);
 		contentPane.add(lblTotaleTaskAssegnati);
 		
-		JLabel lblNewLabel_1 = new JLabel("numero1");
-		lblNewLabel_1.setBounds(210, 198, 73, 14);
-		contentPane.add(lblNewLabel_1);
+		JLabel lblOutMedia = new JLabel("numero1");
+		lblOutMedia.setBounds(210, 198, 73, 14);
+		contentPane.add(lblOutMedia);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("numero1");
-		lblNewLabel_1_1.setBounds(247, 232, 73, 14);
-		contentPane.add(lblNewLabel_1_1);
+		JLabel lblOutPunteggio = new JLabel("numero1");
+		lblOutPunteggio.setBounds(247, 232, 73, 14);
+		contentPane.add(lblOutPunteggio);
 		
-		JLabel lblNewLabel_1_2 = new JLabel("numero1");
-		lblNewLabel_1_2.setBounds(210, 271, 73, 14);
-		contentPane.add(lblNewLabel_1_2);
+		JLabel lblOutTask = new JLabel("numero1");
+		lblOutTask.setBounds(210, 271, 73, 14);
+		contentPane.add(lblOutTask);
 		
 		JLabel lblClassifiche = new JLabel("Classifiche");
 		lblClassifiche.setHorizontalAlignment(SwingConstants.CENTER);

@@ -1,4 +1,4 @@
-package boundary;
+package taskdidatticiNEW;
 
 import java.awt.EventQueue;
 
@@ -22,7 +22,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
-//import NomeP.GUI2;
+import NomeP.GUI2;
 
 import javax.swing.JSplitPane;
 import java.awt.Font;
@@ -86,8 +86,8 @@ public class GUIClassificaTask extends JFrame {
 		aggiornaButton.setBounds(785, 11, 89, 23);
 		contentPane.add(aggiornaButton);
 		
-		JButton logoutBtn = new JButton("indietro");
-		logoutBtn.addMouseListener(new MouseAdapter() {
+		JButton indietroBtn = new JButton("indietro");
+		indietroBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				GUIStudente seconda = new GUIStudente(); // Crea nuova finestra
@@ -95,8 +95,8 @@ public class GUIClassificaTask extends JFrame {
 				dispose(); // Chiude questa finestra
 			}
 		});
-		logoutBtn.setBounds(10, 11, 89, 23);
-		contentPane.add(logoutBtn);
+		indietroBtn.setBounds(10, 11, 89, 23);
+		contentPane.add(indietroBtn);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(116, 131, 664, 395);

@@ -1,22 +1,31 @@
-package boundary;
-
-import controller.Controller;
+package taskdidatticiNEW;
 
 import java.awt.EventQueue;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.FlowLayout;
+import javax.swing.JButton;
+import javax.swing.SpringLayout;
 import java.awt.BorderLayout;
+import javax.swing.SwingConstants;
+import javax.swing.JSeparator;
+import javax.swing.JList;
+import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 
-//import NomeP.GUI2;
+import NomeP.GUI2;
 
+import javax.swing.JSplitPane;
 import java.awt.Font;
+import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -26,11 +35,11 @@ public class GUIRegistrazione extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JTextField ruoloField;
+	private JTextField nomeField;
+	private JTextField cognomeField;
 	private JTextField mailField;
 	private JTextField passwordField;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
 
 	/**
 	 * Launch the application.
@@ -76,30 +85,20 @@ public class GUIRegistrazione extends JFrame {
 		nome.setBounds(251, 237, 116, 20);
 		contentPane.add(nome);
 		
-		mailField = new JTextField();
-		mailField.setBounds(516, 181, 147, 20);
-		contentPane.add(mailField);
-		mailField.setColumns(10);
+		ruoloField = new JTextField();
+		ruoloField.setBounds(516, 181, 147, 20);
+		contentPane.add(ruoloField);
+		ruoloField.setColumns(10);
 		
-		passwordField = new JTextField();
-		passwordField.setBounds(516, 236, 147, 20);
-		contentPane.add(passwordField);
-		passwordField.setColumns(10);
+		nomeField = new JTextField();
+		nomeField.setBounds(516, 236, 147, 20);
+		contentPane.add(nomeField);
+		nomeField.setColumns(10);
 		
 		JButton registrazioneBTN = new JButton("Registrazione");
 		registrazioneBTN.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		registrazioneBTN.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				//int res = Controller.registrazione();
-				int res = 1;
-				if (res == 1){
-					GUILogin seconda = new GUILogin(); // Crea nuova finestra
-					seconda.setVisible(true); // Mostra nuova finestra
-					dispose(); // Chiude questa finestra
-				}else{
-					JOptionPane.showMessageDialog(null, "Registrazione fallita");
-				}
+		registrazioneBTN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		registrazioneBTN.setBounds(381, 480, 130, 29);
@@ -117,10 +116,10 @@ public class GUIRegistrazione extends JFrame {
 		indietroButton.setBounds(10, 11, 89, 23);
 		contentPane.add(indietroButton);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(516, 298, 147, 20);
-		contentPane.add(textField);
+		cognomeField = new JTextField();
+		cognomeField.setColumns(10);
+		cognomeField.setBounds(516, 298, 147, 20);
+		contentPane.add(cognomeField);
 		
 		JLabel cognome = new JLabel("COGNOME");
 		cognome.setHorizontalAlignment(SwingConstants.CENTER);
@@ -134,10 +133,10 @@ public class GUIRegistrazione extends JFrame {
 		mail.setBounds(251, 356, 116, 20);
 		contentPane.add(mail);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(516, 355, 147, 20);
-		contentPane.add(textField_1);
+		mailField = new JTextField();
+		mailField.setColumns(10);
+		mailField.setBounds(516, 355, 147, 20);
+		contentPane.add(mailField);
 		
 		JLabel password = new JLabel("PASSWORD");
 		password.setHorizontalAlignment(SwingConstants.CENTER);
@@ -145,10 +144,10 @@ public class GUIRegistrazione extends JFrame {
 		password.setBounds(251, 407, 116, 20);
 		contentPane.add(password);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(516, 406, 147, 20);
-		contentPane.add(textField_2);
+		passwordField = new JTextField();
+		passwordField.setColumns(10);
+		passwordField.setBounds(516, 406, 147, 20);
+		contentPane.add(passwordField);
 		
 		JLabel ruolo = new JLabel("RUOLO");
 		ruolo.setHorizontalAlignment(SwingConstants.CENTER);

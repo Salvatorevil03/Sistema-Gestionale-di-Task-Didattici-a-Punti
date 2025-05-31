@@ -1,4 +1,4 @@
-package boundary;
+package taskdidatticiNEW;
 
 import java.awt.EventQueue;
 
@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 
-//import NomeP.GUI2;
+import NomeP.GUI2;
 
 import javax.swing.JSplitPane;
 import java.awt.Font;
@@ -41,7 +41,7 @@ public class GUIConsegna extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private DefaultTableModel model; /////
-	private JTextField textField;
+	private JTextField votoField;
 
 	/**
 	 * Launch the application.
@@ -115,11 +115,11 @@ public class GUIConsegna extends JFrame {
 		model.addRow(new Object[] { "classeSasi" });
 		scrollPane.setViewportView(table);
 		
-		JLabel lblBenvenuto_1 = new JLabel("Lista Consegne");
-		lblBenvenuto_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBenvenuto_1.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblBenvenuto_1.setBounds(52, 116, 290, 56);
-		contentPane.add(lblBenvenuto_1);
+		JLabel lblListaConsegna = new JLabel("Lista Consegne");
+		lblListaConsegna.setHorizontalAlignment(SwingConstants.CENTER);
+		lblListaConsegna.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblListaConsegna.setBounds(52, 116, 290, 56);
+		contentPane.add(lblListaConsegna);
 		
 		JTextArea textArea = new JTextArea();
 		textArea.setEditable(false);
@@ -129,26 +129,26 @@ public class GUIConsegna extends JFrame {
 		textArea.setWrapStyleWord(true);    // va a capo tra parole (non a metà parola)
 		textArea.setText("Seleziona una consegna per visualizzare qui l'elaborato");
 		
-		JLabel lblBenvenuto_1_1 = new JLabel("Elaborato");
-		lblBenvenuto_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBenvenuto_1_1.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblBenvenuto_1_1.setBounds(481, 116, 290, 56);
-		contentPane.add(lblBenvenuto_1_1);
+		JLabel lblElaborato = new JLabel("Elaborato");
+		lblElaborato.setHorizontalAlignment(SwingConstants.CENTER);
+		lblElaborato.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblElaborato.setBounds(481, 116, 290, 56);
+		contentPane.add(lblElaborato);
 		
-		JButton btnNewButton = new JButton("valuta");
-		btnNewButton.setBounds(500, 436, 89, 23);
-		contentPane.add(btnNewButton);
+		JButton btnValuta = new JButton("valuta");
+		btnValuta.setBounds(500, 436, 89, 23);
+		contentPane.add(btnValuta);
 		
-		textField = new JTextField();
-		textField.setBounds(619, 437, 122, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		votoField = new JTextField();
+		votoField.setBounds(619, 437, 122, 20);
+		contentPane.add(votoField);
+		votoField.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("voto");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(653, 419, 46, 14);
-		contentPane.add(lblNewLabel);
+		JLabel lblVoto = new JLabel("voto");
+		lblVoto.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblVoto.setHorizontalAlignment(SwingConstants.CENTER);
+		lblVoto.setBounds(653, 419, 46, 14);
+		contentPane.add(lblVoto);
 		
 		JButton aggiornaButton = new JButton("aggiorna");
 		aggiornaButton.addMouseListener(new MouseAdapter() {

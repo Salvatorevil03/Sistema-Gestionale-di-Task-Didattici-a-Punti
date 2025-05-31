@@ -1,4 +1,4 @@
-package boundary;
+package taskdidatticiNEW;
 
 import java.awt.EventQueue;
 
@@ -22,7 +22,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
-//import NomeP.GUI2;
+import NomeP.GUI2;
 
 import javax.swing.JSplitPane;
 import java.awt.Font;
@@ -86,8 +86,8 @@ public class GUIClassificaPunteggio extends JFrame {
 		aggiornaButton.setBounds(785, 11, 89, 23);
 		contentPane.add(aggiornaButton);
 		
-		JButton logoutBtn = new JButton("indietro");
-		logoutBtn.addMouseListener(new MouseAdapter() {
+		JButton indietroBtn = new JButton("indietro");
+		indietroBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				GUIStudente seconda = new GUIStudente(); // Crea nuova finestra
@@ -95,14 +95,14 @@ public class GUIClassificaPunteggio extends JFrame {
 				dispose(); // Chiude questa finestra
 			}
 		});
-		logoutBtn.setBounds(10, 11, 89, 23);
-		contentPane.add(logoutBtn);
+		indietroBtn.setBounds(10, 11, 89, 23);
+		contentPane.add(indietroBtn);
 		
-		JLabel lblBenvenuto = new JLabel("Classifica basata su punteggio totale");
-		lblBenvenuto.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBenvenuto.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblBenvenuto.setBounds(124, 56, 600, 56);
-		contentPane.add(lblBenvenuto);
+		JLabel lblTitolo = new JLabel("Classifica basata su punteggio totale");
+		lblTitolo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitolo.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblTitolo.setBounds(124, 56, 600, 56);
+		contentPane.add(lblTitolo);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(121, 132, 625, 389);

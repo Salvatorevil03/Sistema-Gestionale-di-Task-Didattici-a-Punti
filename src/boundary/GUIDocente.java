@@ -1,4 +1,4 @@
-package boundary;
+package taskdidatticiNEW;
 
 import java.awt.EventQueue;
 
@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 
-//import NomeP.GUI2;
+import NomeP.GUI2;
 
 import javax.swing.JSplitPane;
 import java.awt.Font;
@@ -39,7 +39,7 @@ public class GUIDocente extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField nomeField;
 	private JTable table;
 	private DefaultTableModel model; /////
 
@@ -112,11 +112,11 @@ public class GUIDocente extends JFrame {
 		btnListaStudenti.setBounds(100, 396, 155, 75);
 		contentPane.add(btnListaStudenti);
 		
-		JLabel lblTitolo = new JLabel("Crea Classe");
-		lblTitolo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitolo.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblTitolo.setBounds(69, 116, 208, 56);
-		contentPane.add(lblTitolo);
+		JLabel lblCreaClasse = new JLabel("Crea Classe");
+		lblCreaClasse.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCreaClasse.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblCreaClasse.setBounds(69, 116, 208, 56);
+		contentPane.add(lblCreaClasse);
 		
 		JLabel lblNome = new JLabel("Nome");
 		lblNome.setHorizontalAlignment(SwingConstants.CENTER);
@@ -124,10 +124,10 @@ public class GUIDocente extends JFrame {
 		lblNome.setBounds(69, 189, 46, 14);
 		contentPane.add(lblNome);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(147, 187, 130, 20);
-		contentPane.add(textField);
+		nomeField = new JTextField();
+		nomeField.setColumns(10);
+		nomeField.setBounds(147, 187, 130, 20);
+		contentPane.add(nomeField);
 		
 		JButton btnCrea = new JButton("crea");
 		btnCrea.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -152,11 +152,11 @@ public class GUIDocente extends JFrame {
 		model.addRow(new Object[] { "classeSasi" });
 		scrollPane.setViewportView(table);
 		
-		JLabel lblBenvenuto_1 = new JLabel("Lista Classi");
-		lblBenvenuto_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBenvenuto_1.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblBenvenuto_1.setBounds(520, 116, 208, 56);
-		contentPane.add(lblBenvenuto_1);
+		JLabel lblListaClassi = new JLabel("Lista Classi");
+		lblListaClassi.setHorizontalAlignment(SwingConstants.CENTER);
+		lblListaClassi.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblListaClassi.setBounds(520, 116, 208, 56);
+		contentPane.add(lblListaClassi);
 		
 		JButton btnSeleziona = new JButton("seleziona");
 		btnSeleziona.addMouseListener(new MouseAdapter() {

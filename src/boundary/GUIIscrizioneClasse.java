@@ -1,4 +1,4 @@
-package boundary;
+package taskdidatticiNEW;
 
 import java.awt.EventQueue;
 
@@ -21,7 +21,7 @@ import javax.swing.JList;
 import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 
-//import NomeP.GUI2;
+import NomeP.GUI2;
 
 import javax.swing.JSplitPane;
 import java.awt.Font;
@@ -35,7 +35,7 @@ public class GUIIscrizioneClasse extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField codiceField;
 
 	/**
 	 * Launch the application.
@@ -69,36 +69,36 @@ public class GUIIscrizioneClasse extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel titoloLogin = new JLabel("ISCRIVITI AD UNA CLASSE");
-		titoloLogin.setHorizontalAlignment(SwingConstants.CENTER);
-		titoloLogin.setFont(new Font("Tahoma", Font.BOLD, 30));
-		titoloLogin.setBounds(28, 8, 419, 45);
-		contentPane.add(titoloLogin);
+		JLabel titolo = new JLabel("ISCRIVITI AD UNA CLASSE");
+		titolo.setHorizontalAlignment(SwingConstants.CENTER);
+		titolo.setFont(new Font("Tahoma", Font.BOLD, 30));
+		titolo.setBounds(28, 8, 419, 45);
+		contentPane.add(titolo);
 		
-		JLabel lblNewLabel = new JLabel("Per usare i servizi della piattaforma");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(86, 52, 299, 30);
-		contentPane.add(lblNewLabel);
+		JLabel lblServizi = new JLabel("Per usare i servizi della piattaforma");
+		lblServizi.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblServizi.setHorizontalAlignment(SwingConstants.CENTER);
+		lblServizi.setBounds(86, 52, 299, 30);
+		contentPane.add(lblServizi);
 		
-		JLabel lblNewLabel_1 = new JLabel("codice");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(169, 93, 46, 14);
-		contentPane.add(lblNewLabel_1);
+		JLabel lblCodice = new JLabel("codice");
+		lblCodice.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCodice.setBounds(169, 93, 46, 14);
+		contentPane.add(lblCodice);
 		
-		textField = new JTextField();
-		textField.setBounds(179, 118, 103, 17);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		codiceField = new JTextField();
+		codiceField.setBounds(179, 118, 103, 17);
+		contentPane.add(codiceField);
+		codiceField.setColumns(10);
 		
-		JButton btnNewButton = new JButton("iscrizione");
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		JButton iscrizioneButton = new JButton("iscrizione");
+		iscrizioneButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
 			}
 		});
-		btnNewButton.setBounds(180, 152, 89, 23);
-		contentPane.add(btnNewButton);
+		iscrizioneButton.setBounds(180, 152, 89, 23);
+		contentPane.add(iscrizioneButton);
 	}
 }

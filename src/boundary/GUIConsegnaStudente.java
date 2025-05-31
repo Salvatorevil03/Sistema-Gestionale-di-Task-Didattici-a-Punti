@@ -1,4 +1,4 @@
-package boundary;
+package taskdidatticiNEW;
 
 import java.awt.EventQueue;
 
@@ -22,7 +22,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
-//import NomeP.GUI2;
+import NomeP.GUI2;
 
 import javax.swing.JSplitPane;
 import java.awt.Font;
@@ -72,12 +72,12 @@ public class GUIConsegnaStudente extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton logoutBtn = new JButton("indietro");
-		logoutBtn.addActionListener(new ActionListener() {
+		JButton indietroBtn = new JButton("indietro");
+		indietroBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		logoutBtn.addMouseListener(new MouseAdapter() {
+		indietroBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				GUIStudente seconda = new GUIStudente(); // Crea nuova finestra
@@ -85,34 +85,34 @@ public class GUIConsegnaStudente extends JFrame {
 				dispose(); // Chiude questa finestra
 			}
 		});
-		logoutBtn.setBounds(10, 11, 89, 23);
-		contentPane.add(logoutBtn);
+		indietroBtn.setBounds(10, 11, 89, 23);
+		contentPane.add(indietroBtn);
 		
-		JLabel lblBenvenuto = new JLabel("Nome_Task");
-		lblBenvenuto.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBenvenuto.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblBenvenuto.setBounds(146, 52, 600, 56);
-		contentPane.add(lblBenvenuto);
+		JLabel lblNomeTask = new JLabel("Nome_Task");
+		lblNomeTask.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNomeTask.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblNomeTask.setBounds(146, 52, 600, 56);
+		contentPane.add(lblNomeTask);
 		
-		JLabel lblNewLabel = new JLabel("Titolo :");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel.setBounds(75, 138, 46, 14);
-		contentPane.add(lblNewLabel);
+		JLabel lblTitolo = new JLabel("Titolo :");
+		lblTitolo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblTitolo.setBounds(75, 138, 46, 14);
+		contentPane.add(lblTitolo);
 		
-		JLabel lblNewLabel_1 = new JLabel("Descrizione :");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel_1.setBounds(75, 248, 101, 14);
-		contentPane.add(lblNewLabel_1);
+		JLabel lblDesc = new JLabel("Descrizione :");
+		lblDesc.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblDesc.setBounds(75, 248, 101, 14);
+		contentPane.add(lblDesc);
 		
-		JLabel lblNewLabel_2 = new JLabel("Data Scadenza :");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel_2.setBounds(75, 174, 101, 14);
-		contentPane.add(lblNewLabel_2);
+		JLabel lblData = new JLabel("Data Scadenza :");
+		lblData.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblData.setBounds(75, 174, 101, 14);
+		contentPane.add(lblData);
 		
-		JLabel lblNewLabel_3 = new JLabel("Massimo Punteggio :");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel_3.setBounds(75, 211, 140, 14);
-		contentPane.add(lblNewLabel_3);
+		JLabel lblMax = new JLabel("Massimo Punteggio :");
+		lblMax.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblMax.setBounds(75, 211, 140, 14);
+		contentPane.add(lblMax);
 		
 		JButton btnNewButton = new JButton("Consegna");
 		btnNewButton.setBounds(388, 547, 101, 29);
@@ -122,21 +122,21 @@ public class GUIConsegnaStudente extends JFrame {
 		textArea.setBounds(103, 301, 672, 218);
 		contentPane.add(textArea);
 		
-		JLabel lblNewLabel_4 = new JLabel("New label");
-		lblNewLabel_4.setBounds(130, 138, 627, 14);
-		contentPane.add(lblNewLabel_4);
+		JLabel lblTitoloOut = new JLabel("New label");
+		lblTitoloOut.setBounds(130, 138, 627, 14);
+		contentPane.add(lblTitoloOut);
 		
-		JLabel lblNewLabel_5 = new JLabel("New label");
-		lblNewLabel_5.setBounds(186, 174, 571, 14);
-		contentPane.add(lblNewLabel_5);
+		JLabel lblDataOut = new JLabel("New label");
+		lblDataOut.setBounds(186, 174, 571, 14);
+		contentPane.add(lblDataOut);
 		
-		JLabel lblNewLabel_6 = new JLabel("New label");
-		lblNewLabel_6.setBounds(213, 211, 500, 14);
-		contentPane.add(lblNewLabel_6);
+		JLabel lblMaxOut = new JLabel("New label");
+		lblMaxOut.setBounds(213, 211, 500, 14);
+		contentPane.add(lblMaxOut);
 		
-		JLabel lblNewLabel_7 = new JLabel("New label");
-		lblNewLabel_7.setBounds(172, 248, 592, 14);
-		contentPane.add(lblNewLabel_7);
+		JLabel lblDescOut = new JLabel("New label");
+		lblDescOut.setBounds(172, 248, 592, 14);
+		contentPane.add(lblDescOut);
 		
 	}
 }

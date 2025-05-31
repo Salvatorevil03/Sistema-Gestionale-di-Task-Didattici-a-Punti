@@ -1,4 +1,4 @@
-package boundary;
+package taskdidatticiNEW;
 
 import java.awt.EventQueue;
 
@@ -23,7 +23,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
-//import NomeP.GUI2;
+import NomeP.GUI2;
 
 import javax.swing.JSplitPane;
 import java.awt.Font;
@@ -40,10 +40,10 @@ public class GUIClasseDocente extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField titoloField;
+	private JTextField descField;
+	private JTextField dataField;
+	private JTextField maxField;
 	private JTable table;
 	private DefaultTableModel model; /////
 
@@ -115,22 +115,22 @@ public class GUIClasseDocente extends JFrame {
 		btnListaStudenti.setBounds(91, 483, 155, 75);
 		contentPane.add(btnListaStudenti);
 		
-		JLabel lblTitolo = new JLabel("Crea Task");
+		JLabel lblCreaTask = new JLabel("Crea Task");
+		lblCreaTask.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCreaTask.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblCreaTask.setBounds(45, 122, 208, 56);
+		contentPane.add(lblCreaTask);
+		
+		JLabel lblTitolo = new JLabel("Titolo");
 		lblTitolo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitolo.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblTitolo.setBounds(45, 122, 208, 56);
+		lblTitolo.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblTitolo.setBounds(45, 201, 84, 14);
 		contentPane.add(lblTitolo);
 		
-		JLabel lblTitolo2 = new JLabel("Titolo");
-		lblTitolo2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitolo2.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblTitolo2.setBounds(45, 201, 84, 14);
-		contentPane.add(lblTitolo2);
-		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(149, 199, 130, 20);
-		contentPane.add(textField);
+		titoloField = new JTextField();
+		titoloField.setColumns(10);
+		titoloField.setBounds(149, 199, 130, 20);
+		contentPane.add(titoloField);
 		
 		JLabel lblDescrizione = new JLabel("Descrizione");
 		lblDescrizione.setHorizontalAlignment(SwingConstants.CENTER);
@@ -138,10 +138,10 @@ public class GUIClasseDocente extends JFrame {
 		lblDescrizione.setBounds(45, 242, 84, 14);
 		contentPane.add(lblDescrizione);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(149, 240, 130, 20);
-		contentPane.add(textField_1);
+		descField = new JTextField();
+		descField.setColumns(10);
+		descField.setBounds(149, 240, 130, 20);
+		contentPane.add(descField);
 		
 		JLabel lblData = new JLabel("Data Scadenza");
 		lblData.setHorizontalAlignment(SwingConstants.CENTER);
@@ -149,15 +149,15 @@ public class GUIClasseDocente extends JFrame {
 		lblData.setBounds(28, 284, 121, 14);
 		contentPane.add(lblData);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(149, 282, 130, 20);
-		contentPane.add(textField_2);
+		dataField = new JTextField();
+		dataField.setColumns(10);
+		dataField.setBounds(149, 282, 130, 20);
+		contentPane.add(dataField);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(149, 321, 130, 20);
-		contentPane.add(textField_3);
+		maxField = new JTextField();
+		maxField.setColumns(10);
+		maxField.setBounds(149, 321, 130, 20);
+		contentPane.add(maxField);
 		
 		JLabel lblPunti = new JLabel("Max Punti");
 		lblPunti.setHorizontalAlignment(SwingConstants.CENTER);
@@ -176,11 +176,11 @@ public class GUIClasseDocente extends JFrame {
 		lblListaStudenti.setBounds(63, 416, 208, 56);
 		contentPane.add(lblListaStudenti);
 		
-		JLabel lblBenvenuto = new JLabel("Lista Task");
-		lblBenvenuto.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBenvenuto.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblBenvenuto.setBounds(534, 122, 208, 56);
-		contentPane.add(lblBenvenuto);
+		JLabel lblListaTask = new JLabel("Lista Task");
+		lblListaTask.setHorizontalAlignment(SwingConstants.CENTER);
+		lblListaTask.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblListaTask.setBounds(534, 122, 208, 56);
+		contentPane.add(lblListaTask);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(437, 201, 413, 293);
