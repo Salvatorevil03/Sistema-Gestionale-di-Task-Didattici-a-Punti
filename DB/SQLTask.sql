@@ -18,7 +18,7 @@ USE `taskdidattici` ;
 -- Table `taskdidattici`.`docenti`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `taskdidattici`.`docenti` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NULL DEFAULT NULL,
   `cognome` VARCHAR(45) NULL DEFAULT NULL,
   `mail` VARCHAR(45) NULL DEFAULT NULL,
@@ -33,7 +33,7 @@ DEFAULT CHARACTER SET = utf8mb3;
 -- Table `taskdidattici`.`classi`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `taskdidattici`.`classi` (
-  `codice` INT NOT NULL,
+  `codice` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NULL DEFAULT NULL,
   `numeroTask` INT NULL DEFAULT NULL,
   `docente_id` INT NULL,
@@ -50,7 +50,7 @@ DEFAULT CHARACTER SET = utf8mb3;
 -- Table `taskdidattici`.`studenti`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `taskdidattici`.`studenti` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NULL DEFAULT NULL,
   `cognome` VARCHAR(45) NULL DEFAULT NULL,
   `mail` VARCHAR(45) NULL DEFAULT NULL,
@@ -73,7 +73,7 @@ DEFAULT CHARACTER SET = utf8mb3;
 -- Table `taskdidattici`.`task`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `taskdidattici`.`task` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `titolo` VARCHAR(45) NULL DEFAULT NULL,
   `descrizione` VARCHAR(150) NULL DEFAULT NULL,
   `dataScadenza` VARCHAR(10) NULL DEFAULT NULL,
@@ -92,7 +92,7 @@ DEFAULT CHARACTER SET = utf8mb3;
 -- Table `taskdidattici`.`consegne`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `taskdidattici`.`consegne` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `punteggio` INT NULL DEFAULT NULL,
   `soluzione` BLOB NULL DEFAULT NULL,
   `task_id` INT NOT NULL,
