@@ -194,7 +194,11 @@ public class GUIStudente extends JFrame {
 		JLabel lblOutMedia = new JLabel("numero1");
 		lblOutMedia.setBounds(210, 198, 73, 14);
 		contentPane.add(lblOutMedia);
-		lblOutMedia.setText(Float.toString(statistiche.get(2) / statistiche.get(1)));
+		if (statistiche.get(1) == 0){
+			lblOutMedia.setText("0");
+		}else{
+			lblOutMedia.setText(Float.toString(statistiche.get(2) / statistiche.get(1)));
+		}
 
 		JLabel lblOutPunteggio = new JLabel("numero1");
 		lblOutPunteggio.setBounds(247, 232, 73, 14);

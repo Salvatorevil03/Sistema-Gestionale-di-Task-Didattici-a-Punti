@@ -106,6 +106,8 @@ public class GUILogin extends JFrame {
 							seconda.setVisible(true); // Mostra nuova finestra
 							dispose(); // Chiude questa finestra
 						} else {
+							SessioneStudente studente = SessioneStudente.getInstance();
+							studente.setIdStudente(utente.getId());
 							GUIIscrizioneClasse seconda = new GUIIscrizioneClasse(); // Crea nuova finestra
 							seconda.setVisible(true); // Mostra nuova finestra
 						}
