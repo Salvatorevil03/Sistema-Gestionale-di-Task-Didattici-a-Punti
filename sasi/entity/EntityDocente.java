@@ -52,6 +52,19 @@ public class EntityDocente extends Utente {
                 '}';
     }
 
+    //SASI
+    public EntityDocente(String nome, String cognome, String mail, String password) {
+        this.nome = nome;
+        this.cognome = cognome;
+        this.mail = mail;
+        this.password = password;
+    }
+
+    public int inserisciSuDB(){
+        DBDocente docente = new DBDocente(this.nome, this.cognome, this.mail, this.password);
+        return docente.inserisciSuDB();
+    }
+
     //###########################################################
     //METODI PER POSSIBILI DIPENDENZE
 //    public void caricaClassi(DBDocente docente){

@@ -77,9 +77,9 @@ public class EntityStudente extends Utente {
         this.mail = mail;
         this.password = password;
     }
-    public int creaStudente(){
+    public int inserisciSuDB(){
         DBStudente studente = new DBStudente(this.nome,this.cognome,this.mail,this.password);
-        return studente.creaStudenteSuDB();
+        return studente.inserisciSuDB();
     }
 
 

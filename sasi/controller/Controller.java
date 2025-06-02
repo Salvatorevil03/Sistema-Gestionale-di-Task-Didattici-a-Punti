@@ -15,7 +15,7 @@ public class Controller {
     }
 
     public static DTOUtente login(String mail, String password){
-        return null;
+        return Piattaforma.login(mail,password);
     }
 
     public static int creaClasse(String nome){

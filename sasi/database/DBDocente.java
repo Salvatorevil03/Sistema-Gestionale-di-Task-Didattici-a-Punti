@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class DBDocente {
+public class DBDocente extends  DBUtente{
     private int id;
     private String nome;
     private String cognome;
@@ -90,6 +90,36 @@ public class DBDocente {
                 ", mail='" + mail + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    public DBDocente(String nome, String cognome, String mail, String password) {
+        this.nome = nome;
+        this.cognome = cognome;
+        this.mail = mail;
+        this.password = password;
+    }
+
+    public DBDocente(int id,String nome) {
+        this.id=id;
+        this.nome = nome;
+    }
+
+    public int inserisciSuDB(){
+        //1. definisco la query
+        String query = "INSERT INTO docenti (nome, cognome, mail, password) VALUES ('"
+                + this.nome + "', '"
+                + this.cognome + "', '"
+                + this.mail + "', '"
+                + this.password + "')";
+
+        System.out.println(query); //per debug
+        try {
+            return DBConnectionManager.updateQuery(query);
+        } catch (ClassNotFoundException | SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return -1;
     }
 
     //#######################################################################

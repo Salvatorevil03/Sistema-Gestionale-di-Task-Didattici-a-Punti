@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class DBStudente {
+public class DBStudente extends DBUtente{
     private int id; //PK
     private String nome;
     private String cognome;
@@ -153,7 +153,12 @@ public class DBStudente {
         this.punteggioTotaleOttenuto = 0;
     }
 
-    public int creaStudenteSuDB(){
+    public DBStudente(int id,String nome) {
+        this.id=id;
+        this.nome = nome;
+    }
+
+    public int inserisciSuDB(){
         int ret=0;
         String query = "INSERT INTO studenti (nome, cognome, mail, password) VALUES ('"
                 + this.nome + "', '"
