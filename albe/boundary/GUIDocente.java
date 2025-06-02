@@ -1,5 +1,9 @@
 package taskdidatticiNEW;
 
+import controller.Controller;
+import DTO.DTOClasse;
+import DTO.DTOStudente;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -30,6 +34,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -62,6 +67,16 @@ public class GUIDocente extends JFrame {
 	 * Create the frame.
 	 */
 	public GUIDocente() {
+		SessioneDocente docente = SessioneDocente.getInstance();
+		String nomeDocente = docente.getNomeDocente();
+		//Da cancellare
+		//nomeDocente = "Salvatore";
+		ArrayList<DTOClasse> classi = Controller.getClassi(String.valueOf(docente.getIdDocente()));
+		// Da concellare
+		//classi = new ArrayList<DTOClasse>();
+		//classi.add(new DTOClasse(1,"INGSW",0));
+		//classi.add(new DTOClasse(2,"INGSW2",0));
+
 		//
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,8 +89,8 @@ public class GUIDocente extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel nome_docente = new JLabel("NOME_DOCENTE");
-		nome_docente.setHorizontalAlignment(SwingConstants.CENTER);
+		JLabel nome_docente = new JLabel(nomeDocente);
+		nome_docente.setHorizontalAlignment(SwingConstants.LEFT);
 		nome_docente.setFont(new Font("Tahoma", Font.BOLD, 30));
 		nome_docente.setBounds(414, 41, 255, 64);
 		contentPane.add(nome_docente);
@@ -131,6 +146,22 @@ public class GUIDocente extends JFrame {
 		JButton btnCrea = new JButton("crea");
 		btnCrea.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnCrea.setBounds(119, 234, 89, 23);
+		btnCrea.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String nomeClasse = nomeField.getText();
+				if (nomeClasse.equals("")) {
+					JOptionPane.showMessageDialog(null, "Inserisci un nome");
+				}else {
+					int res = Controller.creaClasse(nomeClasse,String.valueOf(docente.getIdDocente()));
+					if (res == 1) {
+						JOptionPane.showMessageDialog(null, "Classe creata");
+					}else {
+						JOptionPane.showMessageDialog(null, "Errore nella creazione della classe");
+					}
+				}
+			}
+		});
 		contentPane.add(btnCrea);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -140,7 +171,7 @@ public class GUIDocente extends JFrame {
 		table = new JTable();
 		model = new DefaultTableModel(
 				new Object[][] {}, // Inizia vuoto
-				new String[] { "Nome" } // Nome colonna
+				new String[] { "Codice","Nome" } // Nome colonna
 			){
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -148,7 +179,11 @@ public class GUIDocente extends JFrame {
 			}
 		};
 		table.setModel(model);
-		model.addRow(new Object[] { "classeSasi" });
+		if (classi != null) {
+			for (DTOClasse c : classi) {
+				model.addRow(new Object[] { c.getCodice(),c.getNome() });
+			}
+		}
 		scrollPane.setViewportView(table);
 		
 		JLabel lblListaClassi = new JLabel("Lista Classi");
@@ -163,8 +198,11 @@ public class GUIDocente extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				int selectedRow = table.getSelectedRow();
 				if (selectedRow != -1) {
-					String nome = (String) model.getValueAt(selectedRow, 0);
-					System.out.println(nome);
+					String pkClasse = String.valueOf(model.getValueAt(selectedRow, 0));
+					String nomeClasse = String.valueOf(model.getValueAt(selectedRow, 1));
+					docente.setPkClasseSelezionata(pkClasse);
+					docente.setNomeClasseSelezionato(nomeClasse);
+					System.out.println(pkClasse);
 					GUIClasseDocente seconda = new GUIClasseDocente(); // Crea nuova finestra
 					seconda.setVisible(true); // Mostra nuova finestra
 					dispose(); // Chiude questa finestra

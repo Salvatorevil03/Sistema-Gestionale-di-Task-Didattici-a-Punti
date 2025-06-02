@@ -1,5 +1,8 @@
 package taskdidatticiNEW;
 
+import controller.Controller;
+import DTO.DTOStudente;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -30,6 +33,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -61,6 +65,14 @@ public class GUIListaStudentiClasse extends JFrame {
 	 * Create the frame.
 	 */
 	public GUIListaStudentiClasse() {
+		SessioneDocente docente = SessioneDocente.getInstance();
+		String pkClasseSelezionata = docente.getPkClasseSelezionata();
+		ArrayList<DTOStudente> studenti = Controller.getStudenti(pkClasseSelezionata);
+		// da cancellare
+		//studenti = new ArrayList<DTOStudente>();
+		//studenti.add(new DTOStudente(1,"Sasi","Bosco","gmail","pass",1,1,1));
+		//studenti.add(new DTOStudente(1,"Erne","Bosco","gmail","pass",2,2,2));
+
 		//
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -107,10 +119,10 @@ public class GUIListaStudentiClasse extends JFrame {
 		indietroBtn.setBounds(10, 11, 89, 23);
 		contentPane.add(indietroBtn);
 		
-		JLabel lblBenvenuto = new JLabel("Lista Studenti");
+		JLabel lblBenvenuto = new JLabel("Lista Studenti della classe");
 		lblBenvenuto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBenvenuto.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblBenvenuto.setBounds(334, 69, 208, 56);
+		lblBenvenuto.setBounds(66, 69, 708, 56);
 		contentPane.add(lblBenvenuto);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -120,7 +132,7 @@ public class GUIListaStudentiClasse extends JFrame {
 		table = new JTable();
 		model = new DefaultTableModel(
 				new Object[][] {}, // Inizia vuoto
-				new String[] { "Nome", "Cognome" } // Nome colonna
+				new String[] { "ID","Nome", "Cognome" } // Nome colonna
 			){
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -128,7 +140,11 @@ public class GUIListaStudentiClasse extends JFrame {
 			}
 		};
 		table.setModel(model);
-		model.addRow(new Object[] { "Salvatore","Bosco" });
+		if (studenti != null){
+			for (DTOStudente s : studenti) {
+				model.addRow(new Object[] { s.getId(),s.getNome(),s.getCognome() });
+			}
+		}
 		scrollPane.setViewportView(table);
 	}
 }

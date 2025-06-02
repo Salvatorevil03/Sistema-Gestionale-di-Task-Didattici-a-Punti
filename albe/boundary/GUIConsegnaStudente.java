@@ -1,37 +1,36 @@
 package taskdidatticiNEW;
 
+/*
+	NOTA PER SASI:
+	Valuta di inserire qualcosa che faccia capire che la soluzione
+	è già stata consegnata.
+	ES: Nella text area dove si inserisce la soluzione fai
+	textArea.setText("SOLUZIONE GIÀ CONSEGNATA");
+	e mostri il messaggio di errore come popup che già c'è
+ */
+
+import controller.Controller;
+import DTO.DTOTask;
+
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.FlowLayout;
-import javax.swing.JButton;
-import javax.swing.SpringLayout;
 import java.awt.BorderLayout;
-import javax.swing.SwingConstants;
-import javax.swing.JSeparator;
-import javax.swing.JList;
-import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 
-import javax.swing.JSplitPane;
 import java.awt.Font;
-import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
 public class GUIConsegnaStudente extends JFrame {
 
@@ -59,6 +58,12 @@ public class GUIConsegnaStudente extends JFrame {
 	 * Create the frame.
 	 */
 	public GUIConsegnaStudente() {
+
+		SessioneStudente studente = SessioneStudente.getInstance();
+		DTOTask task = Controller.getTask(studente.getPkTask());
+		// da eliminare
+		//task = new DTOTask(1,"titolo di task1","descrizione", "12/08/09", 20);
+
 		//
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -87,7 +92,7 @@ public class GUIConsegnaStudente extends JFrame {
 		indietroBtn.setBounds(10, 11, 89, 23);
 		contentPane.add(indietroBtn);
 		
-		JLabel lblNomeTask = new JLabel("Nome_Task");
+		JLabel lblNomeTask = new JLabel(task.getTitolo());
 		lblNomeTask.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNomeTask.setFont(new Font("Tahoma", Font.BOLD, 30));
 		lblNomeTask.setBounds(146, 52, 600, 56);
@@ -112,28 +117,46 @@ public class GUIConsegnaStudente extends JFrame {
 		lblMax.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblMax.setBounds(75, 211, 140, 14);
 		contentPane.add(lblMax);
-		
-		JButton btnNewButton = new JButton("Consegna");
-		btnNewButton.setBounds(388, 547, 101, 29);
-		contentPane.add(btnNewButton);
-		
+
 		JTextArea textArea = new JTextArea();
 		textArea.setBounds(103, 301, 672, 218);
 		contentPane.add(textArea);
+
+		JButton btnNewButton = new JButton("Consegna");
+		btnNewButton.setBounds(388, 547, 101, 29);
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String soluzione = textArea.getText();
+				if (soluzione.equals("")) {
+					JOptionPane.showMessageDialog(null, "La soluzione è vuota");
+				} else {
+					int res = Controller.consegnaSoluzione(String.valueOf(studente.getIdStudente()),studente.getPkTask(),soluzione);
+					if(res == 1) {
+						JOptionPane.showMessageDialog(null, "Soluzione consegnata con successo");
+						btnNewButton.setEnabled(false);
+					}else {
+						JOptionPane.showMessageDialog(null, "Errore nella consegna");
+					}
+				}
+			}
+		});
+		contentPane.add(btnNewButton);
+
 		
-		JLabel lblTitoloOut = new JLabel("New label");
+		JLabel lblTitoloOut = new JLabel(task.getTitolo());
 		lblTitoloOut.setBounds(130, 138, 627, 14);
 		contentPane.add(lblTitoloOut);
 		
-		JLabel lblDataOut = new JLabel("New label");
+		JLabel lblDataOut = new JLabel(task.getDataScadenza());
 		lblDataOut.setBounds(186, 174, 571, 14);
 		contentPane.add(lblDataOut);
 		
-		JLabel lblMaxOut = new JLabel("New label");
+		JLabel lblMaxOut = new JLabel(String.valueOf(task.getMaxPuntiAssegnabili()));
 		lblMaxOut.setBounds(213, 211, 500, 14);
 		contentPane.add(lblMaxOut);
 		
-		JLabel lblDescOut = new JLabel("New label");
+		JLabel lblDescOut = new JLabel(task.getDescrizione());
 		lblDescOut.setBounds(172, 248, 592, 14);
 		contentPane.add(lblDescOut);
 		

@@ -1,15 +1,13 @@
 package database;
 
+import entity.Utente;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class DBStudente {
+public class DBStudente extends DBUtente {
     private int id; //PK
-    private String nome;
-    private String cognome;
-    private String mail;
-    private String password;
     private int numTaskCompletati;
     private int numTaskValutati;
     private int punteggioTotaleOttenuto;
@@ -142,6 +140,20 @@ public class DBStudente {
         return ret;
     }
 
+    public int getCodiceClasse() {
+        String query="SELECT * FROM STUDENTI WHERE id='"+this.id+"';";
+        int codice_classe=-1;
+        try {
+            ResultSet rs = DBConnectionManager.selectQuery(query);
+            if(rs.next()) {
+                codice_classe=rs.getInt("classe_codice");
+            }
+        } catch (ClassNotFoundException|SQLException e) {
+            e.printStackTrace();
+        }
+        return codice_classe;
+    }
+
     //############################################################################
     //POSSIBILI METODI PER CARICAMENTO DI DIPENDENZE
 //
@@ -192,11 +204,41 @@ public class DBStudente {
 //        }
 //    }
 
-    //ALBERTO
-
     public int salvaTaskCompletatiInDB() {
         int ret=0;
         String query = "UPDATE studenti SET numTaskCompletati = "+this.numTaskCompletati+ " WHERE id= "+this.id+";";
+        try{
+            ret=DBConnectionManager.updateQuery(query);
+        } catch (ClassNotFoundException | SQLException e) {
+            //e.printStackTrace();
+            ret=-1;
+        }
+        return ret;
+    }
+
+    //SASI
+    public DBStudente(String nome, String cognome, String mail, String password) {
+        this.nome = nome;
+        this.cognome = cognome;
+        this.mail = mail;
+        this.password = password;
+        this.numTaskCompletati = 0;
+        this.numTaskValutati = 0;
+        this.punteggioTotaleOttenuto = 0;
+    }
+
+    public DBStudente(int id,String nome) {
+        this.id=id;
+        this.nome = nome;
+    }
+
+    public int inserisciSuDB(){
+        int ret=0;
+        String query = "INSERT INTO studenti (nome, cognome, mail, password) VALUES ('"
+                + this.nome + "', '"
+                + this.cognome + "', '"
+                + this.mail + "', '"
+                + this.password + "')";
         try{
             ret=DBConnectionManager.updateQuery(query);
         } catch (ClassNotFoundException | SQLException e) {

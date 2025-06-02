@@ -10,6 +10,9 @@ public class SessioneDocente {
     private String pkTaskSelezionato;
     private int idStudenteSelezionato;
 
+    private String nomeClasseSelezionato;
+    private String nomeTaskSelezionato;
+
     private SessioneDocente() {}
 
     public static SessioneDocente getInstance() {
@@ -63,4 +66,16 @@ public class SessioneDocente {
         this.idStudenteSelezionato = idStudenteSelezionato;
     }
 
+    public String getNomeClasseSelezionato() {
+        return nomeClasseSelezionato;
+    }
+    public void setNomeClasseSelezionato(String nomeClasseSelezionato) {
+        this.nomeClasseSelezionato = nomeClasseSelezionato;
+    }
+    public String getNomeTaskSelezionato() {
+        return nomeTaskSelezionato;
+    }
+    public void setNomeTaskSelezionato(String nomeTaskSelezionato) {
+        this.nomeTaskSelezionato = nomeTaskSelezionato;
+    }
 }

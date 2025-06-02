@@ -68,9 +68,9 @@ public class EntityConsegna {
 
     //---------------------------------------------------------
     //BUSINESS LOGIC
-    public int impostaPunteggio(int punteggio) {
+    public int impostaPunteggio(int punteggio,DBConsegna consegna) {
         this.punteggio = punteggio;
-        DBConsegna consegna = new DBConsegna(id);
+        //DBConsegna consegna = new DBConsegna(id);
         consegna.setPunteggio(punteggio);
         int esito=consegna.salvaInDB();
         return esito;
@@ -80,13 +80,13 @@ public class EntityConsegna {
         studente.setPunteggioTotaleOttenuto(studente.getPunteggioTotaleOttenuto()+punteggio);
     }
 
-    public int aggiornaStatistiche(int punteggio) {
-        DBConsegna consegna = new DBConsegna(this.id);
+    public int aggiornaStatistiche(int punteggio,DBConsegna consegna) {
+        //DBConsegna consegna = new DBConsegna(this.id);
         DBStudente studente= consegna.caricaStudenteDaDB();
         int esito=0;
         this.aggiornaPunteggioTotaleOttenuto(punteggio,studente);
         this.aggiornaNumTaskValutati(studente);
-        esito =studente.salvaInDB();
+        esito =studente.salvaInDB(); //salvataggio contemporaneo di entrambi i set
         return esito;
     }
 
@@ -94,9 +94,6 @@ public class EntityConsegna {
         studente.setNumTaskValutati(studente.getNumTaskValutati()+1);
     }
 
-
-
-    //ALBERTO
     protected static int creaConsegna(int taskID, String soluzione, int studenteID){
         DBConsegna consegna = new DBConsegna();
         consegna.setPunteggio(-1);

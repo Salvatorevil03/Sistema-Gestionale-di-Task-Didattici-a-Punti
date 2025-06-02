@@ -1,5 +1,9 @@
 package taskdidatticiNEW;
 
+import controller.Controller;
+import DTO.DTOClasse;
+import DTO.DTOStudente;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -30,6 +34,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -63,6 +68,20 @@ public class GUIListaStudentiPiattaforma extends JFrame {
 	 * Create the frame.
 	 */
 	public GUIListaStudentiPiattaforma() {
+
+		SessioneDocente docente = SessioneDocente.getInstance();
+		String pkDocente = String.valueOf(docente.getIdDocente());
+		ArrayList<DTOStudente> studenti = Controller.getStudentiSenzaClasse();
+		ArrayList<DTOClasse> classi = Controller.getClassi(pkDocente);
+		// da cancellare
+		//classi = new ArrayList<DTOClasse>();
+		//classi.add(new DTOClasse(1,"INGSW",0));
+		//classi.add(new DTOClasse(2,"INGSW2",0));
+		//studenti = new ArrayList<DTOStudente>();
+		//studenti.add(new DTOStudente(1,"Sasi","Bosco","gmail","pass",1,1,1));
+		//studenti.add(new DTOStudente(1,"Erne","Bosco","gmail","pass",2,2,2));
+
+
 		//
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -122,7 +141,7 @@ public class GUIListaStudentiPiattaforma extends JFrame {
 		table = new JTable();
 		model = new DefaultTableModel(
 				new Object[][] {}, // Inizia vuoto
-				new String[] { "Nome", "Cognome" } // Nome colonna
+				new String[] { "ID","Nome", "Cognome" } // Nome colonna
 			){
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -130,7 +149,11 @@ public class GUIListaStudentiPiattaforma extends JFrame {
 			}
 		};
 		table.setModel(model);
-		model.addRow(new Object[] { "Ernesto", "Cifuni" });
+		if (studenti != null){
+			for (DTOStudente s : studenti) {
+				model.addRow(new Object[] { s.getId(),s.getNome(),s.getCognome() });
+			}
+		}
 		scrollPane.setViewportView(table);
 		
 		JButton btnIscrivi = new JButton("iscrivi");
@@ -139,9 +162,18 @@ public class GUIListaStudentiPiattaforma extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int selectedRow = table.getSelectedRow();
-				if (selectedRow != -1) {
-					String nome = (String) model.getValueAt(selectedRow, 0);
-					System.out.println(nome);
+				int selectedRow2 = table2.getSelectedRow();
+				if (selectedRow != -1 && selectedRow2 != -1) {
+					String idStudente = String.valueOf(model.getValueAt(selectedRow, 0));
+					String codiceClasse = String.valueOf(model2.getValueAt(selectedRow2, 0));
+					System.out.println(idStudente);
+					System.out.println(codiceClasse);
+					int res = Controller.iscrizione(idStudente, codiceClasse);
+					if (res == 1) {
+						JOptionPane.showMessageDialog(null, "Studente iscritto!");
+					}else {
+						JOptionPane.showMessageDialog(null, "Problema nell'iscrizione");
+					}
 				} else {
 					JOptionPane.showMessageDialog(null, "Nessun studente o classe selezionati.");
 				}
@@ -157,7 +189,7 @@ public class GUIListaStudentiPiattaforma extends JFrame {
 		table2 = new JTable();
 		model2 = new DefaultTableModel(
 				new Object[][] {}, // Inizia vuoto
-				new String[] { "Nome", "Cognome" } // Nome colonna
+				new String[] { "Codice", "Nome" } // Nome colonna
 			){
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -165,7 +197,11 @@ public class GUIListaStudentiPiattaforma extends JFrame {
 			}
 		};
 		table2.setModel(model2);
-		model2.addRow(new Object[] { "Ernesto", "Cifuni" });
+		if (classi != null){
+			for (DTOClasse c : classi) {
+				model2.addRow(new Object[] { c.getCodice(),c.getNome() });
+			}
+		}
 		scrollPane2.setViewportView(table2);
 	}
 }

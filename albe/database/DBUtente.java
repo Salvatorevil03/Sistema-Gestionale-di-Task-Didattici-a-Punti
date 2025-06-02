@@ -1,9 +1,9 @@
-package entity;
+package database;
 
-public class Utente {
-    protected int id;
+public class DBUtente {
     protected String nome;
     protected String cognome;
     protected String mail;
     protected String password;
 }
+

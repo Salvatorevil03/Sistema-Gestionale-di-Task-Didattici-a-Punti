@@ -1,37 +1,29 @@
 package taskdidatticiNEW;
 
+import controller.Controller;
+import DTO.DTOTask;
+
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.FlowLayout;
-import javax.swing.JButton;
-import javax.swing.SpringLayout;
 import java.awt.BorderLayout;
-import javax.swing.SwingConstants;
-import javax.swing.JSeparator;
-import javax.swing.JList;
-import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 
-import javax.swing.JSplitPane;
 import java.awt.Font;
-import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class GUIStudente extends JFrame {
 
@@ -61,6 +53,24 @@ public class GUIStudente extends JFrame {
 	 * Create the frame.
 	 */
 	public GUIStudente() {
+
+		SessioneStudente studente = SessioneStudente.getInstance();
+		String nome = studente.getNomeStudente();
+		ArrayList<Float> statistiche = Controller.getStatistiche(String.valueOf(studente.getIdStudente()));
+		// da concellare
+		//statistiche = new ArrayList<Integer>();
+		//statistiche.add(0);
+		//statistiche.add(0);
+		//statistiche.add(0);
+
+
+		ArrayList<DTOTask> tasks = Controller.getTasks(studente.getPkClasse());
+		// da cancellare
+		//tasks = new ArrayList<DTOTask>();
+		//tasks.add(new DTOTask(1,"titolo di task1","descrizione", studente.getNomeStudente(), studente.getIdStudente()));
+		//tasks.add(new DTOTask(2,"titolo di task2","descrizione", studente.getNomeStudente(), studente.getIdStudente()));
+
+
 		//
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -89,6 +99,7 @@ public class GUIStudente extends JFrame {
 		logoutBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				SessioneStudente.logout();
 				GUILogin seconda = new GUILogin(); // Crea nuova finestra
 				seconda.setVisible(true); // Mostra nuova finestra
 				dispose(); // Chiude questa finestra
@@ -103,8 +114,7 @@ public class GUIStudente extends JFrame {
 		lblBenvenuto.setBounds(200, 48, 208, 56);
 		contentPane.add(lblBenvenuto);
 		
-		SessioneStudente studente = SessioneStudente.getInstance();
-		String nome = studente.getNomeStudente();
+
 		JLabel nome_docente = new JLabel(nome);
 		nome_docente.setHorizontalAlignment(SwingConstants.LEFT);
 		nome_docente.setFont(new Font("Tahoma", Font.BOLD, 30));
@@ -124,7 +134,7 @@ public class GUIStudente extends JFrame {
 		table = new JTable();
 		model = new DefaultTableModel(
 				new Object[][] {}, // Inizia vuoto
-				new String[] { "Titolo","Descrizione","Data Scadenza","" } // Nome colonna
+				new String[] { "ID","Titolo" } // Nome colonna
 			) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -132,16 +142,33 @@ public class GUIStudente extends JFrame {
 			}
 		};
 		table.setModel(model);
-		model.addRow(new Object[] { "classeSasi" });
+		if (tasks != null){
+			LocalDate dataOggi = java.time.LocalDate.now();
+			for (DTOTask t : tasks) {
+				LocalDate taskDate = LocalDate.parse(t.getDataScadenza());
+				if(taskDate.isAfter(dataOggi)){
+					model.addRow(new Object[] { t.getId(),t.getTitolo() });
+				}
+
+			}
+		}
 		scrollPane.setViewportView(table);
 		
 		JButton btnSeleziona = new JButton("seleziona");
 		btnSeleziona.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIConsegnaStudente seconda = new GUIConsegnaStudente(); // Crea nuova finestra
-				seconda.setVisible(true); // Mostra nuova finestra
-				dispose(); // Chiude questa finestra
+				int selectedRow = table.getSelectedRow();
+				if (selectedRow != -1) {
+					String pkTask = String.valueOf(model.getValueAt(selectedRow, 0));
+					System.out.println(pkTask);
+					studente.setPkTask(String.valueOf(pkTask));
+					GUIConsegnaStudente seconda = new GUIConsegnaStudente(); // Crea nuova finestra
+					seconda.setVisible(true); // Mostra nuova finestra
+					dispose(); // Chiude questa finestra
+				} else {
+					JOptionPane.showMessageDialog(null, "Nessun task selezionato");
+				}
 			}
 		});
 		btnSeleziona.setBounds(615, 435, 89, 23);
@@ -170,18 +197,25 @@ public class GUIStudente extends JFrame {
 		lblTotaleTaskAssegnati.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblTotaleTaskAssegnati.setBounds(61, 265, 132, 23);
 		contentPane.add(lblTotaleTaskAssegnati);
-		
+
 		JLabel lblOutMedia = new JLabel("numero1");
 		lblOutMedia.setBounds(210, 198, 73, 14);
 		contentPane.add(lblOutMedia);
-		
+		if (statistiche.get(1) == 0){
+			lblOutMedia.setText("0");
+		}else{
+			lblOutMedia.setText(Float.toString(statistiche.get(2) / statistiche.get(1)));
+		}
+
 		JLabel lblOutPunteggio = new JLabel("numero1");
 		lblOutPunteggio.setBounds(247, 232, 73, 14);
 		contentPane.add(lblOutPunteggio);
-		
+		lblOutPunteggio.setText(statistiche.get(2).toString());
+
 		JLabel lblOutTask = new JLabel("numero1");
 		lblOutTask.setBounds(210, 271, 73, 14);
 		contentPane.add(lblOutTask);
+		lblOutTask.setText(statistiche.get(0).toString());
 		
 		JLabel lblClassifiche = new JLabel("Classifiche");
 		lblClassifiche.setHorizontalAlignment(SwingConstants.CENTER);

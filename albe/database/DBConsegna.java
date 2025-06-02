@@ -134,7 +134,7 @@ public class DBConsegna {
         try{
             ret=DBConnectionManager.updateQuery(query);
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             ret=-1;
         }
         return ret;
@@ -143,15 +143,13 @@ public class DBConsegna {
     public int InserisciSuDB(int taskID, int studenteID){
         int ret=0;
         String query = "INSERT INTO consegne (punteggio,soluzione,task_id,studente_id) VALUES("+this.punteggio+ ", '"+this.soluzione+ "', "+taskID+ ", "+studenteID +");";
-
         try{
-           ret = DBConnectionManager.updateQuery(query);
-
+            ret = DBConnectionManager.updateQuery(query);
         } catch (ClassNotFoundException | SQLException e) {
-            System.err.println("Errore durante l'inserimento nel database: " + e.getMessage());
-            System.err.println("Tipo di eccezione: " + e.getClass().getSimpleName());
+            //System.err.println("Errore durante l'inserimento nel database: " + e.getMessage());
+            //System.err.println("Tipo di eccezione: " + e.getClass().getSimpleName());
+            ret=-1;
         }
-
         return ret;
     }
 

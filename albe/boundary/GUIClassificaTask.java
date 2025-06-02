@@ -1,5 +1,8 @@
 package taskdidatticiNEW;
 
+import controller.Controller;
+import DTO.DTOStudente;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -30,6 +33,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -61,6 +65,13 @@ public class GUIClassificaTask extends JFrame {
 	 * Create the frame.
 	 */
 	public GUIClassificaTask() {
+		SessioneStudente studente = SessioneStudente.getInstance();
+		ArrayList<DTOStudente> studenti = Controller.getClassificaTask(studente.getPkClasse());
+		// Da eliminare
+		//studenti = new ArrayList<DTOStudente>();
+		//studenti.add(new DTOStudente(1,"Sasi","Bosco","gmail","pass",1,1,1));
+		//studenti.add(new DTOStudente(1,"Erne","Bosco","gmail","pass",2,2,2));
+
 		//
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -104,7 +115,7 @@ public class GUIClassificaTask extends JFrame {
 		table = new JTable();
 		model = new DefaultTableModel(
 				new Object[][] {}, // Inizia vuoto
-				new String[] { "Titolo","Descrizione","Data Scadenza","" } // Nome colonna
+				new String[] { "Nome","Cognome","Task Completati" } // Nome colonna
 			){
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -112,7 +123,11 @@ public class GUIClassificaTask extends JFrame {
 			}
 		};
 		table.setModel(model);
-		model.addRow(new Object[] { "classeSasi" });
+		if (studenti != null){
+			for (DTOStudente s : studenti) {
+				model.addRow(new Object[] { s.getNome(),s.getCognome(),s.getNumTaskCompletati() });
+			}
+		}
 		scrollPane.setViewportView(table);
 		
 		JLabel lblClassificaBasataSu = new JLabel("Classifica basata su task completati");

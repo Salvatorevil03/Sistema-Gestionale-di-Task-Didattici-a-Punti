@@ -6,6 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+//mail beckxavier@example.com
+//pass !3K^UAtgd^
+
+
+//Studente:
+//mail samantha09@example.net
+//pass dw@$2AYkS!
+
 public class DBConnectionManager {
 
     public static String url = "jdbc:mysql://localhost:3306/";
