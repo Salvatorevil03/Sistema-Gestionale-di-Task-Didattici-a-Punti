@@ -204,4 +204,16 @@ public class DBStudente extends Utente {
 //        }
 //    }
 
+    public int salvaTaskCompletatiInDB() {
+        int ret=0;
+        String query = "UPDATE studenti SET numTaskCompletati = "+this.numTaskCompletati+ " WHERE id= "+this.id+";";
+        try{
+            ret=DBConnectionManager.updateQuery(query);
+        } catch (ClassNotFoundException | SQLException e) {
+            //e.printStackTrace();
+            ret=-1;
+        }
+        return ret;
+    }
+
 }

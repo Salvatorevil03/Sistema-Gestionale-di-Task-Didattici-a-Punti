@@ -162,5 +162,10 @@ public class EntityTask {
 
 
     //Metodo Creazione Consegna
-
+    public int consegnaSoluzione(int taskID, String soluzione, int studenteID){
+        int ret = EntityConsegna.creaConsegna(taskID, soluzione, studenteID);
+        if(ret==-1) {return ret;}
+        ret = EntityConsegna.updateNumTaskCompletati(studenteID);
+        return ret;
+    }
 }

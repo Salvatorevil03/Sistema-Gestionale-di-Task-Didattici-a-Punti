@@ -100,4 +100,10 @@ public class EntityStudente extends Utente {
 //            this.consegne.add(consegna);
 //        }
 //    }
+
+    protected static int incrementaNumTaskCompletati(int studenteID){
+        DBStudente studente = new DBStudente(studenteID);
+        studente.setNumTaskCompletati(studente.getNumTaskCompletati()+1);
+        return studente.salvaTaskCompletatiInDB();
+    }
 }

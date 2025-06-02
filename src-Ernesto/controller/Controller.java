@@ -200,12 +200,20 @@ public class Controller {
         if(dtoTask.getTitolo()==null){return null;}
         return dtoTask;
     }
-    //TODO-------------
-    public static int consegnaSoluzione(String pkStudente, String pkTask, String soluzione){
 
-        return 0;
+    public static int consegnaSoluzione(String pkStudente, String pkTask, String soluzione){
+        int taskID = 0;
+        int studenteID =0;
+        try{
+            taskID = Integer.parseInt(pkTask);
+            studenteID = Integer.parseInt(pkStudente);
+            }catch(NumberFormatException e){
+            return -1;
+        }
+        EntityTask task = new EntityTask(taskID);
+        return task.consegnaSoluzione(taskID, soluzione, studenteID);
     }
-    //-----------------
+
     public static int getClasseId(String pkStudente){
         //restituisce -1 se classe_codice è NULL
         int id_studente=0;

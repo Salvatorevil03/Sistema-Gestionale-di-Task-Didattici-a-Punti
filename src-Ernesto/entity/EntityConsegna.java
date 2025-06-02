@@ -93,4 +93,15 @@ public class EntityConsegna {
     private void aggiornaNumTaskValutati(DBStudente studente) {
         studente.setNumTaskValutati(studente.getNumTaskValutati()+1);
     }
+
+    protected static int creaConsegna(int taskID, String soluzione, int studenteID){
+        DBConsegna consegna = new DBConsegna();
+        consegna.setPunteggio(-1);
+        consegna.setSoluzione(soluzione);
+        return consegna.InserisciSuDB(taskID, studenteID);
+    }
+
+    protected static int updateNumTaskCompletati(int studenteID){
+        return EntityStudente.incrementaNumTaskCompletati(studenteID);
+    }
 }

@@ -45,7 +45,10 @@ public class Main_Test_ValutaCOnsegna {
         //System.out.println(Controller.creaClasse("AVALON","434343"));
 
         //test di iscrizione
-        System.out.println(Controller.iscrizione("2","1"));
+        //System.out.println(Controller.iscrizione("2","1"));
+
+        //test di consegnaSoluzione------DONE
+        //System.out.println(Controller.consegnaSoluzione("SADDS","","nel mezzo di cammin di nostra vita"));
         long end = System.currentTimeMillis();
         System.out.println("Tempo di esecuzione: " + (end - start) + " ms");
 
