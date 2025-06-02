@@ -1,30 +1,21 @@
 package taskdidatticiNEW;
 
+import controller.Controller;
+
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.FlowLayout;
-import javax.swing.JButton;
-import javax.swing.SpringLayout;
 import java.awt.BorderLayout;
-import javax.swing.SwingConstants;
-import javax.swing.JSeparator;
-import javax.swing.JList;
-import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 
 
-import javax.swing.JSplitPane;
 import java.awt.Font;
-import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -56,6 +47,7 @@ public class GUIIscrizioneClasse extends JFrame {
 	 * Create the frame.
 	 */
 	public GUIIscrizioneClasse() {
+		SessioneStudente studente = SessioneStudente.getInstance();
 		//
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);//MOLTO IMPORTANTE
@@ -94,7 +86,12 @@ public class GUIIscrizioneClasse extends JFrame {
 		iscrizioneButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				int res = Controller.iscrizione(String.valueOf(studente.getIdStudente()),codiceField.getText());
+				if(res == 1) {
+					dispose();
+				}else{
+					JOptionPane.showMessageDialog(null, "Iscrizione fallita");
+				}
 			}
 		});
 		iscrizioneButton.setBounds(180, 152, 89, 23);

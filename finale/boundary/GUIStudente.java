@@ -190,21 +190,21 @@ public class GUIStudente extends JFrame {
 		lblTotaleTaskAssegnati.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblTotaleTaskAssegnati.setBounds(61, 265, 132, 23);
 		contentPane.add(lblTotaleTaskAssegnati);
-		
+
 		JLabel lblOutMedia = new JLabel("numero1");
 		lblOutMedia.setBounds(210, 198, 73, 14);
 		contentPane.add(lblOutMedia);
-		lblOutMedia.setText(statistiche.get(0).toString());
-		
+		lblOutMedia.setText(Float.toString(statistiche.get(2) / statistiche.get(1)));
+
 		JLabel lblOutPunteggio = new JLabel("numero1");
 		lblOutPunteggio.setBounds(247, 232, 73, 14);
 		contentPane.add(lblOutPunteggio);
-		lblOutPunteggio.setText(statistiche.get(1).toString());
-		
+		lblOutPunteggio.setText(statistiche.get(2).toString());
+
 		JLabel lblOutTask = new JLabel("numero1");
 		lblOutTask.setBounds(210, 271, 73, 14);
 		contentPane.add(lblOutTask);
-		lblOutTask.setText(statistiche.get(2).toString());
+		lblOutTask.setText(statistiche.get(0).toString());
 		
 		JLabel lblClassifiche = new JLabel("Classifiche");
 		lblClassifiche.setHorizontalAlignment(SwingConstants.CENTER);
