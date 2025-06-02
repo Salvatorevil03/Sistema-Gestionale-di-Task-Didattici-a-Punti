@@ -170,7 +170,7 @@ public class DBClasse {
     }
 
     private int inserisciSuDB(DBTask task,int id_classe) {
-        int esito=0;
+        int esito=1;
         String query="INSERT INTO TASK (titolo,descrizione,dataScadenza,maxPuntiAssegnabili,classe_codice) VALUES ('" + task.getTitolo() + "','" +
                 task.getDescrizione() + "','" + task.getDataScadenza() + "'," +
                 task.getMaxPuntiAssegnabili()+","+id_classe+ ")";
@@ -184,20 +184,21 @@ public class DBClasse {
         }
         if(esito==-1){return esito;}
         this.setNumeroTask(this.numeroTask+1);
-        esito=this.salvaNumTaskSuDB();
+        esito=this.salvaNumTaskSuDB(id_classe);
         return esito;
     }
 
-    private int salvaNumTaskSuDB() {
-        int ret=0;
+    private int salvaNumTaskSuDB(int id_classe) {
+        int ret=1;
         String query = "UPDATE classi SET numeroTask = "+this.numeroTask+" WHERE codice= "+this.codice+";";
         //System.out.println(query);
         try{
             ret=DBConnectionManager.updateQuery(query);
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             ret=-1;
         }
+        //System.out.println("RET: "+ret);
         return ret;
     }
 

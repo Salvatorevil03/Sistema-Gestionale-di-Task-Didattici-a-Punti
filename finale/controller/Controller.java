@@ -52,6 +52,7 @@ public class Controller {
 
     public static ArrayList<DTOStudente> getStudentiSenzaClasse(){
         ArrayList<DTOStudente> lista= Piattaforma.getStudentiSenzaClasse();
+        if(lista.size()==0){return null;}
         return lista;
     }
 
@@ -66,6 +67,7 @@ public class Controller {
         if(id_docente<=0){return null;}
         EntityDocente docente = new EntityDocente(id_docente);
         ArrayList<DTOClasse> DTOclassi=docente.getElencoClassi();
+        if(DTOclassi.size()==0){return null;}
         return DTOclassi;
     }
 
@@ -96,6 +98,7 @@ public class Controller {
         if(id_classe<=0){return null;}
         EntityClasse classe = new EntityClasse(id_classe);
         ArrayList<DTOTask> DTOTasks=classe.getTasks();
+        if(DTOTasks.size()==0){return null;}
         return DTOTasks;
     }
 
@@ -110,6 +113,7 @@ public class Controller {
         if(id_classe<=0){return null;}
         EntityClasse classe = new EntityClasse(id_classe);
         ArrayList<DTOStudente> DTOStudenti=classe.getStudenti();
+        if(DTOStudenti.size()==0){return null;}
         return DTOStudenti;
     }
 
@@ -124,6 +128,7 @@ public class Controller {
         if(id_Task<=0){return null;}
         EntityTask task = new EntityTask(id_Task);
         ArrayList<DTOConsegna> DTOconsegne=task.getConsegne();
+        if(DTOconsegne.size()==0){return null;}
         return DTOconsegne;
     }
 
@@ -168,6 +173,7 @@ public class Controller {
         EntityClasse classe = new EntityClasse(id_classe);
         ArrayList<DTOStudente> lista=classe.getStudenti();
         lista.sort(Comparator.comparingInt(DTOStudente::getPunteggioTotaleOttenuto).reversed());
+        if(lista.size()==0){return null;}
         return lista;
     }
 
@@ -183,6 +189,7 @@ public class Controller {
         EntityClasse classe = new EntityClasse(id_classe);
         ArrayList<DTOStudente> lista=classe.getStudenti();
         lista.sort(Comparator.comparingInt(DTOStudente::getNumTaskCompletati).reversed());
+        if(lista.size()==0){return null;}
         return lista;
     }
 
@@ -226,6 +233,7 @@ public class Controller {
         EntityStudente studente = new EntityStudente(id_studente);
         int id_classe=studente.getCodiceClasse();
         if(studente.getNome()==null){return -1;}
+        if(id_classe<=0){return -1;}
         return id_classe;
     }
 

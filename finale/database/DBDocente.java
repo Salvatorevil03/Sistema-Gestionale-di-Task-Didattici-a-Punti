@@ -105,7 +105,7 @@ public class DBDocente extends DBUtente {
     }
 
     private int inserisciSuDB(DBClasse classe, int docente_id) {
-        int esito=0;
+        int esito=1;
         String query="INSERT INTO CLASSI (nome,numeroTask,docente_id) VALUES ('"+classe.getNome()+"',"+classe.getNumeroTask()+","+docente_id+")";
         //System.out.println(query);
         try{

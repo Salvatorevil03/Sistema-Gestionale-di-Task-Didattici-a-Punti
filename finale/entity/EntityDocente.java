@@ -81,7 +81,6 @@ public class EntityDocente extends Utente {
     public int creaClasse(String nome) {
         DBDocente docente = new DBDocente();
         int esito=docente.creaClasse(nome,this.id);
-        if(esito==1){return 0;}
         return esito;
     }
 

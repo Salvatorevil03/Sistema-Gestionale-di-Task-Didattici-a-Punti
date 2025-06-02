@@ -131,7 +131,7 @@ public class EntityClasse {
     }
 
     public int creaTask(String titolo, String descrizione, String dataScadenza, int maxPunteggio,int id_classe) {
-        DBClasse classe= new DBClasse();
+        DBClasse classe= new DBClasse(id_classe);
         int esito=classe.creaTask(titolo,descrizione,dataScadenza,maxPunteggio,id_classe);
         return esito;
     }
@@ -140,7 +140,6 @@ public class EntityClasse {
         int esito=0;
         DBClasse classe= new DBClasse();
         esito=classe.iscrizioneSuDB(id_studente,id_classe);
-        if(esito==1){return 0;}
         return esito;
     }
 }
