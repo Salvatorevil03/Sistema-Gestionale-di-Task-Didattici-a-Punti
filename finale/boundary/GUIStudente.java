@@ -23,6 +23,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class GUIStudente extends JFrame {
 
@@ -61,6 +62,7 @@ public class GUIStudente extends JFrame {
 		//statistiche.add(0);
 		//statistiche.add(0);
 		//statistiche.add(0);
+
 
 		ArrayList<DTOTask> tasks = Controller.getTasks(studente.getPkClasse());
 		// da cancellare
@@ -141,8 +143,13 @@ public class GUIStudente extends JFrame {
 		};
 		table.setModel(model);
 		if (tasks != null){
+			LocalDate dataOggi = java.time.LocalDate.now();
 			for (DTOTask t : tasks) {
-				model.addRow(new Object[] { t.getId(),t.getTitolo() });
+				LocalDate taskDate = LocalDate.parse(t.getDataScadenza());
+				if(taskDate.isAfter(dataOggi)){
+					model.addRow(new Object[] { t.getId(),t.getTitolo() });
+				}
+
 			}
 		}
 		scrollPane.setViewportView(table);
@@ -173,22 +180,22 @@ public class GUIStudente extends JFrame {
 		lblStatistiche.setBounds(75, 130, 208, 56);
 		contentPane.add(lblStatistiche);
 		
-		JLabel lblMedia = new JLabel("media voti ottenuti :");
+		JLabel lblMedia = new JLabel("Media voti ottenuti :");
 		lblMedia.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblMedia.setHorizontalAlignment(SwingConstants.LEFT);
 		lblMedia.setBounds(61, 192, 132, 23);
 		contentPane.add(lblMedia);
 		
-		JLabel lblPunteggioTotaleOttenuto = new JLabel("punteggio totale ottenuto :");
+		JLabel lblPunteggioTotaleOttenuto = new JLabel("Punteggio totale ottenuto :");
 		lblPunteggioTotaleOttenuto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPunteggioTotaleOttenuto.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblPunteggioTotaleOttenuto.setBounds(51, 226, 186, 23);
 		contentPane.add(lblPunteggioTotaleOttenuto);
 		
-		JLabel lblTotaleTaskAssegnati = new JLabel("totale task assegnati :");
+		JLabel lblTotaleTaskAssegnati = new JLabel("Totale Task assegnati :");
 		lblTotaleTaskAssegnati.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTotaleTaskAssegnati.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblTotaleTaskAssegnati.setBounds(61, 265, 132, 23);
+		lblTotaleTaskAssegnati.setBounds(61, 265, 160, 23);
 		contentPane.add(lblTotaleTaskAssegnati);
 
 		JLabel lblOutMedia = new JLabel("numero1");
@@ -206,7 +213,7 @@ public class GUIStudente extends JFrame {
 		lblOutPunteggio.setText(statistiche.get(2).toString());
 
 		JLabel lblOutTask = new JLabel("numero1");
-		lblOutTask.setBounds(210, 271, 73, 14);
+		lblOutTask.setBounds(230, 271, 73, 14);
 		contentPane.add(lblOutTask);
 		lblOutTask.setText(statistiche.get(0).toString());
 		

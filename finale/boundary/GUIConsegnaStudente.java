@@ -1,5 +1,14 @@
 package taskdidatticiNEW;
 
+/*
+	NOTA PER SASI:
+	Valuta di inserire qualcosa che faccia capire che la soluzione
+	è già stata consegnata.
+	ES: Nella text area dove si inserisce la soluzione fai
+	textArea.setText("SOLUZIONE GIÀ CONSEGNATA");
+	e mostri il messaggio di errore come popup che già c'è
+ */
+
 import controller.Controller;
 import DTO.DTOTask;
 

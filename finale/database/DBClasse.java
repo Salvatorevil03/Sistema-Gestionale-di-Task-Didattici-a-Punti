@@ -139,6 +139,7 @@ public class DBClasse {
     }
 //
     public void caricaTaskDaDB() {
+
         String query1 = "SELECT * FROM TASK T JOIN CLASSI C ON T.classe_codice=C.codice WHERE C.codice=" + this.codice + ";";
         try {
             ResultSet rs1 = DBConnectionManager.selectQuery(query1);
@@ -148,6 +149,7 @@ public class DBClasse {
                 task.setTitolo(rs1.getString("titolo"));
                 task.setDescrizione(rs1.getString("descrizione"));
                 task.setMaxPuntiAssegnabili(rs1.getInt("maxPuntiAssegnabili"));
+                task.setDataScadenza(rs1.getString("dataScadenza"));
 
                 //SALVATAGGIO RISULTATO
                 this.task.add(task);
@@ -159,46 +161,43 @@ public class DBClasse {
         }
     }
 
-    public int creaTask(String titolo, String descrizione, String dataScadenza, int maxPunteggio,int id_classe) {
+    public int creaTask(String titolo, String descrizione, String dataScadenza, int maxPunteggio) {
         DBTask task = new DBTask();
         task.setTitolo(titolo);
         task.setDescrizione(descrizione);
         task.setDataScadenza(dataScadenza);
         task.setMaxPuntiAssegnabili(maxPunteggio);
-        int esito=this.inserisciSuDB(task,id_classe);
-        return esito;
+        return this.inserisciSuDB(task);
     }
 
-    private int inserisciSuDB(DBTask task,int id_classe) {
-        int esito=1;
+    private int inserisciSuDB(DBTask task) {
+        int esito;
         String query="INSERT INTO TASK (titolo,descrizione,dataScadenza,maxPuntiAssegnabili,classe_codice) VALUES ('" + task.getTitolo() + "','" +
                 task.getDescrizione() + "','" + task.getDataScadenza() + "'," +
-                task.getMaxPuntiAssegnabili()+","+id_classe+ ")";
+                task.getMaxPuntiAssegnabili()+","+this.codice+ ")";
 
-        //System.out.println(query);
         try{
-            esito=DBConnectionManager.updateQuery(query);
+            esito = DBConnectionManager.updateQuery(query);
+            if (esito == 1){
+                this.setNumeroTask(this.numeroTask+1);
+                this.salvaNumTaskSuDB();
+            }
         }catch(ClassNotFoundException | SQLException e){
             //e.printStackTrace();
-            esito=-1;
+            esito = -1;
         }
-        if(esito==-1){return esito;}
-        this.setNumeroTask(this.numeroTask+1);
-        esito=this.salvaNumTaskSuDB(id_classe);
         return esito;
     }
 
-    private int salvaNumTaskSuDB(int id_classe) {
-        int ret=1;
+    private int salvaNumTaskSuDB() {
+        int ret;
         String query = "UPDATE classi SET numeroTask = "+this.numeroTask+" WHERE codice= "+this.codice+";";
-        //System.out.println(query);
         try{
-            ret=DBConnectionManager.updateQuery(query);
+            ret = DBConnectionManager.updateQuery(query);
         } catch (ClassNotFoundException | SQLException e) {
             //e.printStackTrace();
-            ret=-1;
+            ret = -1;
         }
-        //System.out.println("RET: "+ret);
         return ret;
     }
 

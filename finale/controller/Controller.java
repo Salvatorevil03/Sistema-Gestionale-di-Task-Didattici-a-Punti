@@ -10,6 +10,7 @@ import entity.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+
 public class Controller {
 
     public static int registrazione(String ruolo,String nome,String cognome, String mail, String password){
@@ -72,19 +73,12 @@ public class Controller {
     }
 
     public static int creaTask(String pkClasse, String titolo, String descrizione, String dataScadenza, int maxPunteggio){
-        //UNICO PROBLEMA è LA FORMATTAZIONE DEI DATI, ' O " CAUSANO PROBL. CHE SI RISOLVONO BENE SOLO CON PREPARED STATEMENT
-        int id_classe=0;
-        try{
-            id_classe = Integer.parseInt(pkClasse);
-        }catch (NumberFormatException e){
-            return -1;
-        }
-        if(id_classe<=0){return -1;}
-        if(maxPunteggio<0){return -1;}
-        if(titolo=="" || descrizione=="" || dataScadenza==""){return -1;}
+        // Attenzione: formattazione errata dei dati (es. ' o ") può causare problemi.
+        // Si consiglia l'uso di PreparedStatement per evitarli.
+
+        int id_classe=Integer.parseInt(pkClasse);
         EntityClasse classe = new EntityClasse(id_classe);
-        int esito=classe.creaTask(titolo,descrizione,dataScadenza,maxPunteggio,id_classe);
-        return esito;
+        return classe.creaTask(titolo,descrizione,dataScadenza,maxPunteggio);
     }
 
     public static ArrayList<DTOTask> getTasks(String pkClasse){
@@ -101,6 +95,7 @@ public class Controller {
         if(DTOTasks.size()==0){return null;}
         return DTOTasks;
     }
+
 
     public static ArrayList<DTOStudente> getStudenti(String pkClasse){
         //sempre da gui controllo non sia null

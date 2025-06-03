@@ -112,11 +112,13 @@ public class EntityTask {
         if (consegna_da_valutare==null){
             return -1;
         }
+
+        if (consegna_da_valutare.getPunteggio()!=-1){return -1;}
         DBConsegna DB_consegna_da_valutare = new DBConsegna(consegna_da_valutare.getId());
         int esito = consegna_da_valutare.impostaPunteggio(punteggio,DB_consegna_da_valutare);
         //passo il riferimento DAO della consegna da valuatre esternamente così da non dover creare più volte l'oggetto per modificarlo all'interno dei singoli metodi
         if(esito==-1) {return esito;}
-        esito=consegna_da_valutare.aggiornaStatistiche(punteggio,DB_consegna_da_valutare); //Aggiorna Punteggio e NumTaskValutati studente
+        esito=consegna_da_valutare.aggiornaStatisticheAndInviaMail(punteggio,DB_consegna_da_valutare,this.titolo); //Aggiorna Punteggio e NumTaskValutati studente
         if(esito==-1) {return esito;}
         return esito;
     }
@@ -163,6 +165,9 @@ public class EntityTask {
 
     //Metodo Creazione Consegna
     public int consegnaSoluzione(int taskID, String soluzione, int studenteID){
+        int lunghezzaMassima = 30000;
+        //String
+        if(soluzione.length() > lunghezzaMassima) {return -1;}
         int ret = EntityConsegna.creaConsegna(taskID, soluzione, studenteID);
         if(ret==-1) {return ret;}
         ret = EntityConsegna.updateNumTaskCompletati(studenteID);

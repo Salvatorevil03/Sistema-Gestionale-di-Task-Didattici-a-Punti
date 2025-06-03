@@ -88,7 +88,7 @@ public class DBConsegna {
                 DBStudente studente = new DBStudente();
                 studente.setId(rs1.getInt("S.id"));
                 studente.setNome(rs1.getString("nome"));
-                studente.setCognome(rs1.getString("nome"));
+                studente.setCognome(rs1.getString("cognome"));
                 studente.setMail(rs1.getString("mail"));
                 studente.setPassword(rs1.getString("password"));
                 studente.setNumTaskCompletati(rs1.getInt("numTaskCompletati"));
