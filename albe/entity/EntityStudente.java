@@ -72,11 +72,11 @@ public class EntityStudente extends Utente {
                 '}';
     }
 
-    public ArrayList<Float> getStatistiche() {
-        ArrayList<Float> lista=new ArrayList<>();
-        lista.add((float) numTaskCompletati);
-        lista.add((float) numTaskValutati);
-        lista.add((float) punteggioTotaleOttenuto);
+    public ArrayList<Integer> getStatistiche() {
+        ArrayList<Integer> lista=new ArrayList<>();
+        lista.add(numTaskCompletati);
+        lista.add(numTaskValutati);
+        lista.add(punteggioTotaleOttenuto);
         return lista;
     }
 

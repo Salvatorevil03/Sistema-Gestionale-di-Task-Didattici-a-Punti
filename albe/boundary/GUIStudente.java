@@ -56,7 +56,7 @@ public class GUIStudente extends JFrame {
 
 		SessioneStudente studente = SessioneStudente.getInstance();
 		String nome = studente.getNomeStudente();
-		ArrayList<Float> statistiche = Controller.getStatistiche(String.valueOf(studente.getIdStudente()));
+		ArrayList<Integer> statistiche = Controller.getStatistiche(String.valueOf(studente.getIdStudente()));
 		// da concellare
 		//statistiche = new ArrayList<Integer>();
 		//statistiche.add(0);
@@ -180,22 +180,22 @@ public class GUIStudente extends JFrame {
 		lblStatistiche.setBounds(75, 130, 208, 56);
 		contentPane.add(lblStatistiche);
 		
-		JLabel lblMedia = new JLabel("media voti ottenuti :");
+		JLabel lblMedia = new JLabel("Media voti ottenuti :");
 		lblMedia.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblMedia.setHorizontalAlignment(SwingConstants.LEFT);
 		lblMedia.setBounds(61, 192, 132, 23);
 		contentPane.add(lblMedia);
 		
-		JLabel lblPunteggioTotaleOttenuto = new JLabel("punteggio totale ottenuto :");
+		JLabel lblPunteggioTotaleOttenuto = new JLabel("Punteggio totale ottenuto :");
 		lblPunteggioTotaleOttenuto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPunteggioTotaleOttenuto.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblPunteggioTotaleOttenuto.setBounds(51, 226, 186, 23);
 		contentPane.add(lblPunteggioTotaleOttenuto);
 		
-		JLabel lblTotaleTaskAssegnati = new JLabel("totale task assegnati :");
+		JLabel lblTotaleTaskAssegnati = new JLabel("Totale Task assegnati :");
 		lblTotaleTaskAssegnati.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTotaleTaskAssegnati.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblTotaleTaskAssegnati.setBounds(61, 265, 132, 23);
+		lblTotaleTaskAssegnati.setBounds(61, 265, 160, 23);
 		contentPane.add(lblTotaleTaskAssegnati);
 
 		JLabel lblOutMedia = new JLabel("numero1");
@@ -213,7 +213,7 @@ public class GUIStudente extends JFrame {
 		lblOutPunteggio.setText(statistiche.get(2).toString());
 
 		JLabel lblOutTask = new JLabel("numero1");
-		lblOutTask.setBounds(210, 271, 73, 14);
+		lblOutTask.setBounds(230, 271, 73, 14);
 		contentPane.add(lblOutTask);
 		lblOutTask.setText(statistiche.get(0).toString());
 		

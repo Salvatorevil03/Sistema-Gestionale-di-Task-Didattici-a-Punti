@@ -205,7 +205,6 @@ public class GUIClasseDocente extends JFrame {
 						 */
 
 						if (!data.matches("\\d{4}-\\d{2}-\\d{2}")){
-						//if (!data.matches("\\d{2}/\\d{2}/\\d{2}")){
 							throw new Exception();
 						}
 						int punti = Integer.parseInt(maxField.getText());

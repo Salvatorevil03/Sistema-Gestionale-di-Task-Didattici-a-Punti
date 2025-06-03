@@ -165,6 +165,9 @@ public class EntityTask {
 
     //Metodo Creazione Consegna
     public int consegnaSoluzione(int taskID, String soluzione, int studenteID){
+        int lunghezzaMassima = 30000;
+        //String
+        if(soluzione.length() > lunghezzaMassima) {return -1;}
         int ret = EntityConsegna.creaConsegna(taskID, soluzione, studenteID);
         if(ret==-1) {return ret;}
         ret = EntityConsegna.updateNumTaskCompletati(studenteID);

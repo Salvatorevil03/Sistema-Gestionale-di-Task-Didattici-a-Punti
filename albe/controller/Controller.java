@@ -151,7 +151,7 @@ public class Controller {
         return esito;
     }
 
-    public static ArrayList<Float> getStatistiche(String pkStudente){
+    public static ArrayList<Integer> getStatistiche(String pkStudente){
         int id_studente=0;
         try{
             id_studente = Integer.parseInt(pkStudente);
@@ -161,7 +161,7 @@ public class Controller {
         if(id_studente<=0){return null;}
         EntityStudente studente = new EntityStudente(id_studente);
         if (studente.getNome()==null){return null;}
-        ArrayList<Float> lista=studente.getStatistiche();
+        ArrayList<Integer> lista=studente.getStatistiche();
         return lista;
     }
 
