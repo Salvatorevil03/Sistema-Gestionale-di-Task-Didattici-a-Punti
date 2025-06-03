@@ -1,12 +1,14 @@
 package entity;
 
+import DTO.DTODocente;
+import DTO.DTOStudente;
+import DTO.DTOUtente;
 import database.DBDocente;
 import database.DBPiattaforma;
 import database.DBStudente;
 import database.DBUtente;
-import dto.DTODocente;
-import dto.DTOStudente;
-import dto.DTOUtente;
+
+import java.util.ArrayList;
 
 public class Piattaforma {
 
@@ -23,17 +25,38 @@ public class Piattaforma {
     }
 
     public static DTOUtente login(String mail, String password){
-       DBUtente utente = DBPiattaforma.login(mail,password);
-       if(utente != null){
-           if(utente instanceof DBStudente){
-               DTOStudente studente = new DTOStudente(((DBStudente) utente).getId(), ((DBStudente) utente).getNome(), "","","",0,0,0);
-               return studente;
-           }else {
-               DTODocente docente = new DTODocente(((DBDocente) utente).getId(), ((DBDocente) utente).getNome(), "","","");
-               return docente;
-           }
-       }
-       return null;
+        DBUtente utente = DBPiattaforma.login(mail,password);
+        if(utente != null){
+            if(utente instanceof DBStudente){
+                DTOStudente studente = new DTOStudente(((DBStudente) utente).getId(), ((DBStudente) utente).getNome(), "","","",0,0,0);
+                return studente;
+            }else {
+                DTODocente docente = new DTODocente(((DBDocente) utente).getId(), ((DBDocente) utente).getNome(), "","","");
+                return docente;
+            }
+        }
+        return null;
     }
 
+    public static ArrayList<DTOStudente> getStudentiSenzaClasse(){
+        ArrayList<DTOStudente> lista=new ArrayList<>();
+        ArrayList<DBStudente> DBlista = DBPiattaforma.getStudentiSenzaClasse();
+        for(int i=0; i<DBlista.size(); i++){
+            lista.add(convertiToDTO(DBlista.get(i)));
+        }
+        return lista;
+    }
+
+    private static DTOStudente convertiToDTO(DBStudente dbStudente) {
+        DTOStudente studente=new DTOStudente();
+        studente.setId(dbStudente.getId());
+        studente.setNome(dbStudente.getNome());
+        studente.setCognome(dbStudente.getCognome());
+        studente.setMail(dbStudente.getMail());
+        studente.setPassword(dbStudente.getPassword());
+        studente.setNumTaskCompletati(dbStudente.getNumTaskCompletati());
+        studente.setPunteggioTotaleOttenuto(dbStudente.getPunteggioTotaleOttenuto());
+        studente.setNumTaskValutati(dbStudente.getNumTaskValutati());
+        return studente;
+    }
 }

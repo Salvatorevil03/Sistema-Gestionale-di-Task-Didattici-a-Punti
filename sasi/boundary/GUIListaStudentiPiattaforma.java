@@ -1,8 +1,8 @@
 package taskdidatticiNEW;
 
 import controller.Controller;
-import dto.DTOClasse;
-import dto.DTOStudente;
+import DTO.DTOClasse;
+import DTO.DTOStudente;
 
 import java.awt.EventQueue;
 
@@ -74,12 +74,12 @@ public class GUIListaStudentiPiattaforma extends JFrame {
 		ArrayList<DTOStudente> studenti = Controller.getStudentiSenzaClasse();
 		ArrayList<DTOClasse> classi = Controller.getClassi(pkDocente);
 		// da cancellare
-		classi = new ArrayList<DTOClasse>();
-		classi.add(new DTOClasse(1,"INGSW",0));
-		classi.add(new DTOClasse(2,"INGSW2",0));
-		studenti = new ArrayList<DTOStudente>();
-		studenti.add(new DTOStudente(1,"Sasi","Bosco","gmail","pass",1,1,1));
-		studenti.add(new DTOStudente(1,"Erne","Bosco","gmail","pass",2,2,2));
+		//classi = new ArrayList<DTOClasse>();
+		//classi.add(new DTOClasse(1,"INGSW",0));
+		//classi.add(new DTOClasse(2,"INGSW2",0));
+		//studenti = new ArrayList<DTOStudente>();
+		//studenti.add(new DTOStudente(1,"Sasi","Bosco","gmail","pass",1,1,1));
+		//studenti.add(new DTOStudente(1,"Erne","Bosco","gmail","pass",2,2,2));
 
 
 		//

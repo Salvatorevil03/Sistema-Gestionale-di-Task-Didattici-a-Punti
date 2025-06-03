@@ -1,4 +1,7 @@
 package entity;
+import DTO.DTOConsegna;
+import DTO.DTOTask;
+import database.DBConsegna;
 import database.DBTask;
 import java.util.ArrayList;
 
@@ -99,6 +102,7 @@ public class EntityTask {
     //---------------------------------------------------
     //BUSINESS LOGIC
     public int valutaConsegna(int consegna_id, int punteggio){
+        if(punteggio>this.maxPuntiAssegnabili){return -1;}
         //caricamento delle consegne del task
         DBTask task = new DBTask(this.id);
         task.caricaConsegneDaDB();
@@ -108,13 +112,14 @@ public class EntityTask {
         if (consegna_da_valutare==null){
             return -1;
         }
-        int esito = consegna_da_valutare.impostaPunteggio(punteggio);
-        if(esito==-1) {return esito;}
-        esito=consegna_da_valutare.aggiornaStatistiche(punteggio); //Aggiorna Punteggio e NumTaskValutati studente
-        //esito=consegna_da_valutare.aggiornaPunteggioTotaleOttenuto(punteggio);
-        if(esito==-1) {return esito;}
 
-
+        if (consegna_da_valutare.getPunteggio()!=-1){return -1;}
+        DBConsegna DB_consegna_da_valutare = new DBConsegna(consegna_da_valutare.getId());
+        int esito = consegna_da_valutare.impostaPunteggio(punteggio,DB_consegna_da_valutare);
+        //passo il riferimento DAO della consegna da valuatre esternamente così da non dover creare più volte l'oggetto per modificarlo all'interno dei singoli metodi
+        if(esito==-1) {return esito;}
+        esito=consegna_da_valutare.aggiornaStatistiche(punteggio,DB_consegna_da_valutare); //Aggiorna Punteggio e NumTaskValutati studente
+        if(esito==-1) {return esito;}
         return esito;
     }
 
@@ -127,7 +132,45 @@ public class EntityTask {
         return null;
     }
 
+    public ArrayList<DTOConsegna> getConsegne() {
+        DBTask task = new DBTask(this.id);
+        task.caricaConsegneDaDB();
+        this.caricaConsegne(task);
+        ArrayList<DTOConsegna> lista=this.creaDTOTaskList();
+        return lista;
+    }
+
+    private ArrayList<DTOConsegna> creaDTOTaskList() {
+        ArrayList<DTOConsegna> lista=new ArrayList<>();
+        for(int i=0;i<this.consegne.size();i++){
+            DTOConsegna consegna =new DTOConsegna();
+            consegna.setId(this.consegne.get(i).getId());
+            consegna.setPunteggio(this.consegne.get(i).getPunteggio());
+            consegna.setSoluzione(this.consegne.get(i).getSoluzione());
+            lista.add(consegna);
+        }
+        return lista;
+    }
+
+    public DTOTask getInfo() {
+        DTOTask dtoTask = new DTOTask();
+        dtoTask.setId(this.id);
+        dtoTask.setTitolo(this.titolo);
+        dtoTask.setDescrizione(this.descrizione);
+        dtoTask.setDataScadenza(this.dataScadenza);
+        dtoTask.setMaxPuntiAssegnabili(this.maxPuntiAssegnabili);
+        return dtoTask;
+    }
+
 
     //Metodo Creazione Consegna
-
+    public int consegnaSoluzione(int taskID, String soluzione, int studenteID){
+        int lunghezzaMassima = 30000;
+        //String
+        if(soluzione.length() > lunghezzaMassima) {return -1;}
+        int ret = EntityConsegna.creaConsegna(taskID, soluzione, studenteID);
+        if(ret==-1) {return ret;}
+        ret = EntityConsegna.updateNumTaskCompletati(studenteID);
+        return ret;
+    }
 }

@@ -1,8 +1,8 @@
 package taskdidatticiNEW;
 
 import controller.Controller;
-import dto.DTOClasse;
-import dto.DTOStudente;
+import DTO.DTOClasse;
+import DTO.DTOStudente;
 
 import java.awt.EventQueue;
 
@@ -70,12 +70,12 @@ public class GUIDocente extends JFrame {
 		SessioneDocente docente = SessioneDocente.getInstance();
 		String nomeDocente = docente.getNomeDocente();
 		//Da cancellare
-		nomeDocente = "Salvatore";
+		//nomeDocente = "Salvatore";
 		ArrayList<DTOClasse> classi = Controller.getClassi(String.valueOf(docente.getIdDocente()));
 		// Da concellare
-		classi = new ArrayList<DTOClasse>();
-		classi.add(new DTOClasse(1,"INGSW",0));
-		classi.add(new DTOClasse(2,"INGSW2",0));
+		//classi = new ArrayList<DTOClasse>();
+		//classi.add(new DTOClasse(1,"INGSW",0));
+		//classi.add(new DTOClasse(2,"INGSW2",0));
 
 		//
 		setResizable(false);
@@ -153,7 +153,7 @@ public class GUIDocente extends JFrame {
 				if (nomeClasse.equals("")) {
 					JOptionPane.showMessageDialog(null, "Inserisci un nome");
 				}else {
-					int res = Controller.creaClasse(nomeClasse);
+					int res = Controller.creaClasse(nomeClasse,String.valueOf(docente.getIdDocente()));
 					if (res == 1) {
 						JOptionPane.showMessageDialog(null, "Classe creata");
 					}else {

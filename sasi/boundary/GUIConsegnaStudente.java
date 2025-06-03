@@ -1,7 +1,16 @@
 package taskdidatticiNEW;
 
+/*
+	NOTA PER SASI:
+	Valuta di inserire qualcosa che faccia capire che la soluzione
+	è già stata consegnata.
+	ES: Nella text area dove si inserisce la soluzione fai
+	textArea.setText("SOLUZIONE GIÀ CONSEGNATA");
+	e mostri il messaggio di errore come popup che già c'è
+ */
+
 import controller.Controller;
-import dto.DTOTask;
+import DTO.DTOTask;
 
 import java.awt.EventQueue;
 
@@ -53,7 +62,7 @@ public class GUIConsegnaStudente extends JFrame {
 		SessioneStudente studente = SessioneStudente.getInstance();
 		DTOTask task = Controller.getTask(studente.getPkTask());
 		// da eliminare
-		task = new DTOTask(1,"titolo di task1","descrizione", "12/08/09", 20);
+		//task = new DTOTask(1,"titolo di task1","descrizione", "12/08/09", 20);
 
 		//
 		setResizable(false);

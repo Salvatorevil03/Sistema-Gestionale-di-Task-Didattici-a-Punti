@@ -2,6 +2,8 @@ package entity;
 
 import database.DBStudente;
 
+import java.util.ArrayList;
+
 public class EntityStudente extends Utente {
     private int numTaskCompletati;
     private int numTaskValutati;
@@ -70,18 +72,19 @@ public class EntityStudente extends Utente {
                 '}';
     }
 
-    //SASI
-    public EntityStudente(String nome, String cognome, String mail, String password) {
-        this.nome = nome;
-        this.cognome = cognome;
-        this.mail = mail;
-        this.password = password;
-    }
-    public int inserisciSuDB(){
-        DBStudente studente = new DBStudente(this.nome,this.cognome,this.mail,this.password);
-        return studente.inserisciSuDB();
+    public ArrayList<Integer> getStatistiche() {
+        ArrayList<Integer> lista=new ArrayList<>();
+        lista.add(numTaskCompletati);
+        lista.add(numTaskValutati);
+        lista.add(punteggioTotaleOttenuto);
+        return lista;
     }
 
+    public int getCodiceClasse() {
+        DBStudente studente=new DBStudente(id);
+        if(studente.getNome()==null){return -1;}
+        return studente.getCodiceClasse();
+    }
 
     //###########################################################
     //METODI PER POSSIBILI DIPENDENZE
@@ -97,4 +100,22 @@ public class EntityStudente extends Utente {
 //            this.consegne.add(consegna);
 //        }
 //    }
+
+    protected static int incrementaNumTaskCompletati(int studenteID){
+        DBStudente studente = new DBStudente(studenteID);
+        studente.setNumTaskCompletati(studente.getNumTaskCompletati()+1);
+        return studente.salvaTaskCompletatiInDB();
+    }
+
+    //SASI
+    public EntityStudente(String nome, String cognome, String mail, String password) {
+        this.nome = nome;
+        this.cognome = cognome;
+        this.mail = mail;
+        this.password = password;
+    }
+    public int inserisciSuDB(){
+        DBStudente studente = new DBStudente(this.nome,this.cognome,this.mail,this.password);
+        return studente.inserisciSuDB();
+    }
 }

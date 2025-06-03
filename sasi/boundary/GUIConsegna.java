@@ -1,8 +1,16 @@
 package taskdidatticiNEW;
 
+/*
+	NOTA PER SASI:
+	Se possibile rendere NON cliccabile il tasto "Valuta" appena un docente
+	apre un Task.
+	Rendere il tasto cliccabile solo dopo aver cliccato su una consegna e
+	su "Seleziona"
+ */
+
 import controller.Controller;
-import dto.DTOConsegna;
-import dto.DTOStudente;
+import DTO.DTOConsegna;
+import DTO.DTOStudente;
 
 import java.awt.EventQueue;
 
@@ -68,15 +76,15 @@ public class GUIConsegna extends JFrame {
 	 */
 	public GUIConsegna() {
 		SessioneDocente docente = SessioneDocente.getInstance();
-		String pkTask = docente.getPkClasseSelezionata();
+		String pkTask = docente.getPkTaskSelezionato();
 		String nomeTaskSelezionato = docente.getNomeTaskSelezionato();
 		// da Cancellare
-		nomeTaskSelezionato = "Titolo Task";
-		//final ArrayList<DTOConsegna> consegne = Controller.getConsegne(pkTask);
+		//nomeTaskSelezionato = "Titolo Task";
+		final ArrayList<DTOConsegna> consegne = Controller.getConsegne(pkTask);
 		// da Cancellare
-		final ArrayList<DTOConsegna> consegne = new ArrayList<DTOConsegna>();
-		consegne.add(new DTOConsegna(1,-1,"ciao1"));
-		consegne.add(new DTOConsegna(2,-1,"ciao2"));
+		//final ArrayList<DTOConsegna> consegne = new ArrayList<DTOConsegna>();
+		//consegne.add(new DTOConsegna(1,-1,"ciao1"));
+		//consegne.add(new DTOConsegna(2,-1,"ciao2"));
 
 		//
 		setResizable(false);
@@ -104,6 +112,7 @@ public class GUIConsegna extends JFrame {
 		indietroBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				System.out.println(SessioneDocente.getInstance().getPkClasseSelezionata());
 				GUIClasseDocente seconda = new GUIClasseDocente(); // Crea nuova finestra
 				seconda.setVisible(true); // Mostra nuova finestra
 				dispose(); // Chiude questa finestra

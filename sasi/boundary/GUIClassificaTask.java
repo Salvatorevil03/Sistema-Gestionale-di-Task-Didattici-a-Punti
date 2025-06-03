@@ -1,7 +1,7 @@
 package taskdidatticiNEW;
 
 import controller.Controller;
-import dto.DTOStudente;
+import DTO.DTOStudente;
 
 import java.awt.EventQueue;
 
@@ -68,9 +68,9 @@ public class GUIClassificaTask extends JFrame {
 		SessioneStudente studente = SessioneStudente.getInstance();
 		ArrayList<DTOStudente> studenti = Controller.getClassificaTask(studente.getPkClasse());
 		// Da eliminare
-		studenti = new ArrayList<DTOStudente>();
-		studenti.add(new DTOStudente(1,"Sasi","Bosco","gmail","pass",1,1,1));
-		studenti.add(new DTOStudente(1,"Erne","Bosco","gmail","pass",2,2,2));
+		//studenti = new ArrayList<DTOStudente>();
+		//studenti.add(new DTOStudente(1,"Sasi","Bosco","gmail","pass",1,1,1));
+		//studenti.add(new DTOStudente(1,"Erne","Bosco","gmail","pass",2,2,2));
 
 		//
 		setResizable(false);

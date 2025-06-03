@@ -6,13 +6,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+//mail beckxavier@example.com
+//pass !3K^UAtgd^
+
+
+//Studente:
+//mail samantha09@example.net
+//pass dw@$2AYkS!
+
 public class DBConnectionManager {
 
     public static String url = "jdbc:mysql://localhost:3306/";
     public static String dbName = "taskdidattici";
     public static String driver = "com.mysql.cj.jdbc.Driver";
     public static String userName = "root";
-    public static String password = "1608";
+    public static String password = "admin";
 
 
     public static Connection getConnection() throws ClassNotFoundException, SQLException {

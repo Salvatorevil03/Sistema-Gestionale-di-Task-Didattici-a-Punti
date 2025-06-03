@@ -13,8 +13,8 @@ import java.awt.BorderLayout;
 import javax.swing.border.LineBorder;
 
 import controller.Controller;
-import dto.DTOStudente;
-import dto.DTOUtente;
+import DTO.DTOStudente;
+import DTO.DTOUtente;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -106,6 +106,8 @@ public class GUILogin extends JFrame {
 							seconda.setVisible(true); // Mostra nuova finestra
 							dispose(); // Chiude questa finestra
 						} else {
+							SessioneStudente studente = SessioneStudente.getInstance();
+							studente.setIdStudente(utente.getId());
 							GUIIscrizioneClasse seconda = new GUIIscrizioneClasse(); // Crea nuova finestra
 							seconda.setVisible(true); // Mostra nuova finestra
 						}
