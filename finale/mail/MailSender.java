@@ -50,11 +50,9 @@ public class MailSender {
         return esito;
     }
 
-    public static int inviaCreazioneTask(String destinatario, String task, String commento) {
-        int esito=0;
+    public static Message initMail(){
         final String mittente = "ernestocifuni29@gmail.com";
         final String password = "bzoi rmpd vozm irkr"; // Usa una App Password, non la password normale
-        final String nomeMittente = "Sistema di Valutazione"; // Nome personalizzato che apparirà
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -68,8 +66,17 @@ public class MailSender {
             }
         });
 
+        return new MimeMessage(session);
+
+    }
+
+    public static int inviaCreazioneTask(String destinatario, String task, String commento, Message message) {
+        int esito=0;
+        final String mittente = "ernestocifuni29@gmail.com";
+        final String password = "bzoi rmpd vozm irkr"; // Usa una App Password, non la password normale
+        final String nomeMittente = "Sistema di Valutazione"; // Nome personalizzato che apparirà
+
         try {
-            Message message = new MimeMessage(session);
             // Imposta il mittente con nome personalizzato
             message.setFrom(new InternetAddress(mittente, nomeMittente));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));

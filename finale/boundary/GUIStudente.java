@@ -145,10 +145,10 @@ public class GUIStudente extends JFrame {
 		if (tasks != null){
 			LocalDate dataOggi = java.time.LocalDate.now();
 			for (DTOTask t : tasks) {
-				LocalDate taskDate = LocalDate.parse(t.getDataScadenza());
-				if(taskDate.isAfter(dataOggi)){
+				//LocalDate taskDate = LocalDate.parse(t.getDataScadenza());
+				//if(taskDate.isAfter(dataOggi)){
 					model.addRow(new Object[] { t.getId(),t.getTitolo() });
-				}
+				//}
 
 			}
 		}

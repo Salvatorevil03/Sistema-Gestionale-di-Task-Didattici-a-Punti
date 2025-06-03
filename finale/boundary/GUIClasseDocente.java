@@ -36,6 +36,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
@@ -207,6 +210,9 @@ public class GUIClasseDocente extends JFrame {
 						if (!data.matches("\\d{4}-\\d{2}-\\d{2}")){
 							throw new Exception();
 						}
+						if(!isValidDate(data) || !(isDateInFuture(data)) ) {
+							throw new Exception();
+						}
 						int punti = Integer.parseInt(maxField.getText());
 						int res = Controller.creaTask(docente.getPkClasseSelezionata(), titolo, descrizione, data, punti);
 						if (res == -1) {
@@ -289,5 +295,38 @@ public class GUIClasseDocente extends JFrame {
 		});
 		aggiornaButton.setBounds(785, 11, 89, 23);
 		contentPane.add(aggiornaButton);
+	}
+	/*
+    CREAZIONE METODO DI VERIFICA DELLA FORMATTAZIONE DELLA DATA
+     */
+
+	private boolean isValidDate(String date) {
+		try {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			LocalDate parsedDate = LocalDate.parse(date, formatter);
+
+			// Verifica che la data parsata corrisponda alla stringa originale
+			String formattedBack = parsedDate.format(formatter);
+			return date.equals(formattedBack);
+
+		} catch (DateTimeParseException e) {
+			return false;
+		}
+	}
+
+    /*
+    CREAZIONE METODO VERIFICA DATA
+     */
+
+	private boolean isDateInFuture(String dateString) {
+		try {
+			LocalDate inputDate = LocalDate.parse(dateString);
+			LocalDate today = LocalDate.now();
+
+			return inputDate.isAfter(today);
+
+		} catch (DateTimeParseException e) {
+			return false; // Se la data non è parsabile, consideriamo non valida
+		}
 	}
 }
