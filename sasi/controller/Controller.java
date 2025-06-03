@@ -22,12 +22,18 @@ public class Controller {
     }
 
     public static int creaClasse(String nome, String pkDocente){
-        // Attenzione: formattazione errata dei dati (es. ' o ") può causare problemi.
-        // Si consiglia l'uso di PreparedStatement per evitarli.
-
-        int id_classe=Integer.parseInt(pkClasse);
-        EntityClasse classe = new EntityClasse(id_classe);
-        return classe.creaTask(titolo,descrizione,dataScadenza,maxPunteggio);
+        //UNICO PROBLEMA è LA FORMATTAZIONE DEI DATI, ' O " CAUSANO PROBL. CHE SI RISOLVONO BENE SOLO CON PREPARED STATEMENT
+        if(nome==""){return -1;}
+        int id_docente=0;
+        try{
+            id_docente=Integer.parseInt(pkDocente);
+        }catch(NumberFormatException e){
+            return -1;
+        }
+        if(id_docente<=0){return -1;}
+        EntityDocente docente = new EntityDocente(id_docente);
+        int esito=docente.creaClasse(nome);
+        return esito;
     }
 
     public static int iscrizione(String pkStudente, String pkClasse){
@@ -67,20 +73,12 @@ public class Controller {
     }
 
     public static int creaTask(String pkClasse, String titolo, String descrizione, String dataScadenza, int maxPunteggio){
-        //UNICO PROBLEMA è LA FORMATTAZIONE DEI DATI, ' O " CAUSANO PROBL. CHE SI RISOLVONO BENE SOLO CON PREPARED STATEMENT
-        int id_classe=0;
-        try{
-            id_classe = Integer.parseInt(pkClasse);
-        }catch (NumberFormatException e){
-            return -1;
-        }
-        if(id_classe<=0){return -1;}
-        if(maxPunteggio<1){return -1;}
+        // Attenzione: formattazione errata dei dati (es. ' o ") può causare problemi.
+        // Si consiglia l'uso di PreparedStatement per evitarli.
 
-        if(titolo=="" || descrizione=="" || dataScadenza==""){return -1;}
+        int id_classe=Integer.parseInt(pkClasse);
         EntityClasse classe = new EntityClasse(id_classe);
-        int esito=classe.creaTask(titolo,descrizione,dataScadenza,maxPunteggio,id_classe);
-        return esito;
+        return classe.creaTask(titolo,descrizione,dataScadenza,maxPunteggio);
     }
 
     public static ArrayList<DTOTask> getTasks(String pkClasse){
