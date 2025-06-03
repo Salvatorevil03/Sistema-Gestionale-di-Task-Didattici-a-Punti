@@ -1,7 +1,6 @@
 package entity;
 
-import DTO.DTOClasse;
-import database.DBClasse;
+import dto.DTOClasse;
 import database.DBDocente;
 
 import java.util.ArrayList;

@@ -1,25 +1,17 @@
 package taskdidatticiNEW;
 
 import controller.Controller;
-import DTO.DTOTask;
+import dto.DTOTask;
 
 import java.awt.EventQueue;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.FlowLayout;
-import java.awt.BorderLayout;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 
 import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;

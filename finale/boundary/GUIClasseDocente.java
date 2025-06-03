@@ -1,35 +1,21 @@
 package taskdidatticiNEW;
 
 import controller.Controller;
-import DTO.DTOClasse;
-import DTO.DTOStudente;
-import DTO.DTOTask;
+import dto.DTOTask;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.FlowLayout;
 import javax.swing.JButton;
-import javax.swing.SpringLayout;
-import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
-import javax.swing.JSeparator;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 
-import javax.swing.JSplitPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
@@ -41,7 +27,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import javax.swing.JScrollPane;
-import javax.swing.JToolBar;
 import javax.swing.JTable;
 
 public class GUIClasseDocente extends JFrame {

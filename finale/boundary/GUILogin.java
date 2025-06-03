@@ -3,18 +3,12 @@ package taskdidatticiNEW;
 import java.awt.EventQueue;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.FlowLayout;
-import java.awt.BorderLayout;
 import javax.swing.border.LineBorder;
 
 import controller.Controller;
-import DTO.DTOStudente;
-import DTO.DTOUtente;
+import dto.DTOStudente;
+import dto.DTOUtente;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;

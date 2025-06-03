@@ -1,10 +1,9 @@
 package controller;
-import DTO.DTOClasse;
-import DTO.DTOConsegna;
-import DTO.DTOStudente;
-import DTO.DTOTask;
-import database.DBTask;
-import DTO.DTOUtente;
+import dto.DTOClasse;
+import dto.DTOConsegna;
+import dto.DTOStudente;
+import dto.DTOTask;
+import dto.DTOUtente;
 import entity.*;
 
 import java.util.ArrayList;

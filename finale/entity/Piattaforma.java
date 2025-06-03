@@ -1,10 +1,9 @@
 package entity;
 
-import DTO.DTODocente;
-import DTO.DTOStudente;
-import DTO.DTOUtente;
+import dto.DTODocente;
+import dto.DTOStudente;
+import dto.DTOUtente;
 import database.DBDocente;
-import database.DBPiattaforma;
 import database.DBStudente;
 import database.DBUtente;
 
@@ -25,7 +24,7 @@ public class Piattaforma {
     }
 
     public static DTOUtente login(String mail, String password){
-        DBUtente utente = DBPiattaforma.login(mail,password);
+        DBUtente utente = DBUtente.login(mail,password);
         if(utente != null){
             if(utente instanceof DBStudente){
                 DTOStudente studente = new DTOStudente(((DBStudente) utente).getId(), ((DBStudente) utente).getNome(), "","","",0,0,0);
@@ -40,7 +39,7 @@ public class Piattaforma {
 
     public static ArrayList<DTOStudente> getStudentiSenzaClasse(){
         ArrayList<DTOStudente> lista=new ArrayList<>();
-        ArrayList<DBStudente> DBlista = DBPiattaforma.getStudentiSenzaClasse();
+        ArrayList<DBStudente> DBlista = DBUtente.getStudentiSenzaClasse();
         for(int i=0; i<DBlista.size(); i++){
             lista.add(convertiToDTO(DBlista.get(i)));
         }

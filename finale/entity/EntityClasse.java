@@ -1,16 +1,10 @@
 package entity;
-import DTO.DTOStudente;
-import DTO.DTOTask;
+import dto.DTOStudente;
+import dto.DTOTask;
 import database.DBClasse;
 import mail.MailSender;
 
 import java.util.ArrayList;
-
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 
 
 public class EntityClasse {
@@ -159,8 +153,6 @@ public class EntityClasse {
         }
         return ret;
     }
-
-
 
     public int iscrizione(int id_studente,int id_classe) {
         int esito=0;

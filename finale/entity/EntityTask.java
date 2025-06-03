@@ -1,6 +1,6 @@
 package entity;
-import DTO.DTOConsegna;
-import DTO.DTOTask;
+import dto.DTOConsegna;
+import dto.DTOTask;
 import database.DBConsegna;
 import database.DBTask;
 import java.util.ArrayList;
