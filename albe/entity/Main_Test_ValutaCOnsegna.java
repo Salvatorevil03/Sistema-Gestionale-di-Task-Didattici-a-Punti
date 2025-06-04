@@ -1,8 +1,4 @@
 package entity;
-import DTO.DTOStudente;
-import controller.*;
-
-import controller.Controller;
 
 public class Main_Test_ValutaCOnsegna {
     public static void main(String[] args) {

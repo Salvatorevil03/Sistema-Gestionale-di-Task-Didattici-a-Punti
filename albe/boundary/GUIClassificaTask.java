@@ -1,36 +1,21 @@
 package taskdidatticiNEW;
 
 import controller.Controller;
-import DTO.DTOStudente;
+import dto.DTOStudente;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.FlowLayout;
 import javax.swing.JButton;
-import javax.swing.SpringLayout;
-import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
-import javax.swing.JSeparator;
-import javax.swing.JList;
-import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 
-import javax.swing.JSplitPane;
 import java.awt.Font;
-import javax.swing.JTextField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -67,10 +52,6 @@ public class GUIClassificaTask extends JFrame {
 	public GUIClassificaTask() {
 		SessioneStudente studente = SessioneStudente.getInstance();
 		ArrayList<DTOStudente> studenti = Controller.getClassificaTask(studente.getPkClasse());
-		// Da eliminare
-		//studenti = new ArrayList<DTOStudente>();
-		//studenti.add(new DTOStudente(1,"Sasi","Bosco","gmail","pass",1,1,1));
-		//studenti.add(new DTOStudente(1,"Erne","Bosco","gmail","pass",2,2,2));
 
 		//
 		setResizable(false);
@@ -88,9 +69,9 @@ public class GUIClassificaTask extends JFrame {
 		aggiornaButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIClassificaTask seconda = new GUIClassificaTask(); // Crea nuova finestra
-				seconda.setVisible(true); // Mostra nuova finestra
-				dispose(); // Chiude questa finestra
+				GUIClassificaTask seconda = new GUIClassificaTask(); /// Crea nuova finestra
+				seconda.setVisible(true); /// Mostra nuova finestra
+				dispose(); /// Chiude questa finestra
 			}
 		});
 		aggiornaButton.setBounds(785, 11, 89, 23);
@@ -100,9 +81,9 @@ public class GUIClassificaTask extends JFrame {
 		indietroBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIStudente seconda = new GUIStudente(); // Crea nuova finestra
-				seconda.setVisible(true); // Mostra nuova finestra
-				dispose(); // Chiude questa finestra
+				GUIStudente seconda = new GUIStudente(); /// Crea nuova finestra
+				seconda.setVisible(true); /// Mostra nuova finestra
+				dispose(); /// Chiude questa finestra
 			}
 		});
 		indietroBtn.setBounds(10, 11, 89, 23);
@@ -114,8 +95,8 @@ public class GUIClassificaTask extends JFrame {
 		
 		table = new JTable();
 		model = new DefaultTableModel(
-				new Object[][] {}, // Inizia vuoto
-				new String[] { "Nome","Cognome","Task Completati" } // Nome colonna
+				new Object[][] {}, /// Inizia vuoto
+				new String[] { "Nome","Cognome","Task Completati" } /// Nome colonna
 			){
 			@Override
 			public boolean isCellEditable(int row, int column) {

@@ -10,20 +10,13 @@ package taskdidatticiNEW;
  */
 
 import controller.Controller;
-import DTO.DTOTask;
+import dto.DTOTask;
 
 import java.awt.EventQueue;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.FlowLayout;
-import java.awt.BorderLayout;
 import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableModel;
 
 
 import java.awt.Font;
@@ -61,8 +54,6 @@ public class GUIConsegnaStudente extends JFrame {
 
 		SessioneStudente studente = SessioneStudente.getInstance();
 		DTOTask task = Controller.getTask(studente.getPkTask());
-		// da eliminare
-		//task = new DTOTask(1,"titolo di task1","descrizione", "12/08/09", 20);
 
 		//
 		setResizable(false);
@@ -84,9 +75,9 @@ public class GUIConsegnaStudente extends JFrame {
 		indietroBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIStudente seconda = new GUIStudente(); // Crea nuova finestra
-				seconda.setVisible(true); // Mostra nuova finestra
-				dispose(); // Chiude questa finestra
+				GUIStudente seconda = new GUIStudente(); /// Crea nuova finestra
+				seconda.setVisible(true); /// Mostra nuova finestra
+				dispose(); /// Chiude questa finestra
 			}
 		});
 		indietroBtn.setBounds(10, 11, 89, 23);

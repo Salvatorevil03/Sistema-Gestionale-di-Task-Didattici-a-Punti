@@ -92,9 +92,9 @@ public class GUIRegistrazione extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				int res = Controller.registrazione(ruoloField.getText(), nomeField.getText(), cognomeField.getText(), mailField.getText(), passwordField.getText());
 				if (res == 1){
-					GUILogin seconda = new GUILogin(); // Crea nuova finestra
-					seconda.setVisible(true); // Mostra nuova finestra
-					dispose(); // Chiude questa finestra
+					GUILogin seconda = new GUILogin(); /// Crea nuova finestra
+					seconda.setVisible(true); /// Mostra nuova finestra
+					dispose(); /// Chiude questa finestra
 				}else{
 					JOptionPane.showMessageDialog(null, "Registrazione fallita");
 				}
@@ -107,9 +107,9 @@ public class GUIRegistrazione extends JFrame {
 		indietroButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUILogin seconda = new GUILogin(); // Crea nuova finestra
-				seconda.setVisible(true); // Mostra nuova finestra
-				dispose(); // Chiude questa finestra
+				GUILogin seconda = new GUILogin(); /// Crea nuova finestra
+				seconda.setVisible(true); /// Mostra nuova finestra
+				dispose(); /// Chiude questa finestra
 			}
 		});
 		indietroButton.setBounds(10, 11, 89, 23);

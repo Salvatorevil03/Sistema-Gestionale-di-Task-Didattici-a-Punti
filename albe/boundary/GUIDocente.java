@@ -1,37 +1,22 @@
 package taskdidatticiNEW;
 
 import controller.Controller;
-import DTO.DTOClasse;
-import DTO.DTOStudente;
+import dto.DTOClasse;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.FlowLayout;
 import javax.swing.JButton;
-import javax.swing.SpringLayout;
-import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
-import javax.swing.JSeparator;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 
 
-import javax.swing.JSplitPane;
 import java.awt.Font;
 import javax.swing.JTextField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -69,13 +54,8 @@ public class GUIDocente extends JFrame {
 	public GUIDocente() {
 		SessioneDocente docente = SessioneDocente.getInstance();
 		String nomeDocente = docente.getNomeDocente();
-		//Da cancellare
-		//nomeDocente = "Salvatore";
+
 		ArrayList<DTOClasse> classi = Controller.getClassi(String.valueOf(docente.getIdDocente()));
-		// Da concellare
-		//classi = new ArrayList<DTOClasse>();
-		//classi.add(new DTOClasse(1,"INGSW",0));
-		//classi.add(new DTOClasse(2,"INGSW2",0));
 
 		//
 		setResizable(false);
@@ -99,9 +79,9 @@ public class GUIDocente extends JFrame {
 		logoutBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUILogin seconda = new GUILogin(); // Crea nuova finestra
-				seconda.setVisible(true); // Mostra nuova finestra
-				dispose(); // Chiude questa finestra
+				GUILogin seconda = new GUILogin(); /// Crea nuova finestra
+				seconda.setVisible(true); /// Mostra nuova finestra
+				dispose(); /// Chiude questa finestra
 			}
 		});
 		logoutBtn.setBounds(10, 11, 89, 23);
@@ -117,9 +97,9 @@ public class GUIDocente extends JFrame {
 		btnListaStudenti.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIListaStudentiPiattaforma seconda = new GUIListaStudentiPiattaforma(); // Crea nuova finestra
-				seconda.setVisible(true); // Mostra nuova finestra
-				dispose(); // Chiude questa finestra
+				GUIListaStudentiPiattaforma seconda = new GUIListaStudentiPiattaforma(); /// Crea nuova finestra
+				seconda.setVisible(true); /// Mostra nuova finestra
+				dispose(); /// Chiude questa finestra
 			}
 		});
 		btnListaStudenti.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -170,8 +150,8 @@ public class GUIDocente extends JFrame {
 		
 		table = new JTable();
 		model = new DefaultTableModel(
-				new Object[][] {}, // Inizia vuoto
-				new String[] { "Codice","Nome" } // Nome colonna
+				new Object[][] {}, /// Inizia vuoto
+				new String[] { "Codice","Nome" } /// Nome colonna
 			){
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -179,7 +159,7 @@ public class GUIDocente extends JFrame {
 			}
 		};
 		table.setModel(model);
-		if (classi != null) {
+		if (!classi.isEmpty()) {
 			for (DTOClasse c : classi) {
 				model.addRow(new Object[] { c.getCodice(),c.getNome() });
 			}
@@ -203,9 +183,9 @@ public class GUIDocente extends JFrame {
 					docente.setPkClasseSelezionata(pkClasse);
 					docente.setNomeClasseSelezionato(nomeClasse);
 					System.out.println(pkClasse);
-					GUIClasseDocente seconda = new GUIClasseDocente(); // Crea nuova finestra
-					seconda.setVisible(true); // Mostra nuova finestra
-					dispose(); // Chiude questa finestra
+					GUIClasseDocente seconda = new GUIClasseDocente(); /// Crea nuova finestra
+					seconda.setVisible(true); /// Mostra nuova finestra
+					dispose(); /// Chiude questa finestra
 				} else {
 					JOptionPane.showMessageDialog(null, "Nessuna riga selezionata.");
 				}
@@ -224,9 +204,9 @@ public class GUIDocente extends JFrame {
 		aggiornaButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIDocente seconda = new GUIDocente(); // Crea nuova finestra
-				seconda.setVisible(true); // Mostra nuova finestra
-				dispose(); // Chiude questa finestra
+				GUIDocente seconda = new GUIDocente(); /// Crea nuova finestra
+				seconda.setVisible(true); /// Mostra nuova finestra
+				dispose(); /// Chiude questa finestra
 			}
 		});
 		aggiornaButton.setBounds(785, 11, 89, 23);

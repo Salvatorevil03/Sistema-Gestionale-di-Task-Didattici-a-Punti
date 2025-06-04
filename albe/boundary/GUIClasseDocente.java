@@ -1,44 +1,32 @@
 package taskdidatticiNEW;
 
 import controller.Controller;
-import DTO.DTOClasse;
-import DTO.DTOStudente;
-import DTO.DTOTask;
+import dto.DTOTask;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.FlowLayout;
 import javax.swing.JButton;
-import javax.swing.SpringLayout;
-import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
-import javax.swing.JSeparator;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 
-import javax.swing.JSplitPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import javax.swing.JScrollPane;
-import javax.swing.JToolBar;
 import javax.swing.JTable;
 
 public class GUIClasseDocente extends JFrame {
@@ -71,25 +59,19 @@ public class GUIClasseDocente extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GUIClasseDocente() { //Nome dato dalla GUI che lo crea
+	public GUIClasseDocente() { ///Nome dato dalla GUI che lo crea
 		SessioneDocente docente = SessioneDocente.getInstance();
 		String nomeClasse = docente.getNomeClasseSelezionato();
-		// Da eliminare
-		//nomeClasse = "nomeClasse";
 		ArrayList<DTOTask> tasks = Controller.getTasks(docente.getPkClasseSelezionata());
-		// Da eliminare
-		//tasks = new ArrayList<DTOTask>();
-		//tasks.add(new DTOTask(33,"titolo","desc","1/1/1",90));
 
 
-		//
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 650);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(213, 241, 247));
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
-		//
+
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -108,9 +90,9 @@ public class GUIClasseDocente extends JFrame {
 		indietroBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIDocente seconda = new GUIDocente(); // Crea nuova finestra
-				seconda.setVisible(true); // Mostra nuova finestra
-				dispose(); // Chiude questa finestra
+				GUIDocente seconda = new GUIDocente(); /// Crea nuova finestra
+				seconda.setVisible(true); /// Mostra nuova finestra
+				dispose(); /// Chiude questa finestra
 			}
 		});
 		indietroBtn.setBounds(10, 11, 89, 23);
@@ -120,9 +102,9 @@ public class GUIClasseDocente extends JFrame {
 		btnListaStudenti.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIListaStudentiClasse seconda = new GUIListaStudentiClasse(); // Crea nuova finestra
-				seconda.setVisible(true); // Mostra nuova finestra
-				dispose(); // Chiude questa finestra
+				GUIListaStudentiClasse seconda = new GUIListaStudentiClasse(); /// Crea nuova finestra
+				seconda.setVisible(true); /// Mostra nuova finestra
+				dispose(); /// Chiude questa finestra
 			}
 		});
 		btnListaStudenti.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -198,13 +180,20 @@ public class GUIClasseDocente extends JFrame {
 						String titolo = titoloField.getText();
 						String descrizione = descField.getText();
 						String data = dataField.getText();
+
 						/*
-							Necessario passare la stringa nel formato yyyy-mm-dd
-							Il controllo non viene fatto qui ma a livello Entity, se la data non è formattata
-							correttamente il metodo controller.creaTask(...) restituisce -1
+							Necessario passare la stringa nel formato yyyy-mm-dd per l'utilizzo corretto
+							dei metodi isValidDate e isDateInFuture che utilizzano i moduli LocalDate,
+							DateTimeFormatter e DateTimeParseException.
+							Serve inoltre un formato omogeneo da passare al DB.
+							Il controllo viene fatto dalla GUIClasseDocente prima che la String data sia
+							passata a livello Controller
 						 */
 
 						if (!data.matches("\\d{4}-\\d{2}-\\d{2}")){
+							throw new Exception();
+						}
+						if(!isValidDate(data) || !(isDateInFuture(data)) ) {
 							throw new Exception();
 						}
 						int punti = Integer.parseInt(maxField.getText());
@@ -240,8 +229,8 @@ public class GUIClasseDocente extends JFrame {
 		
 		table = new JTable();
 		model = new DefaultTableModel(
-				new Object[][] {}, // Inizia vuoto
-				new String[] { "ID","Titolo","Data Scadenza","Max Punteggio" } // Nome colonna
+				new Object[][] {}, /// Inizia vuoto
+				new String[] { "ID","Titolo","Data Scadenza","Max Punteggio" } /// Nome colonna
 			){
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -249,7 +238,7 @@ public class GUIClasseDocente extends JFrame {
 			}
 		};
 		table.setModel(model);
-		if (tasks != null){
+		if (!tasks.isEmpty()){
 			for (DTOTask t : tasks) {
 				model.addRow(new Object[] { t.getId(),t.getTitolo(),t.getDataScadenza(),t.getMaxPuntiAssegnabili() });
 			}
@@ -267,9 +256,9 @@ public class GUIClasseDocente extends JFrame {
 					docente.setPkTaskSelezionato(pkTask);
 					docente.setNomeTaskSelezionato(nomeTaskSelezionato);
 					System.out.println(pkTask);
-					GUIConsegna seconda = new GUIConsegna(); // Crea nuova finestra
-					seconda.setVisible(true); // Mostra nuova finestra
-					dispose(); // Chiude questa finestra
+					GUIConsegna seconda = new GUIConsegna(); /// Crea nuova finestra
+					seconda.setVisible(true); /// Mostra nuova finestra
+					dispose(); /// Chiude questa finestra
 				} else {
 					JOptionPane.showMessageDialog(null, "Nessuna riga selezionata.");
 				}
@@ -282,12 +271,61 @@ public class GUIClasseDocente extends JFrame {
 		aggiornaButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIClasseDocente seconda = new GUIClasseDocente(); // Crea nuova finestra
-				seconda.setVisible(true); // Mostra nuova finestra
-				dispose(); // Chiude questa finestra
+				GUIClasseDocente seconda = new GUIClasseDocente(); /// Crea nuova finestra
+				seconda.setVisible(true); /// Mostra nuova finestra
+				dispose(); /// Chiude questa finestra
 			}
 		});
 		aggiornaButton.setBounds(785, 11, 89, 23);
 		contentPane.add(aggiornaButton);
+	}
+
+	/**
+     *	METODO DI VERIFICA DELLA FORMATTAZIONE DELLA DATA
+     */
+	private boolean isValidDate(String date) {
+		try {
+
+		/**
+		 *	Verifica formattazione della String date.
+		 *	Se la data non è correttamente formattata solleva una
+		 *	DateTimeParseException
+		 */
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			LocalDate parsedDate = LocalDate.parse(date, formatter);
+
+			///Verifica che la data parsata corrisponda alla stringa originale
+
+			String formattedBack = parsedDate.format(formatter);
+			return date.equals(formattedBack);
+
+		} catch (DateTimeParseException e) {
+			return false;
+		}
+	}
+
+    /**
+     *METODO CHE VERIFICA CHE LA DATA SELEZIONATA NON SIA UNA DATA PASSATA
+     */
+
+	private boolean isDateInFuture(String dateString) {
+		try {
+
+		/**
+		 * 	Verifica formattazione della String date.
+		 *	Se la data non è correttamente formattata solleva una
+		 *	DateTimeParseException.
+		 *	Successivamente, mediante il metodo LocalDate.now(), viene
+		 *	generata una LocalDate della data odierna definita a partire dal
+		 *	TimeZone del sistema (Italy: UTC+1)
+		 */
+			LocalDate inputDate = LocalDate.parse(dateString);
+			LocalDate today = LocalDate.now();
+
+			return inputDate.isAfter(today);
+
+		} catch (DateTimeParseException e) {
+			return false; /// Se la data non è parsabile, consideriamo non valida
+		}
 	}
 }

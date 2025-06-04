@@ -1,34 +1,20 @@
 package taskdidatticiNEW;
 
 import controller.Controller;
-import DTO.DTOStudente;
+import dto.DTOStudente;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.FlowLayout;
 import javax.swing.JButton;
-import javax.swing.SpringLayout;
-import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
-import javax.swing.JSeparator;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 
 
-import javax.swing.JSplitPane;
 import java.awt.Font;
-import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -68,10 +54,6 @@ public class GUIListaStudentiClasse extends JFrame {
 		SessioneDocente docente = SessioneDocente.getInstance();
 		String pkClasseSelezionata = docente.getPkClasseSelezionata();
 		ArrayList<DTOStudente> studenti = Controller.getStudenti(pkClasseSelezionata);
-		// da cancellare
-		//studenti = new ArrayList<DTOStudente>();
-		//studenti.add(new DTOStudente(1,"Sasi","Bosco","gmail","pass",1,1,1));
-		//studenti.add(new DTOStudente(1,"Erne","Bosco","gmail","pass",2,2,2));
 
 		//
 		setResizable(false);
@@ -95,9 +77,9 @@ public class GUIListaStudentiClasse extends JFrame {
 		aggiornaButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIListaStudentiClasse seconda = new GUIListaStudentiClasse(); // Crea nuova finestra
-				seconda.setVisible(true); // Mostra nuova finestra
-				dispose(); // Chiude questa finestra
+				GUIListaStudentiClasse seconda = new GUIListaStudentiClasse(); /// Crea nuova finestra
+				seconda.setVisible(true); /// Mostra nuova finestra
+				dispose(); /// Chiude questa finestra
 			}
 		});
 		aggiornaButton.setBounds(785, 11, 89, 23);
@@ -111,9 +93,9 @@ public class GUIListaStudentiClasse extends JFrame {
 		indietroBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIClasseDocente seconda = new GUIClasseDocente(); // Crea nuova finestra
-				seconda.setVisible(true); // Mostra nuova finestra
-				dispose(); // Chiude questa finestra
+				GUIClasseDocente seconda = new GUIClasseDocente(); /// Crea nuova finestra
+				seconda.setVisible(true); /// Mostra nuova finestra
+				dispose(); /// Chiude questa finestra
 			}
 		});
 		indietroBtn.setBounds(10, 11, 89, 23);
@@ -131,8 +113,8 @@ public class GUIListaStudentiClasse extends JFrame {
 		
 		table = new JTable();
 		model = new DefaultTableModel(
-				new Object[][] {}, // Inizia vuoto
-				new String[] { "ID","Nome", "Cognome" } // Nome colonna
+				new Object[][] {}, /// Inizia vuoto
+				new String[] { "ID","Nome", "Cognome" } /// Nome colonna
 			){
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -140,7 +122,7 @@ public class GUIListaStudentiClasse extends JFrame {
 			}
 		};
 		table.setModel(model);
-		if (studenti != null){
+		if (!studenti.isEmpty()){
 			for (DTOStudente s : studenti) {
 				model.addRow(new Object[] { s.getId(),s.getNome(),s.getCognome() });
 			}

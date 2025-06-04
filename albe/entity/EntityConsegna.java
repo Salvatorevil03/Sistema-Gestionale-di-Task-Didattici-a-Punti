@@ -2,6 +2,7 @@ package entity;
 
 import database.DBConsegna;
 import database.DBStudente;
+import mail.MailSender;
 
 public class EntityConsegna {
     private int id; // PK
@@ -80,13 +81,14 @@ public class EntityConsegna {
         studente.setPunteggioTotaleOttenuto(studente.getPunteggioTotaleOttenuto()+punteggio);
     }
 
-    public int aggiornaStatistiche(int punteggio,DBConsegna consegna) {
+    public int aggiornaStatisticheAndInviaMail(int punteggio, DBConsegna consegna,String titolo_task) {
         //DBConsegna consegna = new DBConsegna(this.id);
         DBStudente studente= consegna.caricaStudenteDaDB();
         int esito=0;
         this.aggiornaPunteggioTotaleOttenuto(punteggio,studente);
         this.aggiornaNumTaskValutati(studente);
         esito =studente.salvaInDB(); //salvataggio contemporaneo di entrambi i set
+        MailSender.inviaValutazioneTask(studente.getMail(),titolo_task,Integer.toString(punteggio),"La tua consegna è stata valutata.");
         return esito;
     }
 
@@ -104,4 +106,5 @@ public class EntityConsegna {
     protected static int updateNumTaskCompletati(int studenteID){
         return EntityStudente.incrementaNumTaskCompletati(studenteID);
     }
+
 }

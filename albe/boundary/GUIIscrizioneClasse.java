@@ -48,9 +48,16 @@ public class GUIIscrizioneClasse extends JFrame {
 	 */
 	public GUIIscrizioneClasse() {
 		SessioneStudente studente = SessioneStudente.getInstance();
+
 		//
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);//MOLTO IMPORTANTE
+
+		/**
+		 * Molto importante per chiudere la finestra quando si preme il tasto X
+		 * garantendo che le risorse siano liberate
+ 		 */
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
 		setBounds(100, 100, 500, 250);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(213, 241, 247));

@@ -1,6 +1,6 @@
 package entity;
-import DTO.DTOConsegna;
-import DTO.DTOTask;
+import dto.DTOConsegna;
+import dto.DTOTask;
 import database.DBConsegna;
 import database.DBTask;
 import java.util.ArrayList;
@@ -118,7 +118,7 @@ public class EntityTask {
         int esito = consegna_da_valutare.impostaPunteggio(punteggio,DB_consegna_da_valutare);
         //passo il riferimento DAO della consegna da valuatre esternamente così da non dover creare più volte l'oggetto per modificarlo all'interno dei singoli metodi
         if(esito==-1) {return esito;}
-        esito=consegna_da_valutare.aggiornaStatistiche(punteggio,DB_consegna_da_valutare); //Aggiorna Punteggio e NumTaskValutati studente
+        esito=consegna_da_valutare.aggiornaStatisticheAndInviaMail(punteggio,DB_consegna_da_valutare,this.titolo); //Aggiorna Punteggio e NumTaskValutati studente
         if(esito==-1) {return esito;}
         return esito;
     }

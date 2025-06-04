@@ -3,18 +3,12 @@ package taskdidatticiNEW;
 import java.awt.EventQueue;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.FlowLayout;
-import java.awt.BorderLayout;
 import javax.swing.border.LineBorder;
 
 import controller.Controller;
-import DTO.DTOStudente;
-import DTO.DTOUtente;
+import dto.DTOStudente;
+import dto.DTOUtente;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -97,27 +91,27 @@ public class GUILogin extends JFrame {
 				if (utente != null) {
 					if (utente instanceof DTOStudente) {
 						int id_classe = Controller.getClasseID(String.valueOf(utente.getId()));
-						if (id_classe!=-1) { //ha classe
+						if (id_classe!=-1) { ///ha classe
 							SessioneStudente studente = SessioneStudente.getInstance();
 							studente.setNomeStudente(utente.getNome());
 							studente.setIdStudente(utente.getId());
 							studente.setPkClasse(String.valueOf(id_classe));
-							GUIStudente seconda = new GUIStudente(); // Crea nuova finestra
-							seconda.setVisible(true); // Mostra nuova finestra
-							dispose(); // Chiude questa finestra
+							GUIStudente seconda = new GUIStudente(); /// Crea nuova finestra
+							seconda.setVisible(true); /// Mostra nuova finestra
+							dispose(); /// Chiude questa finestra
 						} else {
 							SessioneStudente studente = SessioneStudente.getInstance();
 							studente.setIdStudente(utente.getId());
-							GUIIscrizioneClasse seconda = new GUIIscrizioneClasse(); // Crea nuova finestra
-							seconda.setVisible(true); // Mostra nuova finestra
+							GUIIscrizioneClasse seconda = new GUIIscrizioneClasse(); /// Crea nuova finestra
+							seconda.setVisible(true); /// Mostra nuova finestra
 						}
 					}else {
 						SessioneDocente docente = SessioneDocente.getInstance();
 						docente.setNomeDocente(utente.getNome());
 						docente.setIdDocente(utente.getId());
-						GUIDocente seconda = new GUIDocente(); // Crea nuova finestra
-						seconda.setVisible(true); // Mostra nuova finestra
-						dispose(); // Chiude questa finestra
+						GUIDocente seconda = new GUIDocente(); /// Crea nuova finestra
+						seconda.setVisible(true); /// Mostra nuova finestra
+						dispose(); /// Chiude questa finestra
 					}
 				}else {
 					JOptionPane.showMessageDialog(null, "Credenziali non valide");
@@ -132,9 +126,9 @@ public class GUILogin extends JFrame {
 		registrazioneBTN.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIRegistrazione seconda = new GUIRegistrazione(); // Crea nuova finestra
-				seconda.setVisible(true); // Mostra nuova finestra
-				dispose(); // Chiude questa finestra
+				GUIRegistrazione seconda = new GUIRegistrazione(); /// Crea nuova finestra
+				seconda.setVisible(true); /// Mostra nuova finestra
+				dispose(); /// Chiude questa finestra
 			}
 		});
 		registrazioneBTN.setFont(new Font("Tahoma", Font.PLAIN, 15));

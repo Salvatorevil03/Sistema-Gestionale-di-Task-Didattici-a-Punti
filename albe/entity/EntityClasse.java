@@ -1,15 +1,10 @@
 package entity;
-import DTO.DTOStudente;
-import DTO.DTOTask;
+import dto.DTOStudente;
+import dto.DTOTask;
 import database.DBClasse;
+import mail.MailSender;
 
 import java.util.ArrayList;
-
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 
 
 public class EntityClasse {
@@ -137,54 +132,27 @@ public class EntityClasse {
         return lista;
     }
 
-    public int creaTask(String titolo, String descrizione, String dataScadenza, int maxPunteggio,int id_classe) {
-        /*
+    /*
             Prima di creare la BDClasse verifico che la dataScadenza sia correttamente formattata.
             Se non lo è restituisco -1 direttamente.
             Per farlo importo da java.time: LocalDate, DateTimeFormatter e DateTimeParseException
             Inoltre creo il metodo isValidDate(String date) per la verifica
 
          */
-        if(!isValidDate(dataScadenza) || !(isDateInFuture(dataScadenza)) ) {return -1;}
-        DBClasse classe= new DBClasse(id_classe);
-        int esito=classe.creaTask(titolo,descrizione,dataScadenza,maxPunteggio,id_classe);
-        return esito;
-    }
-
-    /*
-    CREAZIONE METODO DI VERIFICA DELLA FORMATTAZIONE DELLA DATA
-     */
-
-    private boolean isValidDate(String date) {
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate parsedDate = LocalDate.parse(date, formatter);
-
-            // Verifica che la data parsata corrisponda alla stringa originale
-            String formattedBack = parsedDate.format(formatter);
-            return date.equals(formattedBack);
-
-        } catch (DateTimeParseException e) {
-            return false;
+    public int creaTask(String titolo, String descrizione, String dataScadenza, int maxPunteggio) {
+        DBClasse classe = new DBClasse(this.codice);
+        int ret = classe.creaTask(titolo,descrizione,dataScadenza,maxPunteggio);
+        if(ret == -1) {
+            return -1;
+        }else{
+            classe.caricaStudentiDaDB();
+            this.caricaStudenti(classe);
+            for(int i=0; i<this.studenti.size(); i++){
+                MailSender.inviaCreazioneTask(this.studenti.get(i).getMail(),titolo,"Invia la tua soluzione prima che scada!!",MailSender.initMail());
+            }
         }
+        return ret;
     }
-
-    /*
-    CREAZIONE METODO VERIFICA DATA
-     */
-
-    private boolean isDateInFuture(String dateString) {
-        try {
-            LocalDate inputDate = LocalDate.parse(dateString);
-            LocalDate today = LocalDate.now();
-
-            return inputDate.isAfter(today);
-
-        } catch (DateTimeParseException e) {
-            return false; // Se la data non è parsabile, consideriamo non valida
-        }
-    }
-
 
     public int iscrizione(int id_studente,int id_classe) {
         int esito=0;

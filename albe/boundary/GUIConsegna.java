@@ -1,41 +1,21 @@
 package taskdidatticiNEW;
 
-/*
-	NOTA PER SASI:
-	Se possibile rendere NON cliccabile il tasto "Valuta" appena un docente
-	apre un Task.
-	Rendere il tasto cliccabile solo dopo aver cliccato su una consegna e
-	su "Seleziona"
- */
-
 import controller.Controller;
-import DTO.DTOConsegna;
-import DTO.DTOStudente;
+import dto.DTOConsegna;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.FlowLayout;
 import javax.swing.JButton;
-import javax.swing.SpringLayout;
-import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
-import javax.swing.JSeparator;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 
 
-import javax.swing.JSplitPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
@@ -78,22 +58,16 @@ public class GUIConsegna extends JFrame {
 		SessioneDocente docente = SessioneDocente.getInstance();
 		String pkTask = docente.getPkTaskSelezionato();
 		String nomeTaskSelezionato = docente.getNomeTaskSelezionato();
-		// da Cancellare
-		//nomeTaskSelezionato = "Titolo Task";
 		final ArrayList<DTOConsegna> consegne = Controller.getConsegne(pkTask);
-		// da Cancellare
-		//final ArrayList<DTOConsegna> consegne = new ArrayList<DTOConsegna>();
-		//consegne.add(new DTOConsegna(1,-1,"ciao1"));
-		//consegne.add(new DTOConsegna(2,-1,"ciao2"));
 
-		//
+		///
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 650);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(213, 241, 247));
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
-		//
+		///
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -113,9 +87,9 @@ public class GUIConsegna extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println(SessioneDocente.getInstance().getPkClasseSelezionata());
-				GUIClasseDocente seconda = new GUIClasseDocente(); // Crea nuova finestra
-				seconda.setVisible(true); // Mostra nuova finestra
-				dispose(); // Chiude questa finestra
+				GUIClasseDocente seconda = new GUIClasseDocente(); /// Crea nuova finestra
+				seconda.setVisible(true); /// Mostra nuova finestra
+				dispose(); /// Chiude questa finestra
 			}
 		});
 		indietroBtn.setBounds(10, 11, 89, 23);
@@ -127,8 +101,8 @@ public class GUIConsegna extends JFrame {
 		
 		table = new JTable();
 		model = new DefaultTableModel(
-				new Object[][] {}, // Inizia vuoto
-				new String[] { "ID" } // Nome colonna
+				new Object[][] {}, /// Inizia vuoto
+				new String[] { "ID" } /// Nome colonna
 			){
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -136,7 +110,7 @@ public class GUIConsegna extends JFrame {
 			}
 		};
 		table.setModel(model);
-		if (consegne != null){
+		if (!consegne.isEmpty()){
 			for (DTOConsegna c : consegne) {
 				model.addRow(new Object[] { c.getId() });
 			}
@@ -153,8 +127,8 @@ public class GUIConsegna extends JFrame {
 		textArea.setEditable(false);
 		textArea.setBounds(458, 185, 367, 223);
 		contentPane.add(textArea);
-		textArea.setLineWrap(true);         // abilita il ritorno a capo
-		textArea.setWrapStyleWord(true);    // va a capo tra parole (non a metà parola)
+		textArea.setLineWrap(true);         /// abilita il ritorno a capo
+		textArea.setWrapStyleWord(true);    /// va a capo tra parole (non a metà parola)
 		textArea.setText("Seleziona una consegna per visualizzare qui l'elaborato");
 		
 		JLabel lblElaborato = new JLabel("Elaborato");
@@ -203,9 +177,9 @@ public class GUIConsegna extends JFrame {
 		aggiornaButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIConsegna seconda = new GUIConsegna(); // Crea nuova finestra
-				seconda.setVisible(true); // Mostra nuova finestra
-				dispose(); // Chiude questa finestra
+				GUIConsegna seconda = new GUIConsegna(); /// Crea nuova finestra
+				seconda.setVisible(true); /// Mostra nuova finestra
+				dispose(); /// Chiude questa finestra
 			}
 		});
 		aggiornaButton.setBounds(785, 11, 89, 23);

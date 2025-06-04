@@ -1,35 +1,22 @@
 package taskdidatticiNEW;
 
 import controller.Controller;
-import DTO.DTOClasse;
-import DTO.DTOStudente;
+import dto.DTOClasse;
+import dto.DTOStudente;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.FlowLayout;
 import javax.swing.JButton;
-import javax.swing.SpringLayout;
-import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
-import javax.swing.JSeparator;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 
 
-import javax.swing.JSplitPane;
 import java.awt.Font;
-import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -73,14 +60,6 @@ public class GUIListaStudentiPiattaforma extends JFrame {
 		String pkDocente = String.valueOf(docente.getIdDocente());
 		ArrayList<DTOStudente> studenti = Controller.getStudentiSenzaClasse();
 		ArrayList<DTOClasse> classi = Controller.getClassi(pkDocente);
-		// da cancellare
-		//classi = new ArrayList<DTOClasse>();
-		//classi.add(new DTOClasse(1,"INGSW",0));
-		//classi.add(new DTOClasse(2,"INGSW2",0));
-		//studenti = new ArrayList<DTOStudente>();
-		//studenti.add(new DTOStudente(1,"Sasi","Bosco","gmail","pass",1,1,1));
-		//studenti.add(new DTOStudente(1,"Erne","Bosco","gmail","pass",2,2,2));
-
 
 		//
 		setResizable(false);
@@ -104,9 +83,9 @@ public class GUIListaStudentiPiattaforma extends JFrame {
 		aggiornaButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIListaStudentiPiattaforma seconda = new GUIListaStudentiPiattaforma(); // Crea nuova finestra
-				seconda.setVisible(true); // Mostra nuova finestra
-				dispose(); // Chiude questa finestra
+				GUIListaStudentiPiattaforma seconda = new GUIListaStudentiPiattaforma(); /// Crea nuova finestra
+				seconda.setVisible(true); /// Mostra nuova finestra
+				dispose(); /// Chiude questa finestra
 			}
 		});
 		aggiornaButton.setBounds(785, 11, 89, 23);
@@ -120,9 +99,9 @@ public class GUIListaStudentiPiattaforma extends JFrame {
 		indietroBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIDocente seconda = new GUIDocente(); // Crea nuova finestra
-				seconda.setVisible(true); // Mostra nuova finestra
-				dispose(); // Chiude questa finestra
+				GUIDocente seconda = new GUIDocente(); /// Crea nuova finestra
+				seconda.setVisible(true); /// Mostra nuova finestra
+				dispose(); /// Chiude questa finestra
 			}
 		});
 		indietroBtn.setBounds(10, 11, 89, 23);
@@ -140,8 +119,8 @@ public class GUIListaStudentiPiattaforma extends JFrame {
 		
 		table = new JTable();
 		model = new DefaultTableModel(
-				new Object[][] {}, // Inizia vuoto
-				new String[] { "ID","Nome", "Cognome" } // Nome colonna
+				new Object[][] {}, /// Inizia vuoto
+				new String[] { "ID","Nome", "Cognome" } /// Nome colonna
 			){
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -149,7 +128,7 @@ public class GUIListaStudentiPiattaforma extends JFrame {
 			}
 		};
 		table.setModel(model);
-		if (studenti != null){
+		if(studenti != null ){
 			for (DTOStudente s : studenti) {
 				model.addRow(new Object[] { s.getId(),s.getNome(),s.getCognome() });
 			}
@@ -188,8 +167,8 @@ public class GUIListaStudentiPiattaforma extends JFrame {
 		
 		table2 = new JTable();
 		model2 = new DefaultTableModel(
-				new Object[][] {}, // Inizia vuoto
-				new String[] { "Codice", "Nome" } // Nome colonna
+				new Object[][] {}, /// Inizia vuoto
+				new String[] { "Codice", "Nome" } /// Nome colonna
 			){
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -197,7 +176,7 @@ public class GUIListaStudentiPiattaforma extends JFrame {
 			}
 		};
 		table2.setModel(model2);
-		if (classi != null){
+		if (!classi.isEmpty()){
 			for (DTOClasse c : classi) {
 				model2.addRow(new Object[] { c.getCodice(),c.getNome() });
 			}
