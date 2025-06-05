@@ -100,6 +100,7 @@ CREATE TABLE IF NOT EXISTS `taskdidattici`.`consegne` (
   INDEX `fk_consegna_task1_idx` (`task_id` ASC) VISIBLE,
   INDEX `fk_consegna_studente1_idx` (`studente_id` ASC) VISIBLE,
   PRIMARY KEY (`id`),
+  CONSTRAINT unique_task_studente UNIQUE (task_id, studente_id),
   CONSTRAINT `fk_consegna_studente1`
     FOREIGN KEY (`studente_id`)
     REFERENCES `taskdidattici`.`studenti` (`id`),
