@@ -154,7 +154,7 @@ public class GUIConsegna extends JFrame {
 						JOptionPane.showMessageDialog(null, "Nessuna riga selezionata.");
 					}
 				}catch (Exception err){
-					JOptionPane.showMessageDialog(null, "Inserisci input numerico.");
+					JOptionPane.showMessageDialog(null, "Inserisci input numerico non negativo.");
 				}
 			}
 		});
