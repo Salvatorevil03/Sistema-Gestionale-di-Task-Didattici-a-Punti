@@ -7,7 +7,7 @@ import java.awt.EventQueue;
 import javax.swing.*;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
-
+import javax.swing.border.EmptyBorder;
 
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -34,7 +34,7 @@ import java.awt.event.MouseEvent;
 public class GUIRegistrazione extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private static final String FONT_FAMILY = "Calibri";
+	private static final String FONT_FAMILY = "Segoe UI";
 	private JPanel contentPane;
 	private JTextField ruoloField;
 	private JTextField nomeField;
@@ -47,13 +47,13 @@ public class GUIRegistrazione extends JFrame {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(() -> {
-            try {
-                GUIRegistrazione frame = new GUIRegistrazione();
-                frame.setVisible(true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
+			try {
+				GUIRegistrazione frame = new GUIRegistrazione();
+				frame.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
 	}
 
 	/**
@@ -71,31 +71,41 @@ public class GUIRegistrazione extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel titoloRegistrazione = new JLabel("REGISTRAZIONE");
 		titoloRegistrazione.setHorizontalAlignment(SwingConstants.CENTER);
-		titoloRegistrazione.setFont(new Font("Tahoma", Font.BOLD, 30));
+		titoloRegistrazione.setFont(new Font("Segoe UI", Font.BOLD, 32));
+		titoloRegistrazione.setForeground(new Color(40, 75, 99));
 		titoloRegistrazione.setBounds(313, 58, 275, 64);
 		contentPane.add(titoloRegistrazione);
-		
+
 		JLabel nome = new JLabel("NOME");
 		nome.setFont(new Font(FONT_FAMILY, Font.PLAIN, 18));
-		nome.setHorizontalAlignment(SwingConstants.CENTER);
+		nome.setHorizontalAlignment(SwingConstants.RIGHT);
 		nome.setBounds(251, 237, 116, 20);
 		contentPane.add(nome);
-		
+
 		ruoloField = new JTextField();
-		ruoloField.setBounds(516, 181, 147, 20);
+		ruoloField.setBounds(516, 181, 147, 28);
+		ruoloField.setFont(new Font(FONT_FAMILY, Font.PLAIN, 15));
+		ruoloField.setBorder(BorderFactory.createLineBorder(new Color(180, 180, 180)));
 		contentPane.add(ruoloField);
 		ruoloField.setColumns(10);
-		
+
 		nomeField = new JTextField();
-		nomeField.setBounds(516, 236, 147, 20);
+		nomeField.setBounds(516, 236, 147, 28);
+		nomeField.setFont(new Font(FONT_FAMILY, Font.PLAIN, 15));
+		nomeField.setBorder(BorderFactory.createLineBorder(new Color(180, 180, 180)));
 		contentPane.add(nomeField);
 		nomeField.setColumns(10);
 
 		JButton registrazioneBTN = new JButton("Registrazione");
-		registrazioneBTN.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		registrazioneBTN.setFont(new Font(FONT_FAMILY, Font.BOLD, 15));
+		registrazioneBTN.setBackground(new Color(100, 149, 237));
+		registrazioneBTN.setForeground(Color.WHITE);
+		registrazioneBTN.setFocusPainted(false);
+		registrazioneBTN.setBounds(381, 480, 130, 36);
+		contentPane.add(registrazioneBTN);
 		registrazioneBTN.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -109,10 +119,13 @@ public class GUIRegistrazione extends JFrame {
 				}
 			}
 		});
-		registrazioneBTN.setBounds(381, 480, 130, 29);
-		contentPane.add(registrazioneBTN);
-		
-		JButton indietroButton = new JButton("indietro");
+
+		JButton indietroButton = new JButton("Indietro");
+		indietroButton.setFont(new Font(FONT_FAMILY, Font.PLAIN, 13));
+		indietroButton.setBackground(new Color(220, 220, 220));
+		indietroButton.setBounds(10, 11, 89, 28);
+		indietroButton.setFocusPainted(false);
+		contentPane.add(indietroButton);
 		indietroButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -121,44 +134,48 @@ public class GUIRegistrazione extends JFrame {
 				dispose(); /// Chiude questa finestra
 			}
 		});
-		indietroButton.setBounds(10, 11, 89, 23);
-		contentPane.add(indietroButton);
-		
+
 		cognomeField = new JTextField();
 		cognomeField.setColumns(10);
-		cognomeField.setBounds(516, 298, 147, 20);
+		cognomeField.setFont(new Font(FONT_FAMILY, Font.PLAIN, 15));
+		cognomeField.setBorder(BorderFactory.createLineBorder(new Color(180, 180, 180)));
+		cognomeField.setBounds(516, 298, 147, 28);
 		contentPane.add(cognomeField);
-		
+
 		JLabel cognome = new JLabel("COGNOME");
-		cognome.setHorizontalAlignment(SwingConstants.CENTER);
+		cognome.setHorizontalAlignment(SwingConstants.RIGHT);
 		cognome.setFont(new Font(FONT_FAMILY, Font.PLAIN, 18));
 		cognome.setBounds(251, 299, 116, 20);
 		contentPane.add(cognome);
-		
+
 		JLabel mail = new JLabel("MAIL");
-		mail.setHorizontalAlignment(SwingConstants.CENTER);
+		mail.setHorizontalAlignment(SwingConstants.RIGHT);
 		mail.setFont(new Font(FONT_FAMILY, Font.PLAIN, 18));
 		mail.setBounds(251, 356, 116, 20);
 		contentPane.add(mail);
-		
+
 		mailField = new JTextField();
 		mailField.setColumns(10);
-		mailField.setBounds(516, 355, 147, 20);
+		mailField.setFont(new Font(FONT_FAMILY, Font.PLAIN, 15));
+		mailField.setBorder(BorderFactory.createLineBorder(new Color(180, 180, 180)));
+		mailField.setBounds(516, 355, 147, 28);
 		contentPane.add(mailField);
-		
+
 		JLabel password = new JLabel("PASSWORD");
-		password.setHorizontalAlignment(SwingConstants.CENTER);
+		password.setHorizontalAlignment(SwingConstants.RIGHT);
 		password.setFont(new Font(FONT_FAMILY, Font.PLAIN, 18));
 		password.setBounds(251, 407, 116, 20);
 		contentPane.add(password);
-		
+
 		passwordField = new JTextField();
 		passwordField.setColumns(10);
-		passwordField.setBounds(516, 406, 147, 20);
+		passwordField.setFont(new Font(FONT_FAMILY, Font.PLAIN, 15));
+		passwordField.setBorder(BorderFactory.createLineBorder(new Color(180, 180, 180)));
+		passwordField.setBounds(516, 406, 147, 28);
 		contentPane.add(passwordField);
-		
+
 		JLabel ruolo = new JLabel("RUOLO");
-		ruolo.setHorizontalAlignment(SwingConstants.CENTER);
+		ruolo.setHorizontalAlignment(SwingConstants.RIGHT);
 		ruolo.setFont(new Font(FONT_FAMILY, Font.PLAIN, 18));
 		ruolo.setBounds(251, 182, 116, 20);
 		contentPane.add(ruolo);
