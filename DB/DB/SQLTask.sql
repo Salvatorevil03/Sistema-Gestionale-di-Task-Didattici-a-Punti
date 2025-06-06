@@ -115,3 +115,50 @@ ADD CONSTRAINT unique_studente_task UNIQUE (task_id, studente_id);
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- Trigger per verificare che la mail dello studente non sia già presente nei docenti
+DELIMITER //
+
+CREATE TRIGGER before_insert_studente_check_mail
+BEFORE INSERT ON taskdidattici.studenti
+FOR EACH ROW
+BEGIN
+    DECLARE mail_exists INT DEFAULT 0;
+    
+    -- Verifica se la mail esiste già nella tabella docenti
+    SELECT COUNT(*) INTO mail_exists 
+    FROM taskdidattici.docenti
+    WHERE `mail` = NEW.mail;
+    
+    -- Se la mail esiste già nei docenti, genera un errore
+    IF mail_exists > 0 THEN
+        SIGNAL SQLSTATE '45000' 
+        SET MESSAGE_TEXT = 'Errore: La mail è già utilizzata da un docente';
+    END IF;
+END//
+
+-- Trigger per verificare che la mail del docente non sia già presente negli studenti
+DELIMITER //
+
+CREATE TRIGGER before_insert_docente_check_mail
+BEFORE INSERT ON taskdidattici.docenti
+FOR EACH ROW
+BEGIN
+    DECLARE mail_exists INT DEFAULT 0;
+    
+    -- Verifica se la mail esiste già nella tabella studenti
+    SELECT COUNT(*) INTO mail_exists 
+    FROM taskdidattici.studenti
+    WHERE `mail` = NEW.mail;
+    
+    -- Se la mail esiste già negli studenti, genera un errore
+    IF mail_exists > 0 THEN
+        SIGNAL SQLSTATE '45000' 
+        SET MESSAGE_TEXT = 'Errore: La mail è già utilizzata da un docente';
+    END IF;
+END//
+
+DELIMITER ;
+
+DELIMITER ;
+
