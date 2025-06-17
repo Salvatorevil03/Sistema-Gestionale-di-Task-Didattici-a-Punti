@@ -26,10 +26,9 @@ public class EntityTask {
         this.consegne = null;
     }
 
-    ///Costruttore con PK
     public EntityTask(int idTask) {
         this.id = idTask;
-        DBTask task = new DBTask(idTask); ///Carico dal DB con la PK
+        DBTask task = new DBTask(idTask);
         this.titolo = task.getTitolo();
         this.descrizione = task.getDescrizione();
         this.dataScadenza = task.getDataScadenza();
@@ -37,7 +36,6 @@ public class EntityTask {
         this.consegne = new ArrayList<>();
     }
 
-    ///Costruttore copia da oggettoBD
     public EntityTask(DBTask task) {
         this.id = task.getId();
         this.titolo = task.getTitolo();
@@ -46,7 +44,6 @@ public class EntityTask {
         this.maxPuntiAssegnabili = task.getMaxPuntiAssegnabili();
     }
 
-    ///GETTER E SETTER
     public int getId() {
         return id;
     }
@@ -95,12 +92,10 @@ public class EntityTask {
 
     public void valutaConsegna(int consegnaID, int punteggio){
         if(punteggio>this.maxPuntiAssegnabili){throw new ScoreEvaluationException();}
-        ///Caricamento delle consegne del task
         DBTask task = new DBTask(this.id);
         task.caricaConsegneDaDB();
         this.caricaConsegne(task);
 
-        ///Ricerca della consegna da valutare
         EntityConsegna consegnaDaValutare = ricercaConsegna(consegnaID);
         if (consegnaDaValutare==null){
             throw new SubmissionEvaluationException();
@@ -110,10 +105,8 @@ public class EntityTask {
 
         DBConsegna dbConsegnaDaValutare = new DBConsegna(consegnaDaValutare.getId());
         consegnaDaValutare.impostaPunteggio(punteggio,dbConsegnaDaValutare);
-        ///Passo il riferimento DAO della consegna da valutare esternamente così da non dover creare più volte l'oggetto per modificarlo all'interno dei singoli metodi
 
 
-        ///Aggiorna Punteggio e NumTaskValutati studente
         consegnaDaValutare.aggiornaStatisticheAndInviaMail(punteggio,dbConsegnaDaValutare,this.titolo);
     }
 
@@ -157,7 +150,6 @@ public class EntityTask {
     }
 
 
-    ///Metodo Creazione Consegna
     public void consegnaSoluzione(int taskID, String soluzione, int studenteID){
         EntityConsegna.creaConsegna(taskID, soluzione, studenteID);
 

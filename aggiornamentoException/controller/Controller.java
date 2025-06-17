@@ -83,8 +83,6 @@ public class Controller {
             throw new ClassCreationException();
         }
 
-        //EntityDocente docente = new EntityDocente(docenteID);
-        //docente.creaClasse(replacedNome);
         Piattaforma.creaClasse(docenteID, replacedNome);
     }
 
@@ -102,8 +100,7 @@ public class Controller {
         if(studenteID==-1 || classeID==-1){
             throw new ClassEnrollmentException();
         }
-        //EntityClasse classe=new EntityClasse();
-        //classe.iscrizione(studenteID, classeID);
+
         Piattaforma.iscrizioneClasse(studenteID,classeID);
     }
 
@@ -133,8 +130,7 @@ public class Controller {
         int docenteID = parseAndValidatePK(pkDocente);
         if(docenteID==-1){return new ArrayList<>();}
 
-        //EntityDocente docente = new EntityDocente(docenteID);
-        List<DTOClasse> dtoClassi= Piattaforma.getElencoClassi(docenteID); //docente.getElencoClassi();
+        List<DTOClasse> dtoClassi= Piattaforma.getElencoClassi(docenteID);
 
         return dtoClassi.isEmpty() ? new ArrayList<>() : dtoClassi;
     }
@@ -172,8 +168,6 @@ public class Controller {
             throw new TaskCreationException();
         }
 
-        //EntityClasse classe = new EntityClasse(classeID);
-        //classe.creaTask(replacedTitolo,replacedDescrizione, dataScadenza, maxPunteggio);
         Piattaforma.creaTask(classeID,replacedTitolo,replacedDescrizione, dataScadenza, maxPunteggio);
     }
 
@@ -193,8 +187,7 @@ public class Controller {
         int classeID = parseAndValidatePK(pkClasse);
         if(classeID==-1){return new ArrayList<>();}
 
-        //EntityClasse classe = new EntityClasse(classeID);
-        List<DTOTask> dtoTasks = Piattaforma.getTasks(classeID);//classe.getTasks();
+        List<DTOTask> dtoTasks = Piattaforma.getTasks(classeID);
 
         return dtoTasks.isEmpty() ? new ArrayList<>() : dtoTasks;
     }
@@ -214,9 +207,7 @@ public class Controller {
 
         int classeID = parseAndValidatePK(pkClasse);
         if(classeID==-1){return new ArrayList<>();}
-
-        //EntityClasse classe = new EntityClasse(classeID);
-        List<DTOStudente> dtoStudenti= Piattaforma.getStudenti(classeID);//classe.getStudenti();
+        List<DTOStudente> dtoStudenti= Piattaforma.getStudenti(classeID);
 
         return dtoStudenti.isEmpty() ? new ArrayList<>() : dtoStudenti;
     }
@@ -237,9 +228,7 @@ public class Controller {
         int taskID = parseAndValidatePK(pkTask);
         if(taskID==-1){return new ArrayList<>();}
 
-        //EntityTask task = new EntityTask(taskID);
-
-        List<DTOConsegna> dtoConsegne= Piattaforma.getConsegne(taskID);//task.getConsegne();
+        List<DTOConsegna> dtoConsegne= Piattaforma.getConsegne(taskID);
         return dtoConsegne.isEmpty() ? new ArrayList<>() : dtoConsegne;
     }
 
@@ -263,8 +252,6 @@ public class Controller {
         int consegnaID = parseAndValidatePK(pkConsegna);
         if(taskID==-1 || consegnaID==-1){ throw new SubmissionEvaluationException();}
 
-        //EntityTask task= new EntityTask(taskID);
-        //task.valutaConsegna(consegnaID,voto);
         Piattaforma.valutaConsegna(consegnaID, taskID, voto);
     }
 
@@ -286,10 +273,7 @@ public class Controller {
         int studenteID = parseAndValidatePK(pkStudente);
         if(studenteID==-1){return new ArrayList<>();}
 
-        //EntityStudente studente = new EntityStudente(studenteID);
-
         return Piattaforma.getNomeStudente(studenteID)==null ? new ArrayList<>() : Piattaforma.getStatisticheStudente(studenteID);
-        //return studente.getNome()==null ? new ArrayList<>() : studente.getStatistiche();
     }
 
     /**
@@ -310,8 +294,7 @@ public class Controller {
         int classeID = parseAndValidatePK( pkClasse );
         if(classeID==-1){return new ArrayList<>();}
 
-        //EntityClasse classe = new EntityClasse(classeID);
-        List<DTOStudente> lista= Piattaforma.getStudenti(classeID);//classe.getStudenti();
+        List<DTOStudente> lista= Piattaforma.getStudenti(classeID);
         lista.sort(Comparator.comparingInt(DTOStudente::getPunteggioTotaleOttenuto).reversed());
 
         return lista.isEmpty() ? new ArrayList<>() : lista;
@@ -336,8 +319,7 @@ public class Controller {
         int classeID = parseAndValidatePK( pkClasse);
         if(classeID==-1){return new ArrayList<>();}
 
-        //EntityClasse classe = new EntityClasse(classeID);
-        List<DTOStudente> lista= Piattaforma.getStudenti(classeID);//classe.getStudenti();
+        List<DTOStudente> lista= Piattaforma.getStudenti(classeID);
         lista.sort(Comparator.comparingInt(DTOStudente::getNumTaskCompletati).reversed());
 
         return lista.isEmpty() ? new ArrayList<>() : lista;
@@ -357,9 +339,7 @@ public class Controller {
     public static DTOTask getTask(String pkTask){
         int taskID = parseAndValidatePK(pkTask);
         if(taskID==-1){return null;}
-
-        //EntityTask task = new EntityTask(taskID);
-        DTOTask dtoTask= Piattaforma.getInfoTask(taskID);//task.getInfo();
+        DTOTask dtoTask= Piattaforma.getInfoTask(taskID);
 
         return dtoTask.getTitolo()==null ? null : dtoTask;
     }
@@ -380,8 +360,6 @@ public class Controller {
         int studenteID = parseAndValidatePK(pkStudente);
         if(taskID==-1 || studenteID==-1){throw new SubmissionException();}
 
-        //EntityTask task = new EntityTask(taskID);
-        //task.consegnaSoluzione(taskID, replacedSoluzione, studenteID);
         Piattaforma.consegnaSoluzione(taskID, replacedSoluzione, studenteID);
     }
 
@@ -397,10 +375,6 @@ public class Controller {
         int studenteID= parseAndValidatePK(pkStudente);
         if(studenteID==-1){return -1;}
 
-        EntityStudente studente = new EntityStudente(studenteID);
-        //if(studente.getNome()==null){return -1;}
-
-        //return studente.getCodiceClasse();
         return Piattaforma.getNomeStudente(studenteID)==null ? -1 : Piattaforma.getCodiceClasse(studenteID);
     }
 

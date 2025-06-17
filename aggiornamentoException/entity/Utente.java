@@ -26,7 +26,7 @@ public class Utente {
             "unife.it", "unimol.it", "unisannio.it", "unisalento.it",
             "unich.it", "uniud.it", "units.it", "unitn.it", "unibz.it",
             "univaq.it", "unicam.it", "uniurb.it", "uniroma2.it", "uniroma3.it",
-            "lumsa.it", "iulm.it", "bocconi.it", "cattolica.it"
+            "lumsa.it", "iulm.it", "bocconi.it", "cattolica.it", "studenti.unina.it"
     );
 
 
@@ -55,7 +55,7 @@ public class Utente {
      *         <li>Seconda parte: una chiocciola @</li>
      *         <li>Terza parte: tutti i caratteri appartenenti alla lista [a-zA-Z0-9-] multipli (+) con un
      *         intervallo di lunghezza {1,10} e alla lista [a-zA-Z] subito dopo il punto con un intervallo
-     *         di lunghezza {2,7}</li>
+     *         di lunghezza {2,9}</li>
      *     </ul>
      * </ul>
      *
@@ -73,7 +73,7 @@ public class Utente {
     protected static boolean isEmailValid(String email){
 
         String emailRegex = "^[a-zA-Z0-9_+&*-]+@" +
-                "(?:[a-zA-Z0-9-]+\\.){1,10}[a-zA-Z]{2,7}$";
+                "(?:[a-zA-Z0-9-]+\\.){1,10}[a-zA-Z]{2,9}$";
 
         return !email.matches(emailRegex) || !isDominioEmailValido(email);
     }

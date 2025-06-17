@@ -6,17 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DBStudente extends DBUtente {
-    private int id; ///PK
+    private int id;
     private int numTaskCompletati;
     private int numTaskValutati;
     private int punteggioTotaleOttenuto;
 
-    ///Costruttore vuoto
     public DBStudente() {
         super();
     }
 
-    ///Contruttore con PK
     public  DBStudente(int id) {
         this.id = id;
         caricaDaDB();
@@ -33,7 +31,6 @@ public class DBStudente extends DBUtente {
         this.punteggioTotaleOttenuto = studente.getPunteggioTotaleOttenuto();
     }
 
-    ///CARICAMENTO DA DB
     public void caricaDaDB() {
 
         String query = "SELECT * FROM studenti WHERE id='"+this.id+"';";
@@ -58,7 +55,6 @@ public class DBStudente extends DBUtente {
         }
     }
 
-    ///GETTER E SETTER
     public int getId() {
         return id;
     }

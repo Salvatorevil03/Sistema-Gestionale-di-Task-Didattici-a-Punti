@@ -13,8 +13,8 @@ public class MailSender {
     private MailSender() {}
     
     public static void inviaValutazioneTask(String destinatario, String task, String valutazione, String commento) {
-        final String password = "chcu ebsc kqdl xgpd"; /// Usa una App Password, non la password normale
-        final String nomeMittente = "Sistema di Valutazione"; /// Nome personalizzato che apparirà
+        final String password = "chcu ebsc kqdl xgpd";
+        final String nomeMittente = "Sistema di Valutazione";
 
         Properties props = getGmailSmtpProperties();
 
@@ -27,7 +27,6 @@ public class MailSender {
 
         try {
             Message message = new MimeMessage(session);
-            /// Imposta il mittente con nome personalizzato
             message.setFrom(new InternetAddress(MITTENTE, nomeMittente));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));
             message.setSubject("Valutazione del task: " + task);
@@ -45,7 +44,7 @@ public class MailSender {
     }
 
     public static Message initMail(){
-        final String password = "chcu ebsc kqdl xgpd"; /// Usa una App Password, non la password normale
+        final String password = "chcu ebsc kqdl xgpd";
 
         Properties props = getGmailSmtpProperties();
 
@@ -73,10 +72,9 @@ public class MailSender {
 
     public static void inviaCreazioneTask(String destinatario, String task, String commento) {
         Message message = initMail();
-        final String nomeMittente = "Sistema di Valutazione"; /// Nome personalizzato che apparirà
+        final String nomeMittente = "Sistema di Valutazione";
 
         try {
-            /// Imposta il mittente con nome personalizzato
             message.setFrom(new InternetAddress(MITTENTE, nomeMittente));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));
             message.setSubject("Creazione del task: " + task);

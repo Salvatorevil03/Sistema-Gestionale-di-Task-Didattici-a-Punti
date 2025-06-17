@@ -29,7 +29,7 @@ public class GUIListaStudentiClasse extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
-	private DefaultTableModel model; /////
+	private DefaultTableModel model;
 
 	/**
 	 * Launch the application.
@@ -73,9 +73,9 @@ public class GUIListaStudentiClasse extends JFrame {
 		aggiornaButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIListaStudentiClasse seconda = new GUIListaStudentiClasse(); /// Crea nuova finestra
-				seconda.setVisible(true); /// Mostra nuova finestra
-				dispose(); /// Chiude questa finestra
+				GUIListaStudentiClasse seconda = new GUIListaStudentiClasse();
+				seconda.setVisible(true);
+				dispose();
 			}
 		});
 		aggiornaButton.setBounds(785, 11, 89, 23);
@@ -87,9 +87,9 @@ public class GUIListaStudentiClasse extends JFrame {
 		indietroBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIClasseDocente seconda = new GUIClasseDocente(); /// Crea nuova finestra
-				seconda.setVisible(true); /// Mostra nuova finestra
-				dispose(); /// Chiude questa finestra
+				GUIClasseDocente seconda = new GUIClasseDocente();
+				seconda.setVisible(true);
+				dispose();
 			}
 		});
 		indietroBtn.setBounds(10, 11, 89, 23);
@@ -107,8 +107,8 @@ public class GUIListaStudentiClasse extends JFrame {
 		
 		table = new JTable();
 		model = new DefaultTableModel(
-				new Object[][] {}, /// Inizia vuoto
-				new String[] { "ID","Nome", "Cognome" } /// Nome colonna
+				new Object[][] {},
+				new String[] { "ID","Nome", "Cognome" }
 			){
 			@Override
 			public boolean isCellEditable(int row, int column) {

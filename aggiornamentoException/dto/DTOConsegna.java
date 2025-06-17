@@ -1,7 +1,7 @@
 package dto;
 
 public class DTOConsegna {
-    private int id; /// PK
+    private int id;
     private int punteggio;
     private String soluzione;
 

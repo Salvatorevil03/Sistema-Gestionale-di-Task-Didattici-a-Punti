@@ -86,7 +86,7 @@ public class GUIIscrizioneClasse extends JFrame {
 					Controller.iscrizione(String.valueOf(studente.getIdStudente()),codiceField.getText());
 					dispose();
 				}catch(ClassEnrollmentException exception){
-					JOptionPane.showMessageDialog(null, exception.getMessage());
+					JOptionPane.showMessageDialog(null, exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

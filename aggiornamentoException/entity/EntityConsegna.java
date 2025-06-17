@@ -74,7 +74,7 @@ public class EntityConsegna {
         this.aggiornaPunteggioTotaleOttenuto(punteggio,studente);
         this.aggiornaNumTaskValutati(studente);
         try{
-            studente.salvaInDB(); ///Salvataggio contemporaneo di entrambi i set
+            studente.salvaInDB();
         }catch(DBException e){
             throw new StudentException();
         }
@@ -92,7 +92,7 @@ public class EntityConsegna {
         try {
             consegna.inserisciSuDB(taskID, studenteID);
         }catch (DBException e){
-            throw new SubmissionException();
+            throw new SubmissionExistingException();
         }
     }
 

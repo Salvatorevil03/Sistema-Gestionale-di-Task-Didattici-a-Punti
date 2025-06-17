@@ -29,7 +29,7 @@ public class GUIClassificaPunteggio extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
-	private DefaultTableModel model; /////
+	private DefaultTableModel model;
 
 
 	/**
@@ -70,9 +70,9 @@ public class GUIClassificaPunteggio extends JFrame {
 		aggiornaButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIClassificaPunteggio seconda = new GUIClassificaPunteggio(); /// Crea nuova finestra
-				seconda.setVisible(true); /// Mostra nuova finestra
-				dispose(); /// Chiude questa finestra
+				GUIClassificaPunteggio seconda = new GUIClassificaPunteggio();
+				seconda.setVisible(true);
+				dispose();
 			}
 		});
 		aggiornaButton.setBounds(785, 11, 89, 23);
@@ -82,9 +82,9 @@ public class GUIClassificaPunteggio extends JFrame {
 		indietroBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIStudente seconda = new GUIStudente(); /// Crea nuova finestra
-				seconda.setVisible(true); /// Mostra nuova finestra
-				dispose(); /// Chiude questa finestra
+				GUIStudente seconda = new GUIStudente();
+				seconda.setVisible(true);
+				dispose();
 			}
 		});
 		indietroBtn.setBounds(10, 11, 89, 23);
@@ -102,8 +102,8 @@ public class GUIClassificaPunteggio extends JFrame {
 		
 		table = new JTable();
 		model = new DefaultTableModel(
-				new Object[][] {}, /// Inizia vuoto
-				new String[] { "Nome","Cognome","Punteggio Totale" } /// Nome colonna
+				new Object[][] {},
+				new String[] { "Nome","Cognome","Punteggio Totale" }
 			){
 			@Override
 			public boolean isCellEditable(int row, int column) {

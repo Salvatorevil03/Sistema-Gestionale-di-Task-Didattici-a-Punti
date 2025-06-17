@@ -79,7 +79,7 @@ public class GUIClasseDocente extends JFrame {
 	 *	passata a livello Controller</p>
 	 */
 
-	public GUIClasseDocente() { ///Nome dato dalla GUI che lo crea
+	public GUIClasseDocente() {
 		SessioneDocente docente = SessioneDocente.getInstance();
 		String nomeClasse = docente.getNomeClasseSelezionato();
 		List<DTOTask> tasks = Controller.getTasks(docente.getPkClasseSelezionata());
@@ -108,9 +108,9 @@ public class GUIClasseDocente extends JFrame {
 		indietroBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIDocente seconda = new GUIDocente(); /// Crea nuova finestra
-				seconda.setVisible(true); /// Mostra nuova finestra
-				dispose(); /// Chiude questa finestra
+				GUIDocente seconda = new GUIDocente();
+				seconda.setVisible(true);
+				dispose();
 			}
 		});
 		indietroBtn.setBounds(10, 11, 89, 23);
@@ -120,9 +120,9 @@ public class GUIClasseDocente extends JFrame {
 		btnListaStudenti.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIListaStudentiClasse seconda = new GUIListaStudentiClasse(); /// Crea nuova finestra
-				seconda.setVisible(true); /// Mostra nuova finestra
-				dispose(); /// Chiude questa finestra
+				GUIListaStudentiClasse seconda = new GUIListaStudentiClasse();
+				seconda.setVisible(true);
+				dispose();
 			}
 		});
 		btnListaStudenti.setFont(new Font(FONT_FAMILY, Font.PLAIN, 18));
@@ -193,7 +193,8 @@ public class GUIClasseDocente extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				try{
 					if (titoloField.getText().equals("") || descField.getText().equals("") || dataField.getText().equals("") || maxField.getText().equals("")) {
-						JOptionPane.showMessageDialog(null, "Alcuni campi sono vuoti");
+						JOptionPane.showMessageDialog(null, "Alcuni campi sono vuoti", "Missing parameters", JOptionPane.ERROR_MESSAGE);
+
 					} else {
 						String titolo = titoloField.getText();
 						String descrizione = descField.getText();
@@ -225,6 +226,8 @@ public class GUIClasseDocente extends JFrame {
 				}catch(FormattedDateException | InvalidDateException | TitleLengthException |
 					   DescriptionLengthException | UnassignableTaskScoreException | TaskCreationException exception) {
 					JOptionPane.showMessageDialog(null, exception.getMessage(),"Error", JOptionPane.ERROR_MESSAGE);
+				}catch(NumberFormatException exception){
+					JOptionPane.showMessageDialog(null, "È stato inserito un tipo non conforme per il punteggio del Task. Inserire un valore numerico intero","Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -248,8 +251,8 @@ public class GUIClasseDocente extends JFrame {
 
 		table = new JTable();
 		model = new DefaultTableModel(
-				new Object[][] {}, /// Inizia vuoto
-				new String[] { "ID","Titolo","Data Scadenza","Max Punteggio" } /// Nome colonna
+				new Object[][] {},
+				new String[] { "ID","Titolo","Data Scadenza","Max Punteggio" }
 			){
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -274,11 +277,11 @@ public class GUIClasseDocente extends JFrame {
 					String nomeTaskSelezionato = String.valueOf(model.getValueAt(selectedRow, 1));
 					docente.setPkTaskSelezionato(pkTask);
 					docente.setNomeTaskSelezionato(nomeTaskSelezionato);
-					GUIConsegna seconda = new GUIConsegna(); /// Crea nuova finestra
-					seconda.setVisible(true); /// Mostra nuova finestra
-					dispose(); /// Chiude questa finestra
+					GUIConsegna seconda = new GUIConsegna();
+					seconda.setVisible(true);
+					dispose();
 				} else {
-					JOptionPane.showMessageDialog(null, "Nessuna riga selezionata.");
+					JOptionPane.showMessageDialog(null, "Nessuna riga selezionata.", "Row error", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
@@ -289,9 +292,9 @@ public class GUIClasseDocente extends JFrame {
 		aggiornaButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIClasseDocente seconda = new GUIClasseDocente(); /// Crea nuova finestra
-				seconda.setVisible(true); /// Mostra nuova finestra
-				dispose(); /// Chiude questa finestra
+				GUIClasseDocente seconda = new GUIClasseDocente();
+				seconda.setVisible(true);
+				dispose();
 			}
 		});
 		aggiornaButton.setBounds(785, 11, 89, 23);
@@ -337,10 +340,10 @@ public class GUIClasseDocente extends JFrame {
 			LocalDate inputDate = LocalDate.parse(dateString);
 			LocalDate today = LocalDate.now();
 
-			return inputDate.isAfter(today);
+			return inputDate.isAfter(today) || inputDate.isEqual(today);
 
 		} catch (DateTimeParseException e) {
-			return false; /// Se la data non è parsable, consideriamo non valida
+			return false; // Se la data non è parsable, consideriamo non valida
 		}
 	}
 }

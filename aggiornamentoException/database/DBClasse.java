@@ -37,7 +37,6 @@ public class DBClasse {
         this.task=classe.task;
     }
 
-    ///CARICAMENTO DATI DAL DB
     public void caricaDaDB(){
         String query= "select * from classi where codice='"+this.codice+"';";
         try {
@@ -52,7 +51,6 @@ public class DBClasse {
         }
     }
 
-    ///GETTER AND SETTER--------------------------------------------
 
     public int getCodice() {
         return codice;
@@ -79,7 +77,6 @@ public class DBClasse {
         return studenti;
     }
 
-    ///METODO TO STRING
     @Override
     public String toString() {
         return "DBClasse{" +
@@ -124,7 +121,6 @@ public class DBClasse {
                 taskToBeLoad.setMaxPuntiAssegnabili(rs1.getInt("maxPuntiAssegnabili"));
                 taskToBeLoad.setDataScadenza(rs1.getString("dataScadenza"));
 
-                ///SALVATAGGIO RISULTATO
                 this.task.add(taskToBeLoad);
             }
             rs1.close();

@@ -3,6 +3,6 @@ package exceptions;
 public class ClassEnrollmentException extends RuntimeException {
 
     public ClassEnrollmentException() {
-        super("Errore durante l'iscrizione alla classe.");
+        super("La classe a cui stai tentando di iscriverti non esiste");
     }
 }

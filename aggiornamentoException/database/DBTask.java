@@ -39,17 +39,11 @@ public class DBTask {
         this.consegne= (ArrayList<DBConsegna>) dbTask.getConsegne();
     }
 
-    ///CARICAMENTO DA DB
     public void caricaDaDB() {
-        ///1. definisco la query
         String query = "SELECT * FROM task WHERE id='" + this.id + "';";
         try {
-            ///2 faccio di query di select
-            /// - crea la connessione
-            /// - statement
             ResultSet rs = DBConnectionManager.selectQuery(query);
-            if (rs.next()) { ///Se ho un risultato
-            ///mi vado a prendere i dati, accedendo tramite il nome dell'attributo-colonna
+            if (rs.next()) {
                 this.setTitolo(rs.getString("titolo"));
                 this.setDescrizione(rs.getString("descrizione"));
                 this.setDataScadenza(rs.getString("dataScadenza"));
@@ -61,7 +55,6 @@ public class DBTask {
         }
     }
 
-    ///GETTER E SETTER
     public int getId() {
         return id;
     }
@@ -115,7 +108,6 @@ public class DBTask {
                 consegna.setPunteggio(rs1.getInt("punteggio"));
                 consegna.setSoluzione(rs1.getString("soluzione"));
 
-                ///SALVATAGGIO RISULTATO
                 this.consegne.add(consegna);
             }
         } catch (ClassNotFoundException | SQLException e) {

@@ -10,14 +10,12 @@ public class DBDocente extends DBUtente {
     private int id;
     private ArrayList<DBClasse> classi;
 
-    ///Costruttore con la chiave primaria
     public DBDocente(int id){
         this.id=id;
         this.classi=new ArrayList<>();
         caricaDaDB();
     }
 
-    ///Costruttore vuoto
     public DBDocente(){
         super();
         this.classi=new ArrayList<>();
@@ -32,17 +30,11 @@ public class DBDocente extends DBUtente {
         this.classi = (ArrayList<DBClasse>) docente.getClassi();
     }
 
-    ///CARICAMENTO DA DB
     public void caricaDaDB() {
-        ///1. definisco la query
         String query = "SELECT * FROM docenti WHERE id='"+this.id+"';";
         try {
-            ///2 faccio di query di select
-            /// - crea la connessione
-            /// - statement
             ResultSet rs = DBConnectionManager.selectQuery(query);
-            if(rs.next()) { ///Se ho un risultato
-            ///Mi vado a prendere i dati, accedendo tramite il nome dell'attributo-colonna
+            if(rs.next()) {
                 this.setNome(rs.getString("nome"));
                 this.setCognome(rs.getString("cognome"));
                 this.setMail(rs.getString("mail"));
@@ -55,7 +47,6 @@ public class DBDocente extends DBUtente {
     }
 
 
-    ///GETTER AND SETTER
     public String getCognome() {
         return cognome;
     }
@@ -112,9 +103,6 @@ public class DBDocente extends DBUtente {
     public void caricaClassiDaDB() {
         String query = "SELECT * FROM classi WHERE docente_id='"+this.id+"';";
         try {
-            ///2 faccio di query di select
-            /// - crea la connessione
-            /// - statement
             ResultSet rs = DBConnectionManager.selectQuery(query);
             while(rs.next()) {
                 DBClasse classe = new DBClasse();

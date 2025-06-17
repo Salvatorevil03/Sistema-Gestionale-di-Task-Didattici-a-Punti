@@ -28,7 +28,7 @@ public class GUIClassificaTask extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
-	private DefaultTableModel model; /////
+	private DefaultTableModel model;
 
 
 	/**
@@ -68,9 +68,9 @@ public class GUIClassificaTask extends JFrame {
 		aggiornaButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIClassificaTask seconda = new GUIClassificaTask(); /// Crea nuova finestra
-				seconda.setVisible(true); /// Mostra nuova finestra
-				dispose(); /// Chiude questa finestra
+				GUIClassificaTask seconda = new GUIClassificaTask();
+				seconda.setVisible(true);
+				dispose();
 			}
 		});
 		aggiornaButton.setBounds(785, 11, 89, 23);
@@ -80,9 +80,9 @@ public class GUIClassificaTask extends JFrame {
 		indietroBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIStudente seconda = new GUIStudente(); /// Crea nuova finestra
-				seconda.setVisible(true); /// Mostra nuova finestra
-				dispose(); /// Chiude questa finestra
+				GUIStudente seconda = new GUIStudente();
+				seconda.setVisible(true);
+				dispose();
 			}
 		});
 		indietroBtn.setBounds(10, 11, 89, 23);
@@ -94,8 +94,8 @@ public class GUIClassificaTask extends JFrame {
 		
 		table = new JTable();
 		model = new DefaultTableModel(
-				new Object[][] {}, /// Inizia vuoto
-				new String[] { "Nome","Cognome","Task Completati" } /// Nome colonna
+				new Object[][] {},
+				new String[] { "Nome","Cognome","Task Completati" }
 			){
 			@Override
 			public boolean isCellEditable(int row, int column) {

@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DBConsegna {
-    private int id; /// PK
+    private int id;
     private int punteggio;
     private String soluzione;
 
@@ -24,7 +24,6 @@ public class DBConsegna {
         this.soluzione=consegna.getSoluzione();
     }
 
-    ///CARICAMENTO DA DB
     public void caricaDaDB() {
         String query = "SELECT * FROM consegne WHERE id='"+this.id+"';";
         try {
@@ -41,7 +40,6 @@ public class DBConsegna {
         }
     }
 
-    ///GETTER E SETTER
     public int getId() {
         return id;
     }
@@ -71,7 +69,6 @@ public class DBConsegna {
     }
 
     public DBStudente caricaStudenteDaDB() {
-        ///Le consegne prelevano gli studenti a esse relative
         String query1= "SELECT * FROM STUDENTI S JOIN CONSEGNE C ON C.studente_id = S.id WHERE C.id="+this.id+";";
         try {
 
@@ -87,7 +84,6 @@ public class DBConsegna {
                 studente.setNumTaskCompletati(rs1.getInt("numTaskCompletati"));
                 studente.setNumTaskValutati(rs1.getInt("numTaskValutati"));
                 studente.setPunteggioTotaleOttenuto(rs1.getInt("punteggioTotaleOttenuto"));
-                ///SALVATAGGIO RISULTATO
                 return studente;
             }
         } catch (ClassNotFoundException | SQLException e) {

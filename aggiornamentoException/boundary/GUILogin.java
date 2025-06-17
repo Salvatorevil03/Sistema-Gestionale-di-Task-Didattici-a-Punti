@@ -155,7 +155,7 @@ public class GUILogin extends JFrame {
 						dispose();
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "Credenziali non valide");
+					JOptionPane.showMessageDialog(null, "Credenziali non valide", "Login error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

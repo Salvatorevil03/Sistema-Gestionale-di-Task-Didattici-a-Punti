@@ -39,7 +39,6 @@ public class EntityClasse {
         this.numeroTask = classe.getNumeroTask();
     }
 
-    ///GETTER AND SETTER-----------------
     public int getCodice() {
         return codice;
     }

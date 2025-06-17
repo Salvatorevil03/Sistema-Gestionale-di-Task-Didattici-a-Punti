@@ -111,11 +111,11 @@ public class GUIRegistrazione extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				try{
 					Controller.registrazione(ruoloField.getText(), nomeField.getText(), cognomeField.getText(), mailField.getText(), passwordField.getText());
-					GUILogin seconda = new GUILogin(); /// Crea nuova finestra
-					seconda.setVisible(true); /// Mostra nuova finestra
-					dispose(); /// Chiude questa finestra
+					GUILogin seconda = new GUILogin();
+					seconda.setVisible(true);
+					dispose();
 				}catch(RoleNotValidException | MailAlreadyUsedException | MailNotValidException exception){
-					JOptionPane.showMessageDialog(null, exception.getMessage());
+					JOptionPane.showMessageDialog(null, exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -129,9 +129,9 @@ public class GUIRegistrazione extends JFrame {
 		indietroButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUILogin seconda = new GUILogin(); /// Crea nuova finestra
-				seconda.setVisible(true); /// Mostra nuova finestra
-				dispose(); /// Chiude questa finestra
+				GUILogin seconda = new GUILogin();
+				seconda.setVisible(true);
+				dispose();
 			}
 		});
 

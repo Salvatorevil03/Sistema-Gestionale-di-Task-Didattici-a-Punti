@@ -4,6 +4,7 @@ import controller.Controller;
 import dto.DTOTask;
 import exceptions.StudentException;
 import exceptions.SubmissionException;
+import exceptions.SubmissionExistingException;
 
 import java.awt.EventQueue;
 
@@ -75,14 +76,14 @@ public class GUIConsegnaStudente extends JFrame {
 		indietroBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIStudente seconda = new GUIStudente(); /// Crea nuova finestra
-				seconda.setVisible(true); /// Mostra nuova finestra
-				dispose(); /// Chiude questa finestra
+				GUIStudente seconda = new GUIStudente();
+				seconda.setVisible(true);
+				dispose();
 			}
 		});
 		indietroBtn.setBounds(10, 11, 89, 23);
 		contentPane.add(indietroBtn);
-		
+
 		JLabel lblNomeTask = new JLabel(task.getTitolo());
 		lblNomeTask.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNomeTask.setFont(new Font(FONT_FAMILY, Font.BOLD, 30));
@@ -121,21 +122,21 @@ public class GUIConsegnaStudente extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String soluzione = textArea.getText();
-				if (soluzione.equals("")) {
-					JOptionPane.showMessageDialog(null, "La soluzione è vuota");
-				}else if (soluzione.length() > 10000){
-					JOptionPane.showMessageDialog(null, "La soluzione è troppo lunga");
+				if (soluzione.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "La soluzione è vuota", "Submission empty error", JOptionPane.ERROR_MESSAGE);
+				}else if (soluzione.length() > 300){
+					JOptionPane.showMessageDialog(null, "La soluzione è troppo lunga","Submission length error", JOptionPane.ERROR_MESSAGE);
 				} else {
 					if (btnNewButton.isEnabled()){
 						try{
 							Controller.consegnaSoluzione(String.valueOf(studente.getIdStudente()),studente.getPkTask(),soluzione);
-							JOptionPane.showMessageDialog(null, "Soluzione consegnata con successo");
+							JOptionPane.showMessageDialog(null, "Soluzione consegnata con successo","Info", JOptionPane.INFORMATION_MESSAGE);
 							btnNewButton.setEnabled(false);
-						}catch(SubmissionException | StudentException exception) {
-							JOptionPane.showMessageDialog(null, exception.getMessage());
+						}catch(SubmissionException | StudentException | SubmissionExistingException exception) {
+							JOptionPane.showMessageDialog(null, exception.getMessage(),"Error", JOptionPane.ERROR_MESSAGE);
 						}
 					} else {
-						JOptionPane.showMessageDialog(null, "Soluzione già consegnata");
+						JOptionPane.showMessageDialog(null, "Soluzione già consegnata", "Submission error", JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			}

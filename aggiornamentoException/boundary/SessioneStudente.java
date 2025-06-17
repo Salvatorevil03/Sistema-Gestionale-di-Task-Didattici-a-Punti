@@ -29,7 +29,7 @@ public class SessioneStudente {
         instance = null;
     }
 
-    /// Getter e Setter
+
     public String getNomeStudente() {
         return nomeStudente;
     }

@@ -33,7 +33,7 @@ public class GUIConsegna extends JFrame {
 	private static final String FONT_FAMILY = "Tahoma";
 	private JPanel contentPane;
 	private JTable table;
-	private DefaultTableModel model; /////
+	private DefaultTableModel model;
 	private JTextField votoField;
 
 	/**
@@ -59,14 +59,13 @@ public class GUIConsegna extends JFrame {
 		String nomeTaskSelezionato = docente.getNomeTaskSelezionato();
 		final List<DTOConsegna> consegne = Controller.getConsegne(pkTask);
 
-		///
+
 		setResizable(false);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 650);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(213, 241, 247));
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
-		///
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -83,9 +82,9 @@ public class GUIConsegna extends JFrame {
 		indietroBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIClasseDocente seconda = new GUIClasseDocente(); /// Crea nuova finestra
-				seconda.setVisible(true); /// Mostra nuova finestra
-				dispose(); /// Chiude questa finestra
+				GUIClasseDocente seconda = new GUIClasseDocente();
+				seconda.setVisible(true);
+				dispose();
 			}
 		});
 		indietroBtn.setBounds(10, 11, 89, 23);
@@ -97,8 +96,8 @@ public class GUIConsegna extends JFrame {
 		
 		table = new JTable();
 		model = new DefaultTableModel(
-				new Object[][] {}, /// Inizia vuoto
-				new String[] { "ID" } /// Nome colonna
+				new Object[][] {},
+				new String[] { "ID" }
 			){
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -107,6 +106,7 @@ public class GUIConsegna extends JFrame {
 		};
 		table.setModel(model);
 		if (!consegne.isEmpty()){
+
 			for (DTOConsegna c : consegne) {
 				if (c.getPunteggio()==-1){
 					model.addRow(new Object[] { c.getId() });
@@ -125,8 +125,8 @@ public class GUIConsegna extends JFrame {
 		textArea.setEditable(false);
 		textArea.setBounds(458, 185, 367, 223);
 		contentPane.add(textArea);
-		textArea.setLineWrap(true);         /// Abilita il ritorno a capo
-		textArea.setWrapStyleWord(true);    /// Va a capo tra parole (non a metà parola)
+		textArea.setLineWrap(true);
+		textArea.setWrapStyleWord(true);
 		textArea.setText("Seleziona una consegna per visualizzare qui l'elaborato");
 		
 		JLabel lblElaborato = new JLabel("Elaborato");
@@ -148,13 +148,15 @@ public class GUIConsegna extends JFrame {
 					int selectedRow = table.getSelectedRow();
 					if (selectedRow != -1 && btnValuta.isEnabled()) {
 						Controller.valutaConsegna(pkTask,String.valueOf(model.getValueAt(selectedRow, 0)),voto);
-						JOptionPane.showMessageDialog(null, "Valutazione effettuata con successo.");
+						JOptionPane.showMessageDialog(null, "Valutazione effettuata con successo.", "Info", JOptionPane.INFORMATION_MESSAGE);
 					}else {
-						JOptionPane.showMessageDialog(null, "Nessuna riga selezionata.");
+						JOptionPane.showMessageDialog(null, "Nessuna riga selezionata.", "Row error", JOptionPane.ERROR_MESSAGE);
 					}
 				}catch(SubmissionEvaluationException | ScoreEvaluationException | SubmissionAlreadyEvaluatedException |
 					   StudentException | SistemaNotificheException exception){
-					JOptionPane.showMessageDialog(null, exception.getMessage());
+					JOptionPane.showMessageDialog(null, exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				}catch(NumberFormatException exception){
+					JOptionPane.showMessageDialog(null, "È stato inserito un tipo non conforme per la valutazione. Inserire un valore numerico intero. ", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -176,9 +178,9 @@ public class GUIConsegna extends JFrame {
 		aggiornaButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIConsegna seconda = new GUIConsegna(); /// Crea nuova finestra
-				seconda.setVisible(true); /// Mostra nuova finestra
-				dispose(); /// Chiude questa finestra
+				GUIConsegna seconda = new GUIConsegna();
+				seconda.setVisible(true);
+				dispose();
 			}
 		});
 		aggiornaButton.setBounds(785, 11, 89, 23);

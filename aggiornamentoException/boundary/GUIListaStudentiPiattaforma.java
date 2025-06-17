@@ -33,9 +33,9 @@ public class GUIListaStudentiPiattaforma extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
-	private DefaultTableModel model; /////
+	private DefaultTableModel model;
 	private JTable table2;
-	private DefaultTableModel model2; /////
+	private DefaultTableModel model2;
 
 	/**
 	 * Launch the application.
@@ -81,9 +81,9 @@ public class GUIListaStudentiPiattaforma extends JFrame {
 		aggiornaButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIListaStudentiPiattaforma seconda = new GUIListaStudentiPiattaforma(); /// Crea nuova finestra
-				seconda.setVisible(true); /// Mostra nuova finestra
-				dispose(); /// Chiude questa finestra
+				GUIListaStudentiPiattaforma seconda = new GUIListaStudentiPiattaforma();
+				seconda.setVisible(true);
+				dispose();
 			}
 		});
 		aggiornaButton.setBounds(785, 11, 89, 23);
@@ -95,9 +95,9 @@ public class GUIListaStudentiPiattaforma extends JFrame {
 		indietroBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIDocente seconda = new GUIDocente(); /// Crea nuova finestra
-				seconda.setVisible(true); /// Mostra nuova finestra
-				dispose(); /// Chiude questa finestra
+				GUIDocente seconda = new GUIDocente();
+				seconda.setVisible(true);
+				dispose();
 			}
 		});
 		indietroBtn.setBounds(10, 11, 89, 23);
@@ -115,8 +115,8 @@ public class GUIListaStudentiPiattaforma extends JFrame {
 		
 		table = new JTable();
 		model = new DefaultTableModel(
-				new Object[][] {}, /// Inizia vuoto
-				new String[] { "ID","Nome", "Cognome" } /// Nome colonna
+				new Object[][] {},
+				new String[] { "ID","Nome", "Cognome" }
 			){
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -143,12 +143,12 @@ public class GUIListaStudentiPiattaforma extends JFrame {
 					String codiceClasse = String.valueOf(model2.getValueAt(selectedRow2, 0));
 					try{
 						Controller.iscrizione(idStudente, codiceClasse);
-						JOptionPane.showMessageDialog(null, "Studente iscritto!");
+						JOptionPane.showMessageDialog(null, "Studente iscritto!", "Info", JOptionPane.INFORMATION_MESSAGE);
 					}catch(ClassEnrollmentException exception){
-						JOptionPane.showMessageDialog(null, exception.getMessage());
+						JOptionPane.showMessageDialog(null, exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "Nessun studente o classe selezionati.");
+					JOptionPane.showMessageDialog(null, "Nessun studente o classe selezionati.", "Selection error",	JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -161,8 +161,8 @@ public class GUIListaStudentiPiattaforma extends JFrame {
 		
 		table2 = new JTable();
 		model2 = new DefaultTableModel(
-				new Object[][] {}, /// Inizia vuoto
-				new String[] { "Codice", "Nome" } /// Nome colonna
+				new Object[][] {},
+				new String[] { "Codice", "Nome" }
 			){
 			@Override
 			public boolean isCellEditable(int row, int column) {

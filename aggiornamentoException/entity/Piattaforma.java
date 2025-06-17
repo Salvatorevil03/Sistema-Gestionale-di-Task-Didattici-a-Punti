@@ -63,7 +63,6 @@ public class Piattaforma {
         studente.setNumTaskValutati(dbStudente.getNumTaskValutati());
         return studente;
     }
-    ///testo da togliere, metodi aggiunti per facade
     public static void valutaConsegna(int consegnaID, int taskID, int voto) {
         EntityTask task = new EntityTask(taskID);
         task.valutaConsegna(consegnaID, voto);

@@ -39,7 +39,7 @@ public class GUIDocente extends JFrame {
 	private JPanel contentPane;
 	private JTextField nomeField;
 	private JTable table;
-	private DefaultTableModel model; /////
+	private DefaultTableModel model;
 
 	/**
 	 * Launch the application.
@@ -85,15 +85,15 @@ public class GUIDocente extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				SessioneDocente.logout();
-				GUILogin seconda = new GUILogin(); /// Crea nuova finestra
-				seconda.setVisible(true); /// Mostra nuova finestra
-				dispose(); /// Chiude questa finestra
+				GUILogin seconda = new GUILogin();
+				seconda.setVisible(true);
+				dispose();
 			}
 		});
 		logoutBtn.setBounds(10, 11, 89, 23);
 		contentPane.add(logoutBtn);
 		
-		JLabel lblBenvenuto = new JLabel("Benvenuto");
+		JLabel lblBenvenuto = new JLabel("Benvenut*");
 		lblBenvenuto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBenvenuto.setFont(new Font(FONT_FAMILY, Font.BOLD, 30));
 		lblBenvenuto.setBounds(218, 45, 208, 56);
@@ -103,9 +103,9 @@ public class GUIDocente extends JFrame {
 		btnListaStudenti.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIListaStudentiPiattaforma seconda = new GUIListaStudentiPiattaforma(); /// Crea nuova finestra
-				seconda.setVisible(true); /// Mostra nuova finestra
-				dispose(); /// Chiude questa finestra
+				GUIListaStudentiPiattaforma seconda = new GUIListaStudentiPiattaforma();
+				seconda.setVisible(true);
+				dispose();
 			}
 		});
 		btnListaStudenti.setFont(new Font(FONT_FAMILY, Font.PLAIN, 18));
@@ -137,13 +137,13 @@ public class GUIDocente extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				String nomeClasse = nomeField.getText();
 				if (nomeClasse.equals("")) {
-					JOptionPane.showMessageDialog(null, "Inserisci un nome");
+					JOptionPane.showMessageDialog(null, "Inserisci un nome", "Name error", JOptionPane.ERROR_MESSAGE);
 				}else {
 					try{
 						Controller.creaClasse(nomeClasse,String.valueOf(docente.getIdDocente()));
-						JOptionPane.showMessageDialog(null, "Classe creata");
+						JOptionPane.showMessageDialog(null, "Classe creata", "Info", JOptionPane.INFORMATION_MESSAGE);
 					}catch(ClassCreationException error){
-						JOptionPane.showMessageDialog(null, error.getMessage());
+						JOptionPane.showMessageDialog(null, error.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			}
@@ -156,8 +156,8 @@ public class GUIDocente extends JFrame {
 		
 		table = new JTable();
 		model = new DefaultTableModel(
-				new Object[][] {}, /// Inizia vuoto
-				new String[] { "Codice","Nome" } /// Nome colonna
+				new Object[][] {},
+				new String[] { "Codice","Nome" }
 			){
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -188,11 +188,11 @@ public class GUIDocente extends JFrame {
 					String nomeClasse = String.valueOf(model.getValueAt(selectedRow, 1));
 					docente.setPkClasseSelezionata(pkClasse);
 					docente.setNomeClasseSelezionato(nomeClasse);
-					GUIClasseDocente seconda = new GUIClasseDocente(); /// Crea nuova finestra
-					seconda.setVisible(true); /// Mostra nuova finestra
-					dispose(); /// Chiude questa finestra
+					GUIClasseDocente seconda = new GUIClasseDocente();
+					seconda.setVisible(true);
+					dispose();
 				} else {
-					JOptionPane.showMessageDialog(null, "Nessuna riga selezionata.");
+					JOptionPane.showMessageDialog(null, "Nessuna riga selezionata.", "Row error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -209,9 +209,9 @@ public class GUIDocente extends JFrame {
 		aggiornaButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIDocente seconda = new GUIDocente(); /// Crea nuova finestra
-				seconda.setVisible(true); /// Mostra nuova finestra
-				dispose(); /// Chiude questa finestra
+				GUIDocente seconda = new GUIDocente();
+				seconda.setVisible(true);
+				dispose();
 			}
 		});
 		aggiornaButton.setBounds(785, 11, 89, 23);

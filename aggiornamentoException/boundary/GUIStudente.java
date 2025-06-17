@@ -43,7 +43,7 @@ public class GUIStudente extends JFrame {
 	private static final String LABEL_NAME = "numero1";
 	private JPanel contentPane;
 	private JTable table;
-	private DefaultTableModel model; ///
+	private DefaultTableModel model;
 
 
 	/**
@@ -86,9 +86,9 @@ public class GUIStudente extends JFrame {
 		aggiornaButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIStudente seconda = new GUIStudente(); /// Crea nuova finestra
-				seconda.setVisible(true); /// Mostra nuova finestra
-				dispose(); /// Chiude questa finestra
+				GUIStudente seconda = new GUIStudente();
+				seconda.setVisible(true);
+				dispose();
 			}
 		});
 		aggiornaButton.setBounds(785, 11, 89, 23);
@@ -99,15 +99,15 @@ public class GUIStudente extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				SessioneStudente.logout();
-				GUILogin seconda = new GUILogin(); /// Crea nuova finestra
-				seconda.setVisible(true); /// Mostra nuova finestra
-				dispose(); /// Chiude questa finestra
+				GUILogin seconda = new GUILogin();
+				seconda.setVisible(true);
+				dispose();
 			}
 		});
 		logoutBtn.setBounds(10, 11, 89, 23);
 		contentPane.add(logoutBtn);
 		
-		JLabel lblBenvenuto = new JLabel("Benvenuto ");
+		JLabel lblBenvenuto = new JLabel("Benvenut* ");
 		lblBenvenuto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBenvenuto.setFont(new Font(FONT_FAMILY, Font.BOLD, 30));
 		lblBenvenuto.setBounds(200, 48, 208, 56);
@@ -132,8 +132,8 @@ public class GUIStudente extends JFrame {
 		
 		table = new JTable();
 		model = new DefaultTableModel(
-				new Object[][] {}, /// Inizia vuoto
-				new String[] { "ID","Titolo" } /// Nome colonna
+				new Object[][] {},
+				new String[] { "ID","Titolo" }
 			) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -161,11 +161,11 @@ public class GUIStudente extends JFrame {
 				if (selectedRow != -1) {
 					String pkTask = String.valueOf(model.getValueAt(selectedRow, 0));
 					studente.setPkTask(String.valueOf(pkTask));
-					GUIConsegnaStudente seconda = new GUIConsegnaStudente(); /// Crea nuova finestra
-					seconda.setVisible(true); /// Mostra nuova finestra
-					dispose(); /// Chiude questa finestra
+					GUIConsegnaStudente seconda = new GUIConsegnaStudente();
+					seconda.setVisible(true);
+					dispose();
 				} else {
-					JOptionPane.showMessageDialog(null, "Nessun task selezionato");
+					JOptionPane.showMessageDialog(null, "Nessun task selezionato", "Task error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -225,9 +225,9 @@ public class GUIStudente extends JFrame {
 		btnListaStudenti.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIClassificaPunteggio seconda = new GUIClassificaPunteggio(); /// Crea nuova finestra
-				seconda.setVisible(true); /// Mostra nuova finestra
-				dispose(); /// Chiude questa finestra
+				GUIClassificaPunteggio seconda = new GUIClassificaPunteggio();
+				seconda.setVisible(true);
+				dispose();
 			}
 		});
 		btnListaStudenti.setFont(new Font(FONT_FAMILY, Font.BOLD, 14));
@@ -238,9 +238,9 @@ public class GUIStudente extends JFrame {
 		btnOtherListaStudenti.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GUIClassificaTask seconda = new GUIClassificaTask(); /// Crea nuova finestra
-				seconda.setVisible(true); /// Mostra nuova finestra
-				dispose(); /// Chiude questa finestra
+				GUIClassificaTask seconda = new GUIClassificaTask();
+				seconda.setVisible(true);
+				dispose();
 			}
 		});
 		btnOtherListaStudenti.setFont(new Font(FONT_FAMILY, Font.BOLD, 15));
